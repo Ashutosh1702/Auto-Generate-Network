@@ -244,7 +244,7 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsRotating(true);
-    }, 5500);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [activeIdx]);
@@ -255,7 +255,7 @@ const HeroSection = () => {
 
     let animId;
     let currentAngle = 0;
-    const speed = 2.4;
+    const speed = 5.0;
 
     const tick = () => {
       currentAngle += speed;
