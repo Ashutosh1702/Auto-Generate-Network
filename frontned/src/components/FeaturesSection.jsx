@@ -31,15 +31,15 @@ const FeatureCard = ({ feature }) => {
     const rect = card.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
-    
+
     // Calculate mouse position relative to center of the card
     const mouseX = e.clientX - rect.left - width / 2;
     const mouseY = e.clientY - rect.top - height / 2;
-    
+
     // Calculate rotation angles (maximum of 12 degrees)
     const rY = (mouseX / (width / 2)) * 12;
     const rX = -(mouseY / (height / 2)) * 12;
-    
+
     setRotateX(rX);
     setRotateY(rY);
   };
@@ -51,7 +51,7 @@ const FeatureCard = ({ feature }) => {
   };
 
   return (
-    <div 
+    <div
       className="w-full h-[220px] cursor-pointer"
       style={{ perspective: "1000px" }}
       onMouseMove={handleMouseMove}
@@ -59,45 +59,55 @@ const FeatureCard = ({ feature }) => {
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
-        animate={{ 
+        animate={{
           rotateX: rotateX,
           rotateY: rotateY + (isFlipped ? 180 : 0),
-          scale: rotateX !== 0 ? 1.03 : 1
+          scale: rotateX !== 0 ? 1.03 : 1,
         }}
         transition={{ type: "spring", stiffness: 150, damping: 15 }}
         style={{ transformStyle: "preserve-3d", width: "100%", height: "100%" }}
         className="relative"
       >
         {/* Card Front Side */}
-        <div 
+        <div
           className="absolute inset-0 bg-[#0d1226]/50 border border-white/5 hover:border-indigo-500/30 p-6 rounded-[24px] flex flex-col items-center justify-center shadow-2xl backdrop-blur-md transition-colors duration-300"
-          style={{ 
+          style={{
             backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden"
+            WebkitBackfaceVisibility: "hidden",
           }}
         >
           {/* Glowing 3D-like Neon Icon Container */}
           <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(99,102,241,0.15)] group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all">
-            {React.cloneElement(feature.icon, { className: "w-6 h-6 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]" })}
+            {React.cloneElement(feature.icon, {
+              className: "w-6 h-6 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]",
+            })}
           </div>
-          <h3 className="text-base font-black text-white mb-2 text-center tracking-wide leading-none">{feature.title}</h3>
-          <p className="text-[11px] text-gray-400 leading-relaxed text-center font-medium">{feature.desc}</p>
+          <h3 className="text-base font-black text-white mb-2 text-center tracking-wide leading-none">
+            {feature.title}
+          </h3>
+          <p className="text-[11px] text-gray-400 leading-relaxed text-center font-medium">
+            {feature.desc}
+          </p>
         </div>
 
         {/* Card Back Side (Detailed 3D Glassmorphism) */}
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-br from-indigo-950/90 to-purple-950/90 border border-indigo-500/30 p-6 rounded-[24px] flex flex-col items-center justify-center shadow-2xl backdrop-blur-md"
-          style={{ 
-            backfaceVisibility: "hidden", 
+          style={{
+            backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)" 
+            transform: "rotateY(180deg)",
           }}
         >
           <div className="w-10 h-10 rounded-xl bg-indigo-500/25 text-indigo-300 flex items-center justify-center mb-3 shadow-[0_0_12px_rgba(99,102,241,0.3)] animate-pulse">
             <FiActivity className="w-5 h-5" />
           </div>
-          <h3 className="text-sm font-black text-white mb-1 text-center tracking-wide leading-none">{feature.title}</h3>
-          <p className="text-[10px] text-indigo-300 font-bold mb-3">Enterprise Module Ready</p>
+          <h3 className="text-sm font-black text-white mb-1 text-center tracking-wide leading-none">
+            {feature.title}
+          </h3>
+          <p className="text-[10px] text-indigo-300 font-bold mb-3">
+            Enterprise Module Ready
+          </p>
           <span className="text-[8px] bg-indigo-600/30 text-indigo-200 px-2.5 py-1 rounded-full border border-indigo-500/40 font-black uppercase tracking-widest leading-none">
             Active System
           </span>
@@ -114,8 +124,8 @@ const FeaturesSection = () => {
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     setMousePos({ x, y });
-    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+    e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
   };
   const features = [
     {
@@ -214,8 +224,13 @@ const FeaturesSection = () => {
   };
 
   return (
-    <section className="feature-section py-24 px-6 md:px-12 bg-[#050816] relative" onMouseMove={handleMouseMove}>
-      <div className="max-w-7xl mx-auto relative"><div className="feature-bg"></div><div className="spotlight absolute inset-0 pointer-events-none"></div>
+    <section
+      className="feature-section py-24 px-6 md:px-12 bg-[#050816] relative"
+      onMouseMove={handleMouseMove}
+    >
+      <div className="max-w-7xl mx-auto relative">
+        <div className="feature-bg"></div>
+        <div className="spotlight absolute inset-0 pointer-events-none"></div>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -246,10 +261,7 @@ const FeaturesSection = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {features.map((feature, idx) => (
-            <motion.div
-              key={idx}
-              variants={itemVariants}
-            >
+            <motion.div key={idx} variants={itemVariants}>
               <FeatureCard feature={feature} />
             </motion.div>
           ))}

@@ -1,62 +1,62 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const AnimatedCounter = ({ end, duration = 2, inView }) => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView) return;
 
-    let start = 0
-    const endValue = parseInt(end, 10)
-    if (start === endValue) return
+    let start = 0;
+    const endValue = parseInt(end, 10);
+    if (start === endValue) return;
 
-    let startTime = null
-    const animationDuration = duration * 1000
+    let startTime = null;
+    const animationDuration = duration * 1000;
 
     const step = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / animationDuration, 1)
-      
-      // easeOutQuart
-      const easeProgress = 1 - Math.pow(1 - progress, 4)
-      
-      setCount(Math.floor(easeProgress * endValue))
-      
-      if (progress < 1) {
-        window.requestAnimationFrame(step)
-      } else {
-        setCount(endValue)
-      }
-    }
-    
-    window.requestAnimationFrame(step)
-  }, [end, duration, inView])
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / animationDuration, 1);
 
-  return <span>{count.toLocaleString()}</span>
-}
+      // easeOutQuart
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+
+      setCount(Math.floor(easeProgress * endValue));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(endValue);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [end, duration, inView]);
+
+  return <span>{count.toLocaleString()}</span>;
+};
 
 const StatsSection = () => {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.2 })
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   const stats = [
-    { value: 2500, suffix: '+', label: 'Garages Across UK' },
-    { value: 50000, suffix: '+', label: 'Jobs Completed' },
-    { value: 98, suffix: '%', label: 'Satisfaction Rate' },
-    { value: 15, suffix: '+', label: 'Years Experience' }
-  ]
+    { value: 2500, suffix: "+", label: "Garages Across UK" },
+    { value: 50000, suffix: "+", label: "Jobs Completed" },
+    { value: 98, suffix: "%", label: "Satisfaction Rate" },
+    { value: 15, suffix: "+", label: "Years Experience" },
+  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-[#050816] to-[#0c1222]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div 
+        <div
           ref={ref}
           className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center"
         >
           {stats.map((stat, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -74,7 +74,7 @@ const StatsSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default StatsSection
+export default StatsSection;
