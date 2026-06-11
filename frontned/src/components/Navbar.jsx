@@ -43,7 +43,7 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
         className="fixed top-0 left-0 right-0 z-50 bg-[#050816]/80 backdrop-blur-md border-b border-white/10"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 flex items-center justify-between h-10 text-gray-300 text-xs">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-14 md:h-12 text-gray-300 text-xs">
           {/* Social icons grouped */}
           <div className="flex items-center space-x-3.5">
             <a
@@ -89,14 +89,15 @@ const Navbar = () => {
           </div>
 
           {/* Contact numbers grouped */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-sm">
             <span className="flex items-center hover:text-white transition-colors">
-              <FiPhone className="mr-1 text-indigo-400" />
-              Sales: 07947906789
+              <FiPhone className="mr-2 text-indigo-400 flex-shrink-0" />
+              <span>Sales: 07947906789</span>
             </span>
+
             <span className="flex items-center hover:text-white transition-colors">
-              <FiPhone className="mr-1 text-indigo-400" />
-              Customer Services: 0172655556
+              <FiPhone className="mr-2 text-indigo-400 flex-shrink-0" />
+              <span>Customer Services: 0172655556</span>
             </span>
           </div>
         </div>
@@ -107,7 +108,7 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className={`fixed top-12 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? "bg-[#050816]/80 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"}`}
+        className={`fixed top-14 md:top-12 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? "bg-[#050816]/80 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"}`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">

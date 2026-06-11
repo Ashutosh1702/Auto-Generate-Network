@@ -43,6 +43,170 @@ const HeroSection = () => {
     },
   };
 
+  // Live state values for Hero Dashboard Mockup
+  const [scheduledJobs, setScheduledJobs] = useState(37);
+  const [todayRevenue, setTodayRevenue] = useState(1240.50);
+  const [bayOccupancy, setBayOccupancy] = useState(85);
+  const [performanceVal, setPerformanceVal] = useState(18.4);
+
+  // Active Queue State
+  const [queue, setQueue] = useState([
+    { reg: "LG24 KXD", car: "BMW 3-Series", service: "Brake Repair", status: "In Progress", statusColor: "text-amber-400 bg-amber-400/10 border-amber-400/20" },
+    { reg: "VO68 FJK", car: "Tesla Model Y", service: "MOT Inspection", status: "Queued", statusColor: "text-blue-400 bg-blue-400/10 border-blue-400/20" },
+    { reg: "HJ19 LCP", car: "Ford Transit", service: "Diagnostics", status: "Completed", statusColor: "text-green-400 bg-green-400/10 border-green-400/20" }
+  ]);
+
+  // Chart points Y offsets wiggling
+  const [cyanPoints, setCyanPoints] = useState([40, 20, 15, 5]);
+  const [indigoPoints, setIndigoPoints] = useState([48, 35, 28, 18]);
+
+  // Booking Flow simulation states
+  const [selectedSlotIdx, setSelectedSlotIdx] = useState(0);
+  const [selectedDateIdx, setSelectedDateIdx] = useState(14); // August 21
+  const [bookingBtnState, setBookingBtnState] = useState("normal"); // "normal", "loading", "success"
+
+  useEffect(() => {
+    // 1. General metrics fluctuation
+    const metricsInterval = setInterval(() => {
+      // Bay occupancy wiggles between 75 and 95
+      setBayOccupancy((prev) => {
+        const delta = Math.random() > 0.5 ? 5 : -5;
+        const next = prev + delta;
+        return Math.min(Math.max(next, 70), 100);
+      });
+      // Performance value wiggles slightly
+      setPerformanceVal((prev) => {
+        const delta = parseFloat((Math.random() * 0.4 - 0.2).toFixed(1));
+        const next = prev + delta;
+        return parseFloat(Math.min(Math.max(next, 16.5), 20.5).toFixed(1));
+      });
+      // SVG Graph wiggling
+      setCyanPoints([
+        Math.min(Math.max(40 + Math.floor(Math.random() * 8 - 4), 30), 50),
+        Math.min(Math.max(20 + Math.floor(Math.random() * 6 - 3), 10), 30),
+        Math.min(Math.max(15 + Math.floor(Math.random() * 6 - 3), 5), 25),
+        Math.min(Math.max(5 + Math.floor(Math.random() * 4 - 2), 2), 12),
+      ]);
+      setIndigoPoints([
+        Math.min(Math.max(48 + Math.floor(Math.random() * 8 - 4), 38), 58),
+        Math.min(Math.max(35 + Math.floor(Math.random() * 6 - 3), 25), 45),
+        Math.min(Math.max(28 + Math.floor(Math.random() * 6 - 3), 18), 38),
+        Math.min(Math.max(18 + Math.floor(Math.random() * 4 - 2), 10), 25),
+      ]);
+    }, 4000);
+
+    // 2. Queue automation loop (every 6 seconds progress the jobs)
+    const queueInterval = setInterval(() => {
+      setQueue((prevQueue) => {
+        const nextQueue = [...prevQueue];
+        
+        // Find if there is a completed job to remove
+        const completedIdx = nextQueue.findIndex(j => j.status === "Completed");
+        if (completedIdx !== -1) {
+          // Replace completed job with a new queued job
+          const carBrands = ["Audi A4", "Mercedes A-Class", "Nissan Qashqai", "VW Golf", "Vauxhall Corsa", "Kia Sportage", "Range Rover"];
+          const services = ["Oil Service", "Tyre Fitting", "Suspension", "Aircon Regas", "Brake Pad Check", "Wheel Alignment"];
+          const prefixes = ["AB", "KV", "SD", "PX", "TR", "WN", "LD"];
+          const suffixes = ["XYZ", "OPQ", "LKM", "WVF", "GHD", "FKD", "JFK"];
+          const years = ["20", "21", "22", "23", "24", "68", "72"];
+          
+          const randomReg = `${prefixes[Math.floor(Math.random()*prefixes.length)]}${years[Math.floor(Math.random()*years.length)]} ${suffixes[Math.floor(Math.random()*suffixes.length)]}`;
+          const randomCar = carBrands[Math.floor(Math.random()*carBrands.length)];
+          const randomService = services[Math.floor(Math.random()*services.length)];
+          
+          nextQueue[completedIdx] = {
+            reg: randomReg,
+            car: randomCar,
+            service: randomService,
+            status: "Queued",
+            statusColor: "text-blue-400 bg-blue-400/10 border-blue-400/20"
+          };
+          return nextQueue;
+        }
+
+        // Find if there is an in progress job to complete
+        const inProgressIdx = nextQueue.findIndex(j => j.status === "In Progress");
+        if (inProgressIdx !== -1) {
+          nextQueue[inProgressIdx] = {
+            ...nextQueue[inProgressIdx],
+            status: "Completed",
+            statusColor: "text-green-400 bg-green-400/10 border-green-400/20"
+          };
+          // Also add a little to revenue when a job is completed!
+          setTodayRevenue(prev => prev + parseFloat((Math.random() * 85 + 40).toFixed(2)));
+          return nextQueue;
+        }
+
+        // Find if there is a queued job to start
+        const queuedIdx = nextQueue.findIndex(j => j.status === "Queued");
+        if (queuedIdx !== -1) {
+          nextQueue[queuedIdx] = {
+            ...nextQueue[queuedIdx],
+            status: "In Progress",
+            statusColor: "text-amber-400 bg-amber-400/10 border-amber-400/20"
+          };
+          return nextQueue;
+        }
+
+        return nextQueue;
+      });
+    }, 5500);
+
+    // 3. Auto-booking flow scheduler (simulate user booking a slot)
+    const bookingFlowTimeout = setInterval(() => {
+      // Step 1: Select a random slot
+      const nextSlot = Math.floor(Math.random() * 4);
+      const nextDate = Math.floor(Math.random() * 21);
+      setSelectedSlotIdx(nextSlot);
+      setSelectedDateIdx(nextDate);
+
+      // Step 2: Animate click confirm after 2 seconds
+      const clickTimer = setTimeout(() => {
+        setBookingBtnState("loading");
+        
+        // Step 3: Success state after 1 second
+        const successTimer = setTimeout(() => {
+          setBookingBtnState("success");
+          setScheduledJobs(prev => prev + 1);
+          setTodayRevenue(prev => prev + 45.00); // MOT booking cost added
+          
+          // Add MOT job to queue
+          setQueue(prev => {
+            const next = [...prev];
+            // Replace the completed one first, or if none, replace index 2
+            const compIdx = next.findIndex(j => j.status === "Completed");
+            const replaceIdx = compIdx !== -1 ? compIdx : 2;
+            next[replaceIdx] = {
+              reg: `AGN ${Math.floor(Math.random()*90 + 10)} MOT`,
+              car: "Ford Fiesta",
+              service: "MOT Test Only",
+              status: "Queued",
+              statusColor: "text-blue-400 bg-blue-400/10 border-blue-400/20"
+            };
+            return next;
+          });
+
+          // Step 4: Reset back to normal after 2.5 seconds
+          const resetTimer = setTimeout(() => {
+            setBookingBtnState("normal");
+          }, 2500);
+
+          return () => clearTimeout(resetTimer);
+        }, 1000);
+
+        return () => clearTimeout(successTimer);
+      }, 2000);
+
+      return () => clearTimeout(clickTimer);
+    }, 12000);
+
+    return () => {
+      clearInterval(metricsInterval);
+      clearInterval(queueInterval);
+      clearInterval(bookingFlowTimeout);
+    };
+  }, []);
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-12 max-w-7xl mx-auto overflow-visible min-h-screen flex items-center">
       <style>{`.three-d{perspective:1200px;transform-style:preserve-3d;transition:transform .4s ease;}
@@ -153,14 +317,15 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right Column: Visual Mockup */}
-        <div className="lg:col-span-6 relative mt-16 lg:mt-0 flex justify-center items-center three-d">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, x: 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full max-w-[550px] z-20"
-          >
+        <div className="lg:col-span-6 relative mt-16 lg:mt-0 flex justify-center items-center three-d w-full overflow-visible py-8">
+          <div className="scale-[0.8] xs:scale-[0.88] sm:scale-95 md:scale-100 origin-center relative w-full max-w-[550px] flex justify-center items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full z-20"
+            >
             {/* Desktop Dashboard Mockup (Center-Back) */}
             <div className="relative w-full border border-white/10 rounded-2xl bg-[#0c1222]/90 backdrop-blur-md shadow-2xl z-20 overflow-hidden shadow-indigo-500/10">
               {/* Browser Header Bar */}
@@ -225,15 +390,15 @@ const HeroSection = () => {
                   <div className="grid grid-cols-3 gap-2">
                     <div className="bg-slate-900/80 border border-white/5 rounded-lg p-2 flex flex-col justify-center">
                       <span className="text-[6.5px] text-gray-500 font-bold uppercase tracking-wider">Scheduled Jobs</span>
-                      <span className="text-[10px] md:text-[11px] font-black text-white mt-0.5">37 <span className="text-[6.5px] text-gray-400 font-normal">this month</span></span>
+                      <span className="text-[10px] md:text-[11px] font-black text-white mt-0.5">{scheduledJobs} <span className="text-[6.5px] text-gray-400 font-normal">this month</span></span>
                     </div>
                     <div className="bg-slate-900/80 border border-white/5 rounded-lg p-2 flex flex-col justify-center">
                       <span className="text-[6.5px] text-gray-500 font-bold uppercase tracking-wider">Today's Revenue</span>
-                      <span className="text-[10px] md:text-[11px] font-black text-green-400 mt-0.5">£1,240.50</span>
+                      <span className="text-[10px] md:text-[11px] font-black text-green-400 mt-0.5">£{todayRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                     <div className="bg-slate-900/80 border border-white/5 rounded-lg p-2 flex flex-col justify-center">
                       <span className="text-[6.5px] text-gray-500 font-bold uppercase tracking-wider">Bay Occupancy</span>
-                      <span className="text-[10px] md:text-[11px] font-black text-cyan-400 mt-0.5">85%</span>
+                      <span className="text-[10px] md:text-[11px] font-black text-cyan-400 mt-0.5">{bayOccupancy}%</span>
                     </div>
                   </div>
 
@@ -246,11 +411,7 @@ const HeroSection = () => {
                         <span className="text-[6px] text-indigo-400 font-semibold cursor-pointer hover:underline">View All</span>
                       </div>
                       <div className="space-y-1.5 mt-1.5">
-                        {[
-                          { reg: "LG24 KXD", car: "BMW 3-Series", service: "Brake Repair", status: "In Progress", statusColor: "text-amber-400 bg-amber-400/10 border-amber-400/20" },
-                          { reg: "VO68 FJK", car: "Tesla Model Y", service: "MOT Inspection", status: "Queued", statusColor: "text-blue-400 bg-blue-400/10 border-blue-400/20" },
-                          { reg: "HJ19 LCP", car: "Ford Transit", service: "Diagnostics", status: "Completed", statusColor: "text-green-400 bg-green-400/10 border-green-400/20" }
-                        ].map((row, idx) => (
+                        {queue.map((row, idx) => (
                           <div key={idx} className="flex items-center justify-between text-[7px] bg-[#0b1021]/60 p-1.5 rounded border border-white/5">
                             <div className="flex items-center space-x-1.5">
                               <span className="px-1 py-0.5 bg-yellow-400/10 text-yellow-500 rounded text-[6px] font-bold border border-yellow-500/20">{row.reg}</span>
@@ -272,12 +433,13 @@ const HeroSection = () => {
                           <span key={i} className="text-gray-600 font-black text-[5px]">{d}</span>
                         ))}
                         {[...Array(21)].map((_, i) => {
-                          const isToday = i === 12; // let's highlight one day
+                          const isSelected = i === selectedDateIdx;
+                          const isToday = i === 12; // highlight day 13
                           return (
                             <span
                               key={i}
-                              className={`w-3 h-3 flex items-center justify-center rounded-full mx-auto ${
-                                isToday ? "bg-indigo-600 text-white font-bold" : "text-gray-400"
+                              className={`w-3 h-3 flex items-center justify-center rounded-full mx-auto transition-all duration-300 ${
+                                isSelected ? "bg-indigo-600/40 text-white font-bold" : isToday ? "bg-cyan-500 text-white font-bold" : "text-gray-400"
                               }`}
                             >
                               {i + 1}
@@ -309,7 +471,7 @@ const HeroSection = () => {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute -left-10 md:-left-16 bottom-[-20px] md:bottom-[-40px] z-30 w-[170px] md:w-[185px] rounded-[28px] border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(79,70,229,0.2)]"
+              className="absolute -left-4 xs:-left-8 sm:-left-12 lg:-left-16 bottom-[-10px] sm:bottom-[-20px] md:bottom-[-40px] z-30 w-[140px] xs:w-[160px] sm:w-[175px] md:w-[185px] rounded-[28px] border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(79,70,229,0.2)]"
               style={{ willChange: "transform" }}
             >
               {/* Status Bar */}
@@ -344,11 +506,11 @@ const HeroSection = () => {
                     <span key={i} className="text-gray-600 font-black text-[5.5px]">{d}</span>
                   ))}
                   {[...Array(21)].map((_, i) => {
-                    const isSelected = i === 14; // highlight day 15
+                    const isSelected = i === selectedDateIdx;
                     return (
                       <span
                         key={i}
-                        className={`w-3.5 h-3.5 flex items-center justify-center rounded-full mx-auto ${
+                        className={`w-3.5 h-3.5 flex items-center justify-center rounded-full mx-auto transition-all duration-300 ${
                           isSelected ? "bg-indigo-600 text-white font-bold" : ""
                         }`}
                       >
@@ -364,8 +526,8 @@ const HeroSection = () => {
                 {["10:00 AM", "11:30 AM", "02:15 PM", "03:45 PM"].map((t, i) => (
                   <div
                     key={i}
-                    className={`text-[6.5px] font-bold text-center py-1 rounded-md border ${
-                      i === 0 ? "bg-indigo-600/25 border-indigo-500 text-white" : "bg-white/5 border-white/5 text-gray-400"
+                    className={`text-[6.5px] font-bold text-center py-1.5 rounded-md border transition-all duration-300 ${
+                      i === selectedSlotIdx ? "bg-indigo-600/25 border-indigo-500 text-white" : "bg-white/5 border-white/5 text-gray-400"
                     }`}
                   >
                     {t}
@@ -374,8 +536,20 @@ const HeroSection = () => {
               </div>
 
               {/* Button */}
-              <button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1.5 rounded-xl text-[8px] transition-colors shadow-lg shadow-indigo-600/30 cursor-pointer">
-                CONFIRM BOOKING
+              <button 
+                className={`w-full font-bold py-1.5 rounded-xl text-[8px] transition-colors shadow-lg cursor-pointer ${
+                  bookingBtnState === "success" 
+                    ? "bg-green-600 hover:bg-green-500 text-white shadow-green-600/30" 
+                    : bookingBtnState === "loading"
+                    ? "bg-indigo-800 text-indigo-300 shadow-indigo-600/10"
+                    : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/30"
+                }`}
+              >
+                {bookingBtnState === "success" 
+                  ? "BOOKING CONFIRMED ✓" 
+                  : bookingBtnState === "loading"
+                  ? "PROCESSING..."
+                  : "CONFIRM BOOKING"}
               </button>
             </motion.div>
 
@@ -388,7 +562,7 @@ const HeroSection = () => {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute -right-6 md:-right-10 top-[-20px] md:top-[-30px] z-30 w-[175px] md:w-[195px] rounded-xl border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+              className="absolute -right-2 xs:-right-4 sm:-right-8 lg:-right-10 top-[-10px] sm:top-[-20px] md:top-[-30px] z-30 w-[140px] xs:w-[160px] sm:w-[175px] md:w-[195px] rounded-xl border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(34,211,238,0.15)]"
               style={{ willChange: "transform" }}
             >
               {/* Card Header */}
@@ -397,7 +571,7 @@ const HeroSection = () => {
                   <span className="text-[6px] text-gray-500 block font-bold uppercase tracking-wider">System Analytics</span>
                   <span className="text-[9px] text-white font-black">Performance</span>
                 </div>
-                <span className="text-[7px] text-green-400 font-bold bg-green-500/10 border border-green-500/20 px-1 py-0.5 rounded">+18.4%</span>
+                <span className="text-[7px] text-green-400 font-bold bg-green-500/10 border border-green-500/20 px-1 py-0.5 rounded">+{performanceVal}%</span>
               </div>
 
               {/* Graph legend */}
@@ -421,23 +595,27 @@ const HeroSection = () => {
                   <line x1="0" y1="45" x2="160" y2="45" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
 
                   {/* Path 1: Gross Revenue (Cyan) */}
-                  <path
-                    d="M 0 50 Q 30 40 60 20 T 120 15 T 160 5"
+                  <motion.path
+                    d={`M 0 50 Q 30 ${cyanPoints[0]} 60 ${cyanPoints[1]} T 120 ${cyanPoints[2]} T 160 ${cyanPoints[3]}`}
                     fill="none"
                     stroke="#22d3ee"
                     strokeWidth="1.5"
+                    animate={{ d: `M 0 50 Q 30 ${cyanPoints[0]} 60 ${cyanPoints[1]} T 120 ${cyanPoints[2]} T 160 ${cyanPoints[3]}` }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
                   />
                   {/* Path 2: Net Income (Indigo) */}
-                  <path
-                    d="M 0 55 Q 30 48 60 35 T 120 28 T 160 18"
+                  <motion.path
+                    d={`M 0 55 Q 30 ${indigoPoints[0]} 60 ${indigoPoints[1]} T 120 ${indigoPoints[2]} T 160 ${indigoPoints[3]}`}
                     fill="none"
                     stroke="#6366f1"
                     strokeWidth="1.5"
+                    animate={{ d: `M 0 55 Q 30 ${indigoPoints[0]} 60 ${indigoPoints[1]} T 120 ${indigoPoints[2]} T 160 ${indigoPoints[3]}` }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
                   />
 
                   {/* Points */}
-                  <circle cx="60" cy="20" r="2" fill="#22d3ee" />
-                  <circle cx="120" cy="28" r="2" fill="#6366f1" />
+                  <motion.circle cx="60" cy={cyanPoints[1]} r="2" fill="#22d3ee" animate={{ cy: cyanPoints[1] }} transition={{ duration: 1.5 }} />
+                  <motion.circle cx="120" cy={indigoPoints[2]} r="2" fill="#6366f1" animate={{ cy: indigoPoints[2] }} transition={{ duration: 1.5 }} />
                 </svg>
               </div>
 
@@ -453,6 +631,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
+    </div>
       
 
     </section>
