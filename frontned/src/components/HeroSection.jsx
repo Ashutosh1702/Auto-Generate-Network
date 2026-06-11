@@ -236,15 +236,32 @@ const HeroSection = () => {
     }
   ];
 
-  const [activeIdx, setActiveIdx] = useState(0);
-  const activeModule = modules[activeIdx];
+  const [angle, setAngle] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % modules.length);
-    }, 4000);
-    return () => clearInterval(interval);
+    let animId;
+    const tick = () => {
+      setAngle((prev) => (prev + 0.4) % 360);
+      animId = requestAnimationFrame(tick);
+    };
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
   }, []);
+
+  const activeIdx = Math.floor(angle / 72) % 5;
+  const activeModule = modules[activeIdx];
+
+  // Calculate coordinates with clockwise speed variation (accelerate in front, decelerate in back)
+  const getCarCoords = (carAngle, rx, ry) => {
+    const radAngle = (carAngle * Math.PI) / 180;
+    const speedAdjustedAngle = carAngle + 12 * Math.sin(radAngle);
+    
+    const rad = (speedAdjustedAngle * Math.PI) / 180;
+    const x = rx * Math.cos(rad);
+    const y = ry * Math.sin(rad);
+    
+    return { x, y, rad };
+  };
 
   const containerVariant = {
     hidden: {},
@@ -494,85 +511,230 @@ const HeroSection = () => {
                       </div>
                     </div>
 
-                    {/* Rotating Center Wheel + Circular Orbiting Cars */}
-                    <div className="flex-grow flex items-center justify-center relative my-2 overflow-hidden h-[100px]">
-                      {/* Dashboard concentric tracks */}
-                      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="48" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
-                        <circle cx="100" cy="100" r="48" fill="none" stroke="rgba(6,182,212,0.12)" strokeWidth="1" strokeDasharray="3,3" />
-                        <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
-                        <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(99,102,241,0.08)" strokeWidth="1" strokeDasharray="4,2" />
+                    {/* 3D Center Wheel Rim + Orbiting Cars Visual Centerpiece */}
+                    <div className="flex-grow flex items-center justify-center relative my-2 overflow-hidden h-[120px] md:h-[130px] w-full">
+                      {/* Perspective compressed guides */}
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                        <ellipse cx="50%" cy="50%" rx="40%" ry="26%" fill="none" stroke="rgba(255,255,255,0.01)" strokeWidth="1.5" />
+                        <ellipse cx="50%" cy="50%" rx="40%" ry="26%" fill="none" stroke="rgba(34,211,238,0.1)" strokeWidth="1" strokeDasharray="4,4" />
+                        <ellipse cx="50%" cy="50%" rx="32%" ry="20%" fill="none" stroke="rgba(255,255,255,0.005)" strokeWidth="1" />
+                        <ellipse cx="50%" cy="50%" rx="32%" ry="20%" fill="none" stroke="rgba(99,102,241,0.06)" strokeWidth="1" strokeDasharray="3,3" />
                       </svg>
 
-                      {/* Spin Center Wheel */}
+                      {/* Large rotating 3D Alloy Wheel/Rim */}
                       <motion.div
                         animate={{ rotate: 360 }}
-                        transition={{ repeat: Infinity, duration: 24, ease: "linear" }}
-                        className="z-10 absolute flex items-center justify-center"
+                        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+                        className="z-10 absolute flex items-center justify-center pointer-events-none"
                       >
-                        <svg viewBox="0 0 100 100" className="w-14 h-14 md:w-18 md:h-18 text-cyan-400/80 drop-shadow-[0_0_10px_rgba(34,211,238,0.25)]">
+                        <svg viewBox="0 0 200 200" className="w-24 h-24 md:w-28 md:h-28 text-cyan-400 drop-shadow-[0_0_18px_rgba(34,211,238,0.4)]">
                           <defs>
-                            <radialGradient id="hub-glow" cx="50%" cy="50%" r="50%">
-                              <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.2" />
-                              <stop offset="100%" stopColor="#050714" stopOpacity="0" />
+                            <filter id="neon-glow-rim" x="-20%" y="-20%" width="140%" height="140%">
+                              <feGaussianBlur stdDeviation="5" result="blur" />
+                              <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                              </feMerge>
+                            </filter>
+                            <linearGradient id="chrome-light" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#f3f4f6" />
+                              <stop offset="30%" stopColor="#9ca3af" />
+                              <stop offset="50%" stopColor="#ffffff" />
+                              <stop offset="70%" stopColor="#4b5563" />
+                              <stop offset="100%" stopColor="#1f2937" />
+                            </linearGradient>
+                            <linearGradient id="chrome-dark" x1="100%" y1="0%" x2="0%" y2="100%">
+                              <stop offset="0%" stopColor="#374151" />
+                              <stop offset="50%" stopColor="#1f2937" />
+                              <stop offset="100%" stopColor="#111827" />
+                            </linearGradient>
+                            <radialGradient id="rubber-tire" cx="50%" cy="50%" r="50%">
+                              <stop offset="70%" stopColor="#080c14" />
+                              <stop offset="85%" stopColor="#1f2937" />
+                              <stop offset="95%" stopColor="#0a0c12" />
+                              <stop offset="100%" stopColor="#040608" />
                             </radialGradient>
                           </defs>
-                          <circle cx="50" cy="50" r="48" fill="url(#hub-glow)" />
-                          <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4,2" />
-                          <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.3" />
-                          {[...Array(12)].map((_, i) => (
-                            <line
+
+                          {/* Outer Tire */}
+                          <circle cx="100" cy="100" r="94" fill="url(#rubber-tire)" />
+                          
+                          {/* Tire Treads */}
+                          {[...Array(36)].map((_, i) => (
+                            <rect
                               key={i}
-                              x1="50"
-                              y1="8"
-                              x2="50"
-                              y2="11"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              transform={`rotate(${i * 30} 50 50)`}
+                              x="97"
+                              y="6"
+                              width="6"
+                              height="8"
+                              rx="1"
+                              fill="#111827"
+                              opacity="0.85"
+                              transform={`rotate(${i * 10} 100 100)`}
                             />
                           ))}
-                          {[...Array(6)].map((_, i) => (
-                            <line
+
+                          {/* Outer Cyan Neon Ring */}
+                          <circle cx="100" cy="100" r="82" fill="none" stroke="#22d3ee" strokeWidth="2.5" filter="url(#neon-glow-rim)" />
+                          
+                          {/* Outer Rim Lip */}
+                          <circle cx="100" cy="100" r="76" fill="none" stroke="url(#chrome-light)" strokeWidth="3" />
+                          <circle cx="100" cy="100" r="73" fill="#060919" stroke="#000000" strokeWidth="2" />
+
+                          {/* Rim Spokes (10 Spokes with 3D Depth shading) */}
+                          {[...Array(10)].map((_, i) => (
+                            <g key={i} transform={`rotate(${i * 36} 100 100)`}>
+                              {/* Spoke Left (Highlight) */}
+                              <path
+                                d="M96 100 L93 28 L100 22 L100 100 Z"
+                                fill="url(#chrome-light)"
+                                opacity="0.95"
+                              />
+                              {/* Spoke Right (Shadow) */}
+                              <path
+                                d="M100 100 L100 22 L107 28 L104 100 Z"
+                                fill="url(#chrome-dark)"
+                                opacity="0.9"
+                              />
+                              {/* Spoke Inner Neon Accent */}
+                              <line
+                                x1="100"
+                                y1="30"
+                                x2="100"
+                                y2="68"
+                                stroke="#22d3ee"
+                                strokeWidth="1.5"
+                                filter="url(#neon-glow-rim)"
+                                opacity="0.9"
+                              />
+                            </g>
+                          ))}
+
+                          {/* Inner Rim Line */}
+                          <circle cx="100" cy="100" r="28" fill="none" stroke="url(#chrome-light)" strokeWidth="2" />
+                          
+                          {/* Center Hub cover */}
+                          <circle cx="100" cy="100" r="22" fill="url(#chrome-dark)" stroke="#000" strokeWidth="1.5" />
+                          
+                          {/* 5 Wheel Lug Nuts */}
+                          {[...Array(5)].map((_, i) => (
+                            <circle
                               key={i}
-                              x1="50"
-                              y1="11"
-                              x2="50"
-                              y2="50"
-                              stroke="currentColor"
-                              strokeWidth="1"
-                              strokeOpacity="0.5"
-                              transform={`rotate(${i * 60} 50 50)`}
+                              cx="100"
+                              cy="87"
+                              r="2.5"
+                              fill="url(#chrome-light)"
+                              stroke="#000"
+                              strokeWidth="0.5"
+                              transform={`rotate(${i * 72} 100 100)`}
                             />
                           ))}
-                          <circle cx="50" cy="50" r="8" fill="#030611" stroke="currentColor" strokeWidth="1.5" />
-                          <circle cx="50" cy="50" r="3" fill="currentColor" />
+
+                          {/* Logo Area */}
+                          <circle cx="100" cy="100" r="9" fill="#030611" stroke="url(#chrome-light)" strokeWidth="1" />
+                          <circle cx="100" cy="100" r="5" fill="#22d3ee" filter="url(#neon-glow-rim)" />
+                          <circle cx="100" cy="100" r="2.5" fill="#ffffff" />
                         </svg>
                       </motion.div>
 
-                      {/* Orbiting Car 1 (Inner loop) */}
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-                        className="absolute w-full h-full flex items-center justify-center pointer-events-none"
-                      >
-                        <div 
-                          className="absolute bg-gradient-to-r from-cyan-400 to-blue-500 w-2 h-1 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"
-                          style={{ transform: "translateY(-48px) rotate(90deg)" }}
-                        />
-                      </motion.div>
+                      {/* 3D Elliptical Orbiting Cars (Clockwise with dynamic tangent rotation) */}
+                      {[
+                        {
+                          id: 1,
+                          offset: 0,
+                          rx: 40,
+                          ry: 26,
+                          colorClass: "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.75)]",
+                          carType: "sports"
+                        },
+                        {
+                          id: 2,
+                          offset: 120,
+                          rx: 32,
+                          ry: 20,
+                          colorClass: "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.7)]",
+                          carType: "suv"
+                        },
+                        {
+                          id: 3,
+                          offset: 240,
+                          rx: 40,
+                          ry: 26,
+                          colorClass: "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.75)]",
+                          carType: "sedan"
+                        }
+                      ].map((car) => {
+                        const carAngle = (angle + car.offset) % 360;
+                        
+                        // Get current coordinates
+                        const coords = getCarCoords(carAngle, car.rx, car.ry);
+                        // Get coordinates slightly ahead to compute the travel tangent vector
+                        const nextCoords = getCarCoords(carAngle + 1.5, car.rx, car.ry);
+                        
+                        const dx = nextCoords.x - coords.x;
+                        const dy = nextCoords.y - coords.y;
+                        
+                        // Compute tangent angle in degrees for clockwise rotation alignment
+                        const rotation = (Math.atan2(dy, dx) * 180) / Math.PI;
+                        
+                        // 3D Depth calculations based on computed rad
+                        const depth = Math.sin(coords.rad); // ranges from -1 (back) to +1 (front)
+                        const scale = 0.65 + ((depth + 1) / 2) * 0.45; // scale between 0.65 and 1.10
+                        const opacity = 0.45 + ((depth + 1) / 2) * 0.55; // opacity between 0.45 and 1.0
+                        const zIndex = depth < 0 ? 5 : 20;
 
-                      {/* Orbiting Car 2 (Outer loop) */}
-                      <motion.div
-                        animate={{ rotate: -360 }}
-                        transition={{ repeat: Infinity, duration: 13, ease: "linear" }}
-                        className="absolute w-full h-full flex items-center justify-center pointer-events-none"
-                      >
-                        <div 
-                          className="absolute bg-gradient-to-r from-rose-500 to-amber-500 w-2 h-1 rounded-full shadow-[0_0_8px_rgba(244,63,94,0.8)]"
-                          style={{ transform: "translateY(72px) rotate(-90deg)" }}
-                        />
-                      </motion.div>
+                        return (
+                          <div
+                            key={car.id}
+                            style={{
+                              position: "absolute",
+                              left: "50%",
+                              top: "50%",
+                              transform: `translate(calc(-50% + ${coords.x}%), calc(-50% + ${coords.y}%)) scale(${scale}) rotate(${rotation}deg)`,
+                              opacity,
+                              zIndex,
+                              pointerEvents: "none"
+                            }}
+                            className="transition-all duration-75"
+                          >
+                            {car.carType === "sports" && (
+                              <svg viewBox="0 0 40 20" className={`w-8 h-4 md:w-9.5 md:h-5 ${car.colorClass}`} fill="currentColor" style={{ filter: "drop-shadow(-6px 0 4px rgba(34,211,238,0.5)) blur(0.2px)" }}>
+                                <path d="M2 6 C 2 3, 6 2.5, 12 2.5 L28 2.5 C 34 2.5, 38 4, 40 10 C 38 16, 34 17.5, 28 17.5 L12 17.5 C 6 17.5, 2 17, 2 14 Z" />
+                                <path d="M11 5 L23 5 C 25 5, 26 6, 26 10 C 26 14, 25 15, 23 15 L11 15 C 9 15, 8 14, 8 10 C 8 6, 9 5, 11 5 Z" fill="#050816" />
+                                <path d="M24 5.5 L26 7 C 26.5 8.5, 26.5 11.5, 26 13 L24 14.5 Z" fill="#0891b2" opacity="0.8" />
+                                <path d="M10 5.5 L8 7 C 7.5 8, 7.5 12, 8 13 L10 14.5 Z" fill="#020617" />
+                                <path d="M1 4 L4 4 L4 16 L1 16 Z" fill="#000" />
+                                <path d="M38 5 L40 6 L40 8 L38 9 Z" fill="#fff" />
+                                <path d="M38 11 L40 12 L40 14 L38 15 Z" fill="#fff" />
+                                <rect x="2" y="4" width="1.5" height="3" rx="0.5" fill="#f43f5e" />
+                                <rect x="2" y="13" width="1.5" height="3" rx="0.5" fill="#f43f5e" />
+                              </svg>
+                            )}
+                            {car.carType === "suv" && (
+                              <svg viewBox="0 0 40 20" className={`w-8 h-4 md:w-9.5 md:h-5 ${car.colorClass}`} fill="currentColor" style={{ filter: "drop-shadow(-6px 0 4px rgba(99,102,241,0.5)) blur(0.2px)" }}>
+                                <path d="M2 5 C 2 3, 5 3, 10 3 L30 3 C 34 3, 37 4.5, 39 10 C 37 15.5, 34 17, 30 17 L10 17 C 5 17, 2 17, 2 15 Z" />
+                                <path d="M9 4.5 L27 4.5 C 29 4.5, 30 5.5, 30 10 C 30 14.5, 29 15.5, 27 15.5 L9 15.5 C 7 15.5, 6 14.5, 6 10 C 6 5.5, 7 4.5, 9 4.5 Z" fill="#050816" />
+                                <rect x="17" y="4.5" width="2" height="11" fill="#1e1b4b" />
+                                <path d="M25 5 L28 7 C 28.5 8, 28.5 12, 28 13 L25 15 Z" fill="#4338ca" opacity="0.8" />
+                                <rect x="2" y="4" width="1.5" height="4" rx="0.5" fill="#ef4444" />
+                                <rect x="2" y="12" width="1.5" height="4" rx="0.5" fill="#ef4444" />
+                                <path d="M37 4 L39 5 L39 7 L37 7 Z" fill="#fff" />
+                                <path d="M37 13 L39 13 L39 15 L37 16 Z" fill="#fff" />
+                              </svg>
+                            )}
+                            {car.carType === "sedan" && (
+                              <svg viewBox="0 0 40 20" className={`w-8 h-4 md:w-9.5 md:h-5 ${car.colorClass}`} fill="currentColor" style={{ filter: "drop-shadow(-6px 0 4px rgba(244,63,94,0.5)) blur(0.2px)" }}>
+                                <path d="M3 5.5 C 3 3.5, 7 3, 12 3 L28 3 C 33 3, 36 4.5, 38 10 C 36 15.5, 33 17, 28 17 L12 17 C 7 17, 3 16.5, 3 14.5 Z" />
+                                <path d="M10 5 L25 5 C 27 5, 28 6, 28 10 C 28 14, 27 15, 25 15 L10 15 C 8 15, 7 14, 7 10 C 7 6, 8 5, 10 5 Z" fill="#050816" />
+                                <path d="M23 5.5 L26 7 C 26.5 8, 26.5 12, 26 13 L23 14.5 Z" fill="#9f1239" opacity="0.8" />
+                                <path d="M9 5.5 L8 7 C 7.5 8, 7.5 12, 8 13 L9 14.5 Z" fill="#1e293b" />
+                                <rect x="2" y="4" width="1.5" height="3" rx="0.5" fill="#f43f5e" />
+                                <rect x="2" y="13" width="1.5" height="3" rx="0.5" fill="#f43f5e" />
+                              </svg>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
 
                     {/* Smoothly Morphing SVG chart */}
