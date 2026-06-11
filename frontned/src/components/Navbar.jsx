@@ -122,7 +122,7 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex flex-grow items-center justify-between mx-6 lg:mx-10 xl:mx-16">
+            <nav className="hidden lg:flex flex-grow items-center justify-between mx-6 lg:mx-10 xl:mx-16 gap-3 xl:gap-4">
               {navLinks.map((link) => {
                 const isLogIn = link.name === "Log In";
                 return (
@@ -142,7 +142,7 @@ const Navbar = () => {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center flex-shrink-0">
+            <div className="hidden lg:flex items-center flex-shrink-0">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -152,8 +152,8 @@ const Navbar = () => {
               </motion.button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile / Tablet Menu Button */}
+            <div className="lg:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-gray-300 hover:text-white"
@@ -168,14 +168,14 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile / Tablet Menu Drawer */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-[#111827] border-b border-white/10"
+              className="lg:hidden bg-[#111827] border-b border-white/10"
             >
               <div className="px-6 py-4 space-y-4">
                 {navLinks.map((link) => {
