@@ -7,82 +7,7 @@ import {
 } from "framer-motion";
 import { FiPlay, FiTrendingUp, FiCheckCircle, FiStar, FiAlertTriangle, FiTruck, FiClipboard, FiUser, FiActivity } from "react-icons/fi";
 
-// MovingCarsAnimation component simulating realistic highway traffic/driving with headlight glow
-const MovingCarsAnimation = () => {
-  return (
-    <div className="absolute bottom-4 left-0 right-0 h-16 overflow-hidden pointer-events-none z-10 w-full bg-[#050816]/40 backdrop-blur-[2px] border-y border-white/5">
-      <svg className="hidden">
-        <defs>
-          <linearGradient id="headlight-glow" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="taillight-glow" x1="100%" y1="50%" x2="0%" y2="50%">
-            <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#f43f5e" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
-      
-      {/* Road Lane Lines */}
-      <div className="absolute top-1/2 left-0 right-0 h-0.5 border-t border-dashed border-indigo-500/10" />
-
-      {/* Car 1: Sports Car (moving left to right) */}
-      <motion.div
-        initial={{ x: "-20%" }}
-        animate={{ 
-          x: ["-20%", "120%"],
-          y: [2, 3.5, 1.5, 3, 2] // realistic engine/suspension vibration
-        }}
-        transition={{ 
-          x: { repeat: Infinity, duration: 14, ease: "linear" },
-          y: { repeat: Infinity, duration: 0.4, ease: "easeInOut" }
-        }}
-        className="absolute left-0 w-24 h-8 text-indigo-400 opacity-60"
-      >
-        <svg viewBox="0 0 120 40" fill="currentColor">
-          <polygon points="90,25 120,15 120,35" fill="url(#headlight-glow)" />
-          <polygon points="10,25 -20,18 -20,32" fill="url(#taillight-glow)" />
-          {/* Sports Car silhouette */}
-          <path d="M10 25 L15 15 Q25 10 35 10 L65 10 Q75 13 80 18 L90 23 Q95 25 95 28 L95 32 L85 32 Q85 28 80 28 Q75 28 75 32 L25 32 Q25 28 20 28 Q15 28 15 32 L5 32 L5 28 Z" />
-          {/* Wheels */}
-          <circle cx="20" cy="32" r="5" fill="#0c1222" stroke="currentColor" strokeWidth="2" />
-          <circle cx="78" cy="32" r="5" fill="#0c1222" stroke="currentColor" strokeWidth="2" />
-          {/* Cabin window */}
-          <path d="M35 12 L50 12 L50 18 L32 18 Z" fill="#050816" opacity="0.8" />
-          <path d="M53 12 L63 12 L68 18 L53 18 Z" fill="#050816" opacity="0.8" />
-        </svg>
-      </motion.div>
-
-      {/* Car 2: Fast EV (moving right to left) */}
-      <motion.div
-        initial={{ x: "120%" }}
-        animate={{ 
-          x: ["120%", "-20%"],
-          y: [10, 11.5, 9.5, 11, 10]
-        }}
-        transition={{ 
-          x: { repeat: Infinity, duration: 10, ease: "linear", delay: 2 },
-          y: { repeat: Infinity, duration: 0.35, ease: "easeInOut" }
-        }}
-        className="absolute left-0 w-24 h-8 text-cyan-400 opacity-70"
-      >
-        <svg viewBox="0 0 120 40" fill="currentColor" className="transform scale-x-[-1]">
-          <polygon points="90,25 120,15 120,35" fill="url(#headlight-glow)" />
-          <polygon points="10,25 -20,18 -20,32" fill="url(#taillight-glow)" />
-          {/* Modern Sedan Silhouette */}
-          <path d="M8 25 L15 15 Q25 10 38 10 L68 10 Q78 12 82 17 L90 22 Q94 24 94 28 L94 32 L84 32 Q84 28 79 28 Q74 28 74 32 L26 32 Q26 28 21 28 Q16 28 16 32 L8 32 Z" />
-          {/* Wheels */}
-          <circle cx="21" cy="32" r="5" fill="#0c1222" stroke="currentColor" strokeWidth="2" />
-          <circle cx="79" cy="32" r="5" fill="#0c1222" stroke="currentColor" strokeWidth="2" />
-          {/* Cabin window */}
-          <path d="M35 12 L50 12 L50 18 L32 18 Z" fill="#050816" opacity="0.8" />
-          <path d="M53 12 L65 12 L70 18 L53 18 Z" fill="#050816" opacity="0.8" />
-        </svg>
-      </motion.div>
-    </div>
-  );
-};
+// MovingCarsAnimation removed
 
 // Simple number counter using framer-motion
 const NumberCounter = ({ target, format }) => {
@@ -529,8 +454,7 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Dynamic Driving Road Lane Animation */}
-      <MovingCarsAnimation />
+
     </section>
   );
 };
