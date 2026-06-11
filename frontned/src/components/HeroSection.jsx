@@ -236,20 +236,50 @@ const HeroSection = () => {
     }
   ];
 
+  const [activeIdx, setActiveIdx] = useState(0);
   const [angle, setAngle] = useState(0);
+  const [isRotating, setIsRotating] = useState(false);
 
+  // Autoplay pause timer controller
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsRotating(true);
+    }, 5500);
+
+    return () => clearTimeout(timer);
+  }, [activeIdx]);
+
+  // Tick loop when isRotating is true
+  useEffect(() => {
+    if (!isRotating) return;
+
     let animId;
+    let currentAngle = 0;
+    const speed = 2.4;
+
     const tick = () => {
-      setAngle((prev) => (prev + 0.4) % 360);
-      animId = requestAnimationFrame(tick);
+      currentAngle += speed;
+      if (currentAngle >= 360) {
+        setAngle(0);
+        setIsRotating(false);
+        setActiveIdx((prev) => (prev + 1) % 5);
+      } else {
+        setAngle(currentAngle);
+        animId = requestAnimationFrame(tick);
+      }
     };
+
     animId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animId);
-  }, []);
+  }, [isRotating]);
 
-  const activeIdx = Math.floor(angle / 72) % 5;
   const activeModule = modules[activeIdx];
+
+  const handleModuleClick = (idx) => {
+    setIsRotating(false);
+    setAngle(0);
+    setActiveIdx(idx);
+  };
 
   // Calculate coordinates with clockwise speed variation (accelerate in front, decelerate in back)
   const getCarCoords = (carAngle, rx, ry) => {
@@ -455,7 +485,7 @@ const HeroSection = () => {
                           return (
                             <div
                               key={m.id}
-                              onClick={() => setActiveIdx(idx)}
+                              onClick={() => handleModuleClick(idx)}
                               className={`flex items-center space-x-2 px-2 py-1.5 rounded-lg cursor-pointer transition-all duration-300 relative overflow-hidden ${
                                 isActive ? "text-white" : "text-gray-500 hover:text-gray-300"
                               }`}
@@ -522,9 +552,8 @@ const HeroSection = () => {
                       </svg>
 
                       {/* Large rotating 3D Alloy Wheel/Rim */}
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+                      <div
+                        style={{ transform: `rotate(${angle}deg)` }}
                         className="z-10 absolute flex items-center justify-center pointer-events-none"
                       >
                         <svg viewBox="0 0 200 200" className="w-24 h-24 md:w-28 md:h-28 text-cyan-400 drop-shadow-[0_0_18px_rgba(34,211,238,0.4)]">
@@ -635,7 +664,7 @@ const HeroSection = () => {
                           <circle cx="100" cy="100" r="5" fill="#22d3ee" filter="url(#neon-glow-rim)" />
                           <circle cx="100" cy="100" r="2.5" fill="#ffffff" />
                         </svg>
-                      </motion.div>
+                      </div>
 
                       {/* 3D Elliptical Orbiting Cars (Clockwise with dynamic tangent rotation) */}
                       {[

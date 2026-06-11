@@ -31,6 +31,7 @@ const Navbar = () => {
     { name: "Latest Work", href: "#" },
     { name: "Blog", href: "#" },
     { name: "Contact Us", href: "#" },
+    { name: "Log In", href: "#" },
   ];
 
   return (
@@ -42,55 +43,62 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
         className="fixed top-0 left-0 right-0 z-50 bg-[#050816]/80 backdrop-blur-md border-b border-white/10"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 flex items-center justify-between space-x-1 h-10 text-gray-300">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            <FaFacebookF size={20} className="text-[#1877F2]" />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            <FaInstagram size={20} className="text-[#E1306C]" />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            <FaTwitter size={20} className="text-[#1DA1F2]" />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            <FaLinkedinIn size={20} />
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            <FaYoutube size={20} className="text-[#FF0000]" />
-          </a>
-          <span className="ml-4 flex items-center">
-            <FiPhone className="mr-1" />
-            Sales: 07947906789
-          </span>
-          <span className="ml-2 flex items-center">
-            <FiPhone className="mr-1" />
-            Customer Services: 0172655556
-          </span>
+        <div className="max-w-5xl mx-auto px-6 md:px-12 flex items-center justify-between h-10 text-gray-300 text-xs">
+          {/* Social icons grouped */}
+          <div className="flex items-center space-x-3.5">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              <FaFacebookF size={15} className="text-[#1877F2]" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              <FaInstagram size={15} className="text-[#E1306C]" />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              <FaTwitter size={15} className="text-[#1DA1F2]" />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              <FaLinkedinIn size={15} />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              <FaYoutube size={15} className="text-[#FF0000]" />
+            </a>
+          </div>
+
+          {/* Contact numbers grouped */}
+          <div className="flex items-center space-x-4">
+            <span className="flex items-center hover:text-white transition-colors">
+              <FiPhone className="mr-1 text-indigo-400" />
+              Sales: 07947906789
+            </span>
+            <span className="flex items-center hover:text-white transition-colors">
+              <FiPhone className="mr-1 text-indigo-400" />
+              Customer Services: 0172655556
+            </span>
+          </div>
         </div>
       </motion.header>
 
@@ -113,30 +121,31 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+            <nav className="hidden md:flex flex-grow items-center justify-between mx-6 lg:mx-10 xl:mx-16">
+              {navLinks.map((link) => {
+                const isLogIn = link.name === "Log In";
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={
+                      isLogIn
+                        ? "text-[11px] lg:text-xs xl:text-sm font-bold text-white bg-white/5 hover:bg-indigo-600/10 border border-white/10 hover:border-indigo-500/50 px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap shadow-[0_0_15px_rgba(79,70,229,0.1)]"
+                        : "text-[11px] lg:text-xs xl:text-sm font-semibold text-gray-300 hover:text-white transition-colors whitespace-nowrap"
+                    }
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-4">
-              <a
-                href="#"
-                className="text-sm font-medium text-white hover:text-gray-300 transition-colors"
-              >
-                Log in
-              </a>
+            <div className="hidden md:flex items-center flex-shrink-0">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs lg:text-sm font-semibold px-4 py-2 lg:px-5 lg:py-2.5 rounded-lg shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all whitespace-nowrap"
               >
                 Book Free Demo
               </motion.button>
@@ -168,22 +177,23 @@ const Navbar = () => {
               className="md:hidden bg-[#111827] border-b border-white/10"
             >
               <div className="px-6 py-4 space-y-4">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="block text-base font-medium text-gray-300 hover:text-white"
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                <div className="pt-4 border-t border-white/10 flex flex-col gap-4">
-                  <a
-                    href="#"
-                    className="block text-base font-medium text-white"
-                  >
-                    Log in
-                  </a>
+                {navLinks.map((link) => {
+                  const isLogIn = link.name === "Log In";
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className={
+                        isLogIn
+                          ? "block text-center text-base font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg py-2.5 mt-2 transition-all duration-300"
+                          : "block text-base font-medium text-gray-300 hover:text-white"
+                      }
+                    >
+                      {link.name}
+                    </a>
+                  );
+                })}
+                <div className="pt-4 border-t border-white/10">
                   <button className="w-full bg-indigo-600 text-white font-semibold px-5 py-3 rounded-lg">
                     Book Free Demo
                   </button>
