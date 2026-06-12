@@ -8,7 +8,7 @@ import {
   FiGlobe,
   FiTrendingUp,
   FiCheckCircle,
-  FiPlus
+  FiPlus,
 } from "react-icons/fi";
 
 const SEOSection = () => {
@@ -104,7 +104,12 @@ const SEOSection = () => {
         </div>
         {[
           { kw: "MOT near me", pos: 1, change: "+2", color: "text-cyan-400" },
-          { kw: "Garage services London", pos: 2, change: "+1", color: "text-cyan-400" },
+          {
+            kw: "Garage services London",
+            pos: 2,
+            change: "+1",
+            color: "text-cyan-400",
+          },
           { kw: "Car repair", pos: 4, change: "-1", color: "text-red-400" },
         ].map((row, i) => (
           <div
@@ -113,7 +118,9 @@ const SEOSection = () => {
           >
             <div className="flex items-center space-x-2.5">
               <FiSearch className="text-gray-500 w-3.5 h-3.5" />
-              <span className="text-xs text-gray-300 font-semibold">{row.kw}</span>
+              <span className="text-xs text-gray-300 font-semibold">
+                {row.kw}
+              </span>
             </div>
             <div className="flex items-center space-x-3 text-[10px] font-extrabold leading-none">
               <div className="text-white">Pos. {row.pos}</div>
@@ -140,26 +147,47 @@ const SEOSection = () => {
       {/* Review Feed list */}
       <div className="space-y-2.5 py-0.5 min-h-[220px] flex flex-col justify-center">
         {[
-          { name: "Sarah J.", text: "Excellent service, MOT done in 45 minutes! Highly recommend.", rating: 5, time: "Just now" },
-          { name: "Emma W.", text: "Brilliant diagnostics. Very clear explanation of the issues.", rating: 5, time: "1 hour ago" },
-          { name: "Alex B.", text: "Reliable pricing and quick scheduling. Best garage suite in town.", rating: 5, time: "1 day ago" }
+          {
+            name: "Sarah J.",
+            text: "Excellent service, MOT done in 45 minutes! Highly recommend.",
+            rating: 5,
+            time: "Just now",
+          },
+          {
+            name: "Emma W.",
+            text: "Brilliant diagnostics. Very clear explanation of the issues.",
+            rating: 5,
+            time: "1 hour ago",
+          },
+          {
+            name: "Alex B.",
+            text: "Reliable pricing and quick scheduling. Best garage suite in town.",
+            rating: 5,
+            time: "1 day ago",
+          },
         ].map((rev, i) => {
           const isNew = i === 0 && showNewReviewAlert;
           return (
             <motion.div
               key={i}
-              initial={isNew ? { opacity: 0, y: 10, scale: 0.95 } : { opacity: 1 }}
+              initial={
+                isNew ? { opacity: 0, y: 10, scale: 0.95 } : { opacity: 1 }
+              }
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.3 }}
               className={`p-2.5 rounded-xl border text-[7.5px] font-semibold text-gray-300 leading-normal transition-all ${
-                isNew 
-                  ? "bg-blue-600/10 border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.15)]" 
+                isNew
+                  ? "bg-blue-600/10 border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.15)]"
                   : "bg-[#111827] border-white/5"
               }`}
             >
               <div className="flex justify-between items-center mb-1">
-                <span className="text-white font-black text-[8px]">{rev.name}</span>
-                <span className="text-gray-500 font-medium text-[7px]">{rev.time}</span>
+                <span className="text-white font-black text-[8px]">
+                  {rev.name}
+                </span>
+                <span className="text-gray-500 font-medium text-[7px]">
+                  {rev.time}
+                </span>
               </div>
               <div className="flex text-yellow-400 mb-1 leading-none">
                 {[...Array(rev.rating)].map((_, starIdx) => (
@@ -189,9 +217,15 @@ const SEOSection = () => {
       {/* Organic Traffic Stats summary */}
       <div className="bg-[#050816] rounded-xl border border-white/5 p-3.5 mb-1 shrink-0 flex items-center justify-between">
         <div>
-          <span className="text-[7px] text-gray-500 font-black block uppercase">SEO SEARCH GROWTH</span>
-          <span className="text-lg font-black text-white leading-tight mt-0.5">+48.2%</span>
-          <span className="text-[7px] text-cyan-400 font-bold block">Organic traffic increase vs last month</span>
+          <span className="text-[7px] text-gray-500 font-black block uppercase">
+            SEO SEARCH GROWTH
+          </span>
+          <span className="text-lg font-black text-white leading-tight mt-0.5">
+            +48.2%
+          </span>
+          <span className="text-[7px] text-cyan-400 font-bold block">
+            Organic traffic increase vs last month
+          </span>
         </div>
         <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400 shadow-sm shrink-0">
           <FiTrendingUp className="w-6 h-6" />
@@ -204,21 +238,44 @@ const SEOSection = () => {
           Organic Services URLs
         </div>
         {[
-          { page: "/services/mot-testing", pos: "Pos. 1", note: "Top Organic Rank", change: "Stable" },
-          { page: "/services/car-servicing", pos: "Pos. 1", note: "Top Organic Rank", change: "Stable" },
-          { page: "/services/wheel-alignment", pos: "Pos. 2", note: "Page Rank Clomb", change: "+1" },
+          {
+            page: "/services/mot-testing",
+            pos: "Pos. 1",
+            note: "Top Organic Rank",
+            change: "Stable",
+          },
+          {
+            page: "/services/car-servicing",
+            pos: "Pos. 1",
+            note: "Top Organic Rank",
+            change: "Stable",
+          },
+          {
+            page: "/services/wheel-alignment",
+            pos: "Pos. 2",
+            note: "Page Rank Clomb",
+            change: "+1",
+          },
         ].map((row, i) => (
           <div
             key={i}
             className="flex justify-between items-center bg-[#111827] rounded-lg p-2.5 border border-white/5 text-[10px] font-extrabold leading-none"
           >
             <div>
-              <span className="text-gray-300 font-semibold block">{row.page}</span>
-              <span className="text-[6.5px] text-gray-500 font-medium block mt-1">{row.note}</span>
+              <span className="text-gray-300 font-semibold block">
+                {row.page}
+              </span>
+              <span className="text-[6.5px] text-gray-500 font-medium block mt-1">
+                {row.note}
+              </span>
             </div>
             <div className="flex items-center space-x-3 text-right">
               <div className="text-white">{row.pos}</div>
-              <div className={row.change.startsWith("+") ? "text-cyan-400" : "text-gray-500"}>
+              <div
+                className={
+                  row.change.startsWith("+") ? "text-cyan-400" : "text-gray-500"
+                }
+              >
                 {row.change}
               </div>
             </div>
@@ -235,7 +292,6 @@ const SEOSection = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          
           {/* Left Column: Interactive Feature Cards */}
           <div className="order-2 md:order-1 space-y-8">
             <motion.div
@@ -256,7 +312,7 @@ const SEOSection = () => {
               </p>
             </motion.div>
 
-            <div className="space-y-4">
+            <div className="hidden md:block space-y-4">
               {features.map((item, idx) => {
                 const isActive = idx === activeTab;
                 return (
@@ -283,18 +339,24 @@ const SEOSection = () => {
                       />
                     )}
 
-                    <div className={`w-12 h-12 flex-shrink-0 rounded-xl border flex items-center justify-center transition-all ${
-                      isActive 
-                        ? "bg-blue-500/20 border-blue-500/40 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" 
-                        : "bg-[#111827] border-white/10 text-gray-500"
-                    }`}>
+                    <div
+                      className={`w-12 h-12 flex-shrink-0 rounded-xl border flex items-center justify-center transition-all ${
+                        isActive
+                          ? "bg-blue-500/20 border-blue-500/40 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]"
+                          : "bg-[#111827] border-white/10 text-gray-500"
+                      }`}
+                    >
                       {React.cloneElement(item.icon, { className: "w-6 h-6" })}
                     </div>
                     <div>
-                      <h3 className={`text-xl font-bold transition-all mb-1.5 ${isActive ? "text-blue-400" : "text-white"}`}>
+                      <h3
+                        className={`text-xl font-bold transition-all mb-1.5 ${isActive ? "text-blue-400" : "text-white"}`}
+                      >
                         {item.title}
                       </h3>
-                      <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                      <p className="text-gray-400 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
                   </motion.div>
                 );
@@ -362,7 +424,7 @@ const SEOSection = () => {
                 <div className="text-[9.5px] font-black text-white shrink-0 flex items-center space-x-1.5">
                   <span>{reviewsCount} New Google Reviews</span>
                   {showNewReviewAlert && (
-                    <motion.span 
+                    <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       className="bg-cyan-500/10 text-cyan-400 border border-cyan-500/35 px-1 rounded text-[7px] font-black"

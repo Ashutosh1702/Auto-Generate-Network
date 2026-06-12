@@ -1,6 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FiCalendar, FiClock, FiCheck, FiMail, FiMessageSquare, FiRefreshCw, FiAlertTriangle, FiSearch, FiCheckCircle } from 'react-icons/fi'
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FiCalendar,
+  FiClock,
+  FiCheck,
+  FiMail,
+  FiMessageSquare,
+  FiRefreshCw,
+  FiAlertTriangle,
+  FiSearch,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 const MOTDiary = () => {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -41,10 +51,26 @@ const MOTDiary = () => {
   }, [activeFeature]);
 
   const features = [
-    { icon: <FiMessageSquare className="w-5 h-5" />, title: 'Automated SMS & Email Reminders', desc: 'Reduce no-shows by automatically notifying customers before their MOT is due.' },
-    { icon: <FiRefreshCw className="w-5 h-5" />, title: 'DVSA Integration for MOT History', desc: 'Instantly retrieve full DVSA records and advisory safety issues on any registration plate.' },
-    { icon: <FiCalendar className="w-5 h-5" />, title: 'Drag-and-Drop Scheduling', desc: 'Reallocate bays, reschedule slots, and optimize your diary grid in real-time.' },
-    { icon: <FiClock className="w-5 h-5" />, title: 'Live Bay Availability', desc: 'Monitor diagnostic checks and ramp load percentages with real-time feedback indicators.' }
+    {
+      icon: <FiMessageSquare className="w-5 h-5" />,
+      title: "Automated SMS & Email Reminders",
+      desc: "Reduce no-shows by automatically notifying customers before their MOT is due.",
+    },
+    {
+      icon: <FiRefreshCw className="w-5 h-5" />,
+      title: "DVSA Integration for MOT History",
+      desc: "Instantly retrieve full DVSA records and advisory safety issues on any registration plate.",
+    },
+    {
+      icon: <FiCalendar className="w-5 h-5" />,
+      title: "Drag-and-Drop Scheduling",
+      desc: "Reallocate bays, reschedule slots, and optimize your diary grid in real-time.",
+    },
+    {
+      icon: <FiClock className="w-5 h-5" />,
+      title: "Live Bay Availability",
+      desc: "Monitor diagnostic checks and ramp load percentages with real-time feedback indicators.",
+    },
   ];
 
   const renderDVSALookup = () => (
@@ -53,7 +79,9 @@ const MOTDiary = () => {
       <div className="flex justify-between items-center border-b border-white/5 pb-3 shrink-0">
         <div className="flex items-center space-x-2">
           <FiRefreshCw className="w-4 h-4 text-purple-400 animate-spin" />
-          <h4 className="text-xs font-bold text-white uppercase tracking-wider">DVSA Live API Gateway</h4>
+          <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            DVSA Live API Gateway
+          </h4>
         </div>
         <span className="text-[7.5px] bg-purple-500/10 border border-purple-500/30 text-purple-400 px-1.5 py-0.5 rounded font-black shrink-0">
           CONNECTED
@@ -63,24 +91,28 @@ const MOTDiary = () => {
       {dvsaStep === 0 ? (
         /* Scanning Screen */
         <div className="py-6 flex flex-col items-center justify-center space-y-4 relative overflow-hidden h-[135px]">
-          <span className="text-[7.5px] text-gray-500 font-extrabold uppercase tracking-widest">Scanning Registration Plate</span>
-          
+          <span className="text-[7.5px] text-gray-500 font-extrabold uppercase tracking-widest">
+            Scanning Registration Plate
+          </span>
+
           {/* Licence Plate */}
           <div className="bg-amber-400 border-2 border-slate-950 rounded-md px-6 py-2 shadow-lg relative overflow-hidden h-11 w-[200px] flex items-center justify-center shrink-0">
             <div className="absolute left-0 top-0 bottom-0 w-4.5 bg-blue-600 flex flex-col items-center justify-center text-white text-[5px] leading-none shrink-0 font-bold">
               <span>GB</span>
             </div>
-            <span className="text-slate-900 font-black tracking-widest text-sm uppercase pl-3 select-none">AB12 CDE</span>
-            
+            <span className="text-slate-900 font-black tracking-widest text-sm uppercase pl-3 select-none">
+              AB12 CDE
+            </span>
+
             {/* Animated scan bar */}
             <motion.div
               animate={{
-                top: ["0%", "100%", "0%"]
+                top: ["0%", "100%", "0%"],
               }}
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute left-0 right-0 h-0.5 bg-cyan-400 shadow-[0_0_8px_#22d3ee] pointer-events-none"
             />
@@ -101,9 +133,15 @@ const MOTDiary = () => {
           {/* Vehicle Card */}
           <div className="bg-[#111827] border border-white/5 p-2 rounded-xl flex items-center justify-between">
             <div>
-              <span className="text-[6.5px] text-gray-500 font-extrabold block uppercase">VEHICLE DETAILS</span>
-              <span className="text-[10px] font-black text-white block leading-tight">FORD FOCUS 1.6L ECOBOOST</span>
-              <span className="text-[7.5px] text-purple-400 font-bold">Blue • Hatchback • 2018</span>
+              <span className="text-[6.5px] text-gray-500 font-extrabold block uppercase">
+                VEHICLE DETAILS
+              </span>
+              <span className="text-[10px] font-black text-white block leading-tight">
+                FORD FOCUS 1.6L ECOBOOST
+              </span>
+              <span className="text-[7.5px] text-purple-400 font-bold">
+                Blue • Hatchback • 2018
+              </span>
             </div>
             <div className="bg-amber-400 border border-slate-950 rounded text-slate-950 font-black text-[9px] px-2 py-0.5 select-none shrink-0">
               AB12 CDE
@@ -113,13 +151,17 @@ const MOTDiary = () => {
           {/* MOT Expiry and Status */}
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-[#111827] border border-white/5 p-1.5 rounded-lg text-center flex flex-col justify-center">
-              <span className="text-[6px] text-gray-500 font-extrabold block uppercase">MOT STATUS</span>
+              <span className="text-[6px] text-gray-500 font-extrabold block uppercase">
+                MOT STATUS
+              </span>
               <span className="text-[8.5px] text-green-400 font-black uppercase flex items-center justify-center mt-0.5">
                 ✓ PASSED
               </span>
             </div>
             <div className="bg-[#111827] border border-white/5 p-1.5 rounded-lg text-center flex flex-col justify-center">
-              <span className="text-[6px] text-gray-500 font-extrabold block uppercase">MOT EXPIRY</span>
+              <span className="text-[6px] text-gray-500 font-extrabold block uppercase">
+                MOT EXPIRY
+              </span>
               <span className="text-[8.5px] text-white font-black block mt-0.5">
                 24 Oct 2027
               </span>
@@ -130,7 +172,9 @@ const MOTDiary = () => {
           <div className="bg-[#111827] border border-white/5 p-2 rounded-xl space-y-1">
             <div className="flex justify-between items-center text-[7px] text-gray-400 font-bold border-b border-white/5 pb-1">
               <span>⚠️ ACTIVE DVSA ADVISORIES</span>
-              <span className="text-amber-400 font-black text-[6.5px]">2 WARNINGS</span>
+              <span className="text-amber-400 font-black text-[6.5px]">
+                2 WARNINGS
+              </span>
             </div>
             <div className="space-y-0.5 text-[7px] font-semibold text-gray-400 leading-tight">
               <div className="flex items-start space-x-1 text-amber-300">
@@ -150,24 +194,67 @@ const MOTDiary = () => {
 
   const renderDiaryGrid = () => {
     const rows = [
-      { time: '09:00', bookings: [
-        { bay: 1, type: 'Service', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
-        { bay: 2, empty: true },
-        { bay: 3, type: 'Tyres', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
-        { bay: 4, type: 'MOT', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
-      ]},
-      { time: '10:00', bookings: [
-        { bay: 1, type: 'Service', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
-        { bay: 2, type: 'Diagnostics', color: 'bg-red-500/20 text-red-400 border-red-500/30', isDragSource: true },
-        { bay: 3, empty: true },
-        { bay: 4, empty: true },
-      ]},
-      { time: '11:00', bookings: [
-        { bay: 1, empty: true },
-        { bay: 2, type: 'Diagnostics', color: 'bg-red-500/20 text-red-400 border-red-500/30' },
-        { bay: 3, type: 'Brakes', color: 'bg-orange-500/20 text-orange-400 border-orange-500/30', isDragTarget: true },
-        { bay: 4, type: 'MOT', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
-      ]},
+      {
+        time: "09:00",
+        bookings: [
+          {
+            bay: 1,
+            type: "Service",
+            color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+          },
+          { bay: 2, empty: true },
+          {
+            bay: 3,
+            type: "Tyres",
+            color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+          },
+          {
+            bay: 4,
+            type: "MOT",
+            color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+          },
+        ],
+      },
+      {
+        time: "10:00",
+        bookings: [
+          {
+            bay: 1,
+            type: "Service",
+            color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+          },
+          {
+            bay: 2,
+            type: "Diagnostics",
+            color: "bg-red-500/20 text-red-400 border-red-500/30",
+            isDragSource: true,
+          },
+          { bay: 3, empty: true },
+          { bay: 4, empty: true },
+        ],
+      },
+      {
+        time: "11:00",
+        bookings: [
+          { bay: 1, empty: true },
+          {
+            bay: 2,
+            type: "Diagnostics",
+            color: "bg-red-500/20 text-red-400 border-red-500/30",
+          },
+          {
+            bay: 3,
+            type: "Brakes",
+            color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+            isDragTarget: true,
+          },
+          {
+            bay: 4,
+            type: "MOT",
+            color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+          },
+        ],
+      },
     ];
 
     return (
@@ -191,18 +278,34 @@ const MOTDiary = () => {
               if (activeFeature === 3) {
                 if (b.empty) {
                   return (
-                    <div key={i} className="rounded-md border border-emerald-500/30 border-dashed bg-emerald-500/5 flex items-center justify-center text-[7px] font-black text-emerald-400 animate-pulse relative h-full">
+                    <div
+                      key={i}
+                      className="rounded-md border border-emerald-500/30 border-dashed bg-emerald-500/5 flex items-center justify-center text-[7px] font-black text-emerald-400 animate-pulse relative h-full"
+                    >
                       <span>🟢 Free</span>
                     </div>
                   );
                 } else {
-                  const progressWidth = b.type === "MOT" ? "95%" : b.type === "Service" ? "80%" : "35%";
+                  const progressWidth =
+                    b.type === "MOT"
+                      ? "95%"
+                      : b.type === "Service"
+                        ? "80%"
+                        : "35%";
                   return (
-                    <div key={i} className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight ${b.color} relative overflow-hidden h-full`}>
-                      <span className="font-extrabold text-[8px]">{b.type}</span>
+                    <div
+                      key={i}
+                      className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight ${b.color} relative overflow-hidden h-full`}
+                    >
+                      <span className="font-extrabold text-[8px]">
+                        {b.type}
+                      </span>
                       <span className="text-[6px] opacity-70">AB12 CDE</span>
                       <div className="w-full bg-white/5 h-0.5 rounded-full overflow-hidden mt-1.5 border border-white/5">
-                        <div className="h-full bg-current opacity-75" style={{ width: progressWidth }} />
+                        <div
+                          className="h-full bg-current opacity-75"
+                          style={{ width: progressWidth }}
+                        />
                       </div>
                     </div>
                   );
@@ -222,46 +325,52 @@ const MOTDiary = () => {
                             "rgba(139, 92, 246, 0.8)",
                             "rgba(168, 85, 247, 0.8)",
                             "rgba(168, 85, 247, 0.8)",
-                            "rgba(239, 68, 68, 0.3)"
+                            "rgba(239, 68, 68, 0.3)",
                           ],
                           boxShadow: [
                             "0 1px 2px rgba(0,0,0,0.1)",
                             "0 6px 15px rgba(139,92,246,0.3)",
                             "0 6px 15px rgba(139,92,246,0.35)",
                             "0 6px 15px rgba(139,92,246,0.35)",
-                            "0 1px 2px rgba(0,0,0,0.1)"
-                          ]
+                            "0 1px 2px rgba(0,0,0,0.1)",
+                          ],
                         }}
                         transition={{
                           duration: 5,
                           repeat: Infinity,
                           times: [0, 0.2, 0.55, 0.85, 1],
-                          ease: "easeInOut"
+                          ease: "easeInOut",
                         }}
                         className="absolute inset-0 bg-[#050816] rounded-md border text-[7.5px] p-1 flex flex-col justify-center z-20 cursor-grab"
                       >
-                        <span className="font-extrabold text-[8px] text-red-400">Diagnostics</span>
-                        <span className="text-[6.5px] opacity-75 text-red-300">AB12 CDE</span>
+                        <span className="font-extrabold text-[8px] text-red-400">
+                          Diagnostics
+                        </span>
+                        <span className="text-[6.5px] opacity-75 text-red-300">
+                          AB12 CDE
+                        </span>
                       </motion.div>
                     </div>
                   );
                 }
-                
+
                 if (b.isDragTarget) {
                   return (
                     <div key={i} className="relative h-full">
                       <div className="absolute inset-0 border border-dashed border-purple-500/40 bg-purple-500/5 rounded-md flex items-center justify-center">
-                        <span className="text-[6.5px] font-black text-purple-400/50 uppercase select-none">Target</span>
+                        <span className="text-[6.5px] font-black text-purple-400/50 uppercase select-none">
+                          Target
+                        </span>
                       </div>
-                      
+
                       <motion.div
                         animate={{
-                          opacity: [0, 0, 1, 1, 0]
+                          opacity: [0, 0, 1, 1, 0],
                         }}
                         transition={{
                           duration: 5,
                           repeat: Infinity,
-                          times: [0, 0.55, 0.6, 0.85, 1]
+                          times: [0, 0.55, 0.6, 0.85, 1],
                         }}
                         className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white font-extrabold text-[6.5px] px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30"
                       >
@@ -275,16 +384,25 @@ const MOTDiary = () => {
               if (activeFeature === 0) {
                 if (b.type === "MOT" && row.time === "09:00") {
                   return (
-                    <div key={i} className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight transition-all duration-300 ${
-                      smsConfirmed 
-                        ? "bg-green-500/10 border-green-500/40 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.15)]" 
-                        : b.color
-                    } h-full`}>
-                      <span className="font-extrabold text-[8px]">{b.type}</span>
+                    <div
+                      key={i}
+                      className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight transition-all duration-300 ${
+                        smsConfirmed
+                          ? "bg-green-500/10 border-green-500/40 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.15)]"
+                          : b.color
+                      } h-full`}
+                    >
+                      <span className="font-extrabold text-[8px]">
+                        {b.type}
+                      </span>
                       <span className="text-[6px] opacity-70">AB12 CDE</span>
-                      <span className={`text-[5.5px] font-black tracking-wide uppercase mt-0.5 transition-colors ${
-                        smsConfirmed ? "text-green-400" : "text-purple-400 animate-pulse"
-                      }`}>
+                      <span
+                        className={`text-[5.5px] font-black tracking-wide uppercase mt-0.5 transition-colors ${
+                          smsConfirmed
+                            ? "text-green-400"
+                            : "text-purple-400 animate-pulse"
+                        }`}
+                      >
                         {smsConfirmed ? "✓ Confirmed" : "⏰ SMS Pending"}
                       </span>
                     </div>
@@ -293,12 +411,19 @@ const MOTDiary = () => {
               }
 
               return (
-                <div key={i} className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight ${
-                  b.type ? b.color : 'border-dashed border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer transition-colors'
-                } h-full`}>
+                <div
+                  key={i}
+                  className={`rounded-md border p-1 flex flex-col justify-center text-[7.5px] leading-tight ${
+                    b.type
+                      ? b.color
+                      : "border-dashed border-white/5 bg-white/5 hover:bg-white/10 cursor-pointer transition-colors"
+                  } h-full`}
+                >
                   {b.type ? (
                     <>
-                      <span className="font-extrabold text-[8px]">{b.type}</span>
+                      <span className="font-extrabold text-[8px]">
+                        {b.type}
+                      </span>
                       <span className="text-[6px] opacity-70">AB12 CDE</span>
                     </>
                   ) : null}
@@ -321,9 +446,12 @@ const MOTDiary = () => {
               <span className="text-green-500">Live</span>
             </div>
             <div className="space-y-1.5">
-              <div className="text-[7.5px] font-bold text-gray-400">To: +44 7700 900077</div>
+              <div className="text-[7.5px] font-bold text-gray-400">
+                To: +44 7700 900077
+              </div>
               <div className="bg-slate-800 p-2 rounded-lg text-[8px] font-semibold text-white leading-relaxed relative">
-                "Hi Alex, reminder that your Ford Focus MOT is booked for Tue Oct 24th at 09:00 AM. Please reply YES to confirm."
+                "Hi Alex, reminder that your Ford Focus MOT is booked for Tue
+                Oct 24th at 09:00 AM. Please reply YES to confirm."
                 <div className="absolute -left-1 top-2.5 w-2 h-2 bg-slate-800 rotate-45 rounded-sm"></div>
               </div>
               {smsConfirmed && (
@@ -351,22 +479,29 @@ const MOTDiary = () => {
         return {
           icon: <FiMessageSquare className="w-4 h-4" />,
           title: "Automated SMS Sent",
-          desc: smsConfirmed ? "MOT Confirmed: AB12 CDE" : "MOT Reminder: AB12 CDE",
-          color: smsConfirmed ? "bg-green-500/20 text-green-400" : "bg-purple-500/20 text-purple-400"
+          desc: smsConfirmed
+            ? "MOT Confirmed: AB12 CDE"
+            : "MOT Reminder: AB12 CDE",
+          color: smsConfirmed
+            ? "bg-green-500/20 text-green-400"
+            : "bg-purple-500/20 text-purple-400",
         };
       case 1:
         return {
           icon: <FiRefreshCw className="w-4 h-4 animate-spin" />,
           title: "DVSA Gateway Syncing",
-          desc: dvsaStep === 1 ? "Scan complete - PASS: AB12 CDE" : "Importing safety advisories...",
-          color: "bg-cyan-500/20 text-cyan-400"
+          desc:
+            dvsaStep === 1
+              ? "Scan complete - PASS: AB12 CDE"
+              : "Importing safety advisories...",
+          color: "bg-cyan-500/20 text-cyan-400",
         };
       case 2:
         return {
           icon: <FiCalendar className="w-4 h-4" />,
           title: "Drag & Drop Rescheduler",
           desc: "Diagnostics shifted to Bay 3",
-          color: "bg-pink-500/20 text-pink-400"
+          color: "bg-pink-500/20 text-pink-400",
         };
       case 3:
       default:
@@ -374,7 +509,7 @@ const MOTDiary = () => {
           icon: <FiClock className="w-4 h-4" />,
           title: "Bay Occupancy Meter",
           desc: "Active Load: 3/4 Ramps (75%)",
-          color: "bg-blue-500/20 text-blue-400"
+          color: "bg-blue-500/20 text-blue-400",
         };
     }
   };
@@ -385,18 +520,17 @@ const MOTDiary = () => {
     <section className="py-24 px-6 md:px-12 bg-[#0c1222] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          
           {/* Left Column: Visual Mockup */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative w-full flex justify-center items-center"
           >
             <div className="absolute inset-0 bg-purple-600/15 blur-[120px] rounded-full pointer-events-none"></div>
-            
+
             {/* MOT Diary Dashboard Mockup Box */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               className="relative rounded-2xl border border-white/10 bg-[#050816] p-4 shadow-[0_0_40px_rgba(139,92,246,0.12)] z-10 w-full max-w-[500px]"
@@ -408,12 +542,18 @@ const MOTDiary = () => {
                     <FiCalendar className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-xs md:text-sm">MOT Diary Dashboard</h3>
-                    <p className="text-[9px] text-gray-500 font-semibold mt-0.5">Tue, Oct 24th, 2026</p>
+                    <h3 className="text-white font-bold text-xs md:text-sm">
+                      MOT Diary Dashboard
+                    </h3>
+                    <p className="text-[9px] text-gray-500 font-semibold mt-0.5">
+                      Tue, Oct 24th, 2026
+                    </p>
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <div className="px-3 py-1 bg-purple-600 text-white text-[9px] font-black rounded-lg cursor-pointer shadow-sm shadow-purple-500/20 hover:bg-purple-500 transition-colors">+ New Booking</div>
+                  <div className="px-3 py-1 bg-purple-600 text-white text-[9px] font-black rounded-lg cursor-pointer shadow-sm shadow-purple-500/20 hover:bg-purple-500 transition-colors">
+                    + New Booking
+                  </div>
                 </div>
               </div>
 
@@ -427,7 +567,9 @@ const MOTDiary = () => {
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.25 }}
                   >
-                    {activeFeature === 1 ? renderDVSALookup() : renderDiaryGrid()}
+                    {activeFeature === 1
+                      ? renderDVSALookup()
+                      : renderDiaryGrid()}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -435,25 +577,37 @@ const MOTDiary = () => {
 
             {/* Dynamic Floating Notification Box */}
             <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeFeature + "-" + (smsConfirmed ? "confirmed" : "pending") + "-" + dvsaStep}
+              <motion.div
+                key={
+                  activeFeature +
+                  "-" +
+                  (smsConfirmed ? "confirmed" : "pending") +
+                  "-" +
+                  dvsaStep
+                }
                 initial={{ opacity: 0, y: 15, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.95 }}
                 transition={{ duration: 0.25 }}
                 className="absolute -bottom-6 -right-6 md:-right-8 bg-[#111827] border border-white/10 p-3 rounded-xl shadow-2xl glass-panel z-20 flex items-center space-x-3 select-none shrink-0"
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentNotification.color}`}>
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${currentNotification.color}`}
+                >
                   {currentNotification.icon}
                 </div>
                 <div className="text-left leading-none">
-                  <div className="text-[8px] text-gray-500 font-black uppercase tracking-wider">{currentNotification.title}</div>
-                  <div className="text-[10.5px] font-bold text-white mt-1">{currentNotification.desc}</div>
+                  <div className="text-[8px] text-gray-500 font-black uppercase tracking-wider">
+                    {currentNotification.title}
+                  </div>
+                  <div className="text-[10.5px] font-bold text-white mt-1">
+                    {currentNotification.desc}
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
           </motion.div>
-          
+
           {/* Right Column: Descriptions & Clickable Feature Tabs */}
           <div className="space-y-8 text-left z-10">
             <motion.div
@@ -462,32 +616,37 @@ const MOTDiary = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Smart <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">MOT Diary</span> Management
+                Smart{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+                  MOT Diary
+                </span>{" "}
+                Management
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed">
-                Simplify your MOT scheduling with our intelligent diary system. Reduce no-shows, fill gaps, and keep your ramps fully booked.
+                Simplify your MOT scheduling with our intelligent diary system.
+                Reduce no-shows, fill gaps, and keep your ramps fully booked.
               </p>
             </motion.div>
-            
-            <div className="space-y-4">
+
+            <div className="hidden md:block space-y-4">
               {features.map((item, idx) => {
                 const isActive = idx === activeFeature;
                 return (
-                  <motion.div 
-                    key={idx} 
+                  <motion.div
+                    key={idx}
                     onClick={() => {
                       setActiveFeature(idx);
                       setIsAutoPlaying(false);
                     }}
                     whileHover={{ scale: 1.02 }}
                     className={`flex gap-4 p-4 rounded-2xl border cursor-pointer transition-all duration-300 relative overflow-hidden ${
-                      isActive 
-                        ? "bg-[#111827]/80 border-purple-500/50 shadow-[0_0_20px_rgba(139,92,246,0.1)]" 
+                      isActive
+                        ? "bg-[#111827]/80 border-purple-500/50 shadow-[0_0_20px_rgba(139,92,246,0.1)]"
                         : "bg-[#111827]/20 border-white/5 hover:bg-[#111827]/40 hover:border-white/10"
                     }`}
                   >
                     {isActive && isAutoPlaying && (
-                      <motion.div 
+                      <motion.div
                         key={idx}
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -496,40 +655,45 @@ const MOTDiary = () => {
                       />
                     )}
 
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl border flex items-center justify-center transition-all ${
-                      isActive 
-                        ? "bg-purple-500/20 border-purple-500/40 text-purple-400 shadow-[0_0_10px_rgba(139,92,246,0.2)]" 
-                        : "bg-[#111827] border-white/10 text-gray-500"
-                    }`}>
+                    <div
+                      className={`flex-shrink-0 w-12 h-12 rounded-xl border flex items-center justify-center transition-all ${
+                        isActive
+                          ? "bg-purple-500/20 border-purple-500/40 text-purple-400 shadow-[0_0_10px_rgba(139,92,246,0.2)]"
+                          : "bg-[#111827] border-white/10 text-gray-500"
+                      }`}
+                    >
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className={`text-xl font-bold transition-all mb-1 ${isActive ? "text-purple-400" : "text-white"}`}>
+                      <h3
+                        className={`text-xl font-bold transition-all mb-1 ${isActive ? "text-purple-400" : "text-white"}`}
+                      >
                         {item.title}
                       </h3>
-                      <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                      <p className="text-gray-400 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
                   </motion.div>
                 );
               })}
             </div>
-            
-            <motion.button 
+
+            <motion.button
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all cursor-pointer"
+              className="hidden md:inline-block px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all cursor-pointer"
             >
               Explore MOT Features
             </motion.button>
           </div>
-
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default MOTDiary
+export default MOTDiary;

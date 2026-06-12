@@ -69,37 +69,121 @@ const DashboardSection = () => {
   const [smsDispatched, setSmsDispatched] = useState(45);
 
   const [liveWorkFeed, setLiveWorkFeed] = useState([
-    { name: "Audi A3 (Job #9012)", info: "MOT Testing", time: "Active (40 mins)", color: "text-green-400" },
-    { name: "Ford Transit (Job #9013)", info: "Clutch Replace", time: "Repairs (2h remaining)", color: "text-red-400" },
-    { name: "Tesla Model Y (Job #9014)", info: "Battery Audit", time: "Scheduled (Pending)", color: "text-indigo-400" },
-    { name: "Vauxhall Corsa (Job #9015)", info: "Alignment Check", time: "Completed", color: "text-gray-400" }
+    {
+      name: "Audi A3 (Job #9012)",
+      info: "MOT Testing",
+      time: "Active (40 mins)",
+      color: "text-green-400",
+    },
+    {
+      name: "Ford Transit (Job #9013)",
+      info: "Clutch Replace",
+      time: "Repairs (2h remaining)",
+      color: "text-red-400",
+    },
+    {
+      name: "Tesla Model Y (Job #9014)",
+      info: "Battery Audit",
+      time: "Scheduled (Pending)",
+      color: "text-indigo-400",
+    },
+    {
+      name: "Vauxhall Corsa (Job #9015)",
+      info: "Alignment Check",
+      time: "Completed",
+      color: "text-gray-400",
+    },
   ]);
 
-  const [barChartHeights, setBarChartHeights] = useState([70, 90, 40, 80, 55, 65]);
+  const [barChartHeights, setBarChartHeights] = useState([
+    70, 90, 40, 80, 55, 65,
+  ]);
   const [fleetPerformance, setFleetPerformance] = useState([91, 78, 54]);
 
   const [chartYVals, setChartYVals] = useState({
-    c1: 110, c2: 130, c3: 70, c4: 40, c5: 90, c6: 50, c7: 30, c8: 20
+    c1: 110,
+    c2: 130,
+    c3: 70,
+    c4: 40,
+    c5: 90,
+    c6: 50,
+    c7: 30,
+    c8: 20,
   });
 
   const [activeAgreements, setActiveAgreements] = useState([
-    { name: "David Jenkins (Golf)", info: "Agrmt #402", status: "Due today 17:00", color: "text-blue-400" },
-    { name: "Sarah Jenkins (Focus)", info: "Agrmt #403", status: "Returned (Clean)", color: "text-green-400" },
-    { name: "Michael Chang (Corsa)", info: "Agrmt #404", status: "Out (7d remaining)", color: "text-indigo-400" },
-    { name: "Emma Watson (Fiesta)", info: "Agrmt #405", status: "Out (3d remaining)", color: "text-indigo-400" }
+    {
+      name: "David Jenkins (Golf)",
+      info: "Agrmt #402",
+      status: "Due today 17:00",
+      color: "text-blue-400",
+    },
+    {
+      name: "Sarah Jenkins (Focus)",
+      info: "Agrmt #403",
+      status: "Returned (Clean)",
+      color: "text-green-400",
+    },
+    {
+      name: "Michael Chang (Corsa)",
+      info: "Agrmt #404",
+      status: "Out (7d remaining)",
+      color: "text-indigo-400",
+    },
+    {
+      name: "Emma Watson (Fiesta)",
+      info: "Agrmt #405",
+      status: "Out (3d remaining)",
+      color: "text-indigo-400",
+    },
   ]);
 
   const [workshopTimeSlots, setWorkshopTimeSlots] = useState([
-    { time: "09:30", name: "David Roberts", service: "Audi A3 - MOT + Major Service", color: "bg-green-500" },
-    { time: "11:00", name: "Jessica Taylor", service: "BMW X5 - Aircon Regas & Clean", color: "bg-indigo-500" },
-    { time: "13:30", name: "Thomas Evans", service: "Nissan Qashqai - Interim Service", color: "bg-purple-500" }
+    {
+      time: "09:30",
+      name: "David Roberts",
+      service: "Audi A3 - MOT + Major Service",
+      color: "bg-green-500",
+    },
+    {
+      time: "11:00",
+      name: "Jessica Taylor",
+      service: "BMW X5 - Aircon Regas & Clean",
+      color: "bg-indigo-500",
+    },
+    {
+      time: "13:30",
+      name: "Thomas Evans",
+      service: "Nissan Qashqai - Interim Service",
+      color: "bg-purple-500",
+    },
   ]);
 
   const [upcomingDiary, setUpcomingDiary] = useState([
-    { name: "Emma Smith", service: "Brake Fluid", time: "16:00", color: "text-purple-400" },
-    { name: "James Wilson", service: "Alignment", time: "16:30", color: "text-purple-400" },
-    { name: "Robert Harris", service: "Diagnostics", time: "17:00", color: "text-indigo-400" },
-    { name: "Oliver Davies", service: "Battery Check", time: "17:30", color: "text-gray-400" }
+    {
+      name: "Emma Smith",
+      service: "Brake Fluid",
+      time: "16:00",
+      color: "text-purple-400",
+    },
+    {
+      name: "James Wilson",
+      service: "Alignment",
+      time: "16:30",
+      color: "text-purple-400",
+    },
+    {
+      name: "Robert Harris",
+      service: "Diagnostics",
+      time: "17:00",
+      color: "text-indigo-400",
+    },
+    {
+      name: "Oliver Davies",
+      service: "Battery Check",
+      time: "17:30",
+      color: "text-gray-400",
+    },
   ]);
 
   useEffect(() => {
@@ -123,29 +207,29 @@ const DashboardSection = () => {
   useEffect(() => {
     const simulationInterval = setInterval(() => {
       // 1. Increment revenue
-      setEstimatedRevenue(prev => prev + Math.floor(Math.random() * 60) + 15);
-      
+      setEstimatedRevenue((prev) => prev + Math.floor(Math.random() * 60) + 15);
+
       // 2. Increment parts expense slightly
-      setPartsExpense(prev => prev + Math.floor(Math.random() * 15) + 5);
+      setPartsExpense((prev) => prev + Math.floor(Math.random() * 15) + 5);
 
       // 3. Wiggle alerts and count
-      setFleetOverview(prev => prev + (Math.random() > 0.5 ? 1 : -1));
-      setServiceAlerts(prev => {
+      setFleetOverview((prev) => prev + (Math.random() > 0.5 ? 1 : -1));
+      setServiceAlerts((prev) => {
         const next = prev + (Math.random() > 0.5 ? 1 : -1);
         return Math.min(Math.max(next, 34), 43);
       });
-      setActiveTickets(prev => {
+      setActiveTickets((prev) => {
         const next = prev + (Math.random() > 0.5 ? 1 : -1);
         return Math.min(Math.max(next, 10), 18);
       });
-      setTodayMotBookings(prev => {
+      setTodayMotBookings((prev) => {
         const next = prev + (Math.random() > 0.5 ? 1 : -1);
         return Math.min(Math.max(next, 15), 23);
       });
-      setSmsDispatched(prev => prev + (Math.random() > 0.7 ? 1 : 0));
+      setSmsDispatched((prev) => prev + (Math.random() > 0.7 ? 1 : 0));
 
       // 4. Bay Utilization toggle
-      setBayUtilization(prev => {
+      setBayUtilization((prev) => {
         const choices = [60, 80, 100];
         return choices[Math.floor(Math.random() * choices.length)];
       });
@@ -159,21 +243,25 @@ const DashboardSection = () => {
         c5: 90 + Math.floor(Math.random() * 12 - 6),
         c6: 50 + Math.floor(Math.random() * 10 - 5),
         c7: 30 + Math.floor(Math.random() * 8 - 4),
-        c8: 20 + Math.floor(Math.random() * 6 - 3)
+        c8: 20 + Math.floor(Math.random() * 6 - 3),
       });
 
       // 6. Wiggle bar chart heights
-      setBarChartHeights(prev =>
-        prev.map(h => Math.min(Math.max(h + Math.floor(Math.random() * 12 - 6), 25), 98))
+      setBarChartHeights((prev) =>
+        prev.map((h) =>
+          Math.min(Math.max(h + Math.floor(Math.random() * 12 - 6), 25), 98),
+        ),
       );
 
       // 7. Wiggle fleet utilization
-      setFleetPerformance(prev =>
-        prev.map(p => Math.min(Math.max(p + Math.floor(Math.random() * 8 - 4), 40), 98))
+      setFleetPerformance((prev) =>
+        prev.map((p) =>
+          Math.min(Math.max(p + Math.floor(Math.random() * 8 - 4), 40), 98),
+        ),
       );
 
       // 8. Progress live work feed
-      setLiveWorkFeed(prev => {
+      setLiveWorkFeed((prev) => {
         const next = [...prev];
         const target = Math.floor(Math.random() * next.length);
         if (next[target].time.includes("Active")) {
@@ -188,18 +276,22 @@ const DashboardSection = () => {
       });
 
       // 9. Rotate active agreements slightly
-      setActiveAgreements(prev => {
+      setActiveAgreements((prev) => {
         const next = [...prev];
         const targetIdx = Math.floor(Math.random() * next.length);
         if (next[targetIdx].status.includes("Out")) {
-          const daysLeft = parseInt(next[targetIdx].status.match(/\d+/)?.[0] || "3", 10);
-          next[targetIdx].status = `Out (${Math.max(1, daysLeft - 1)}d remaining)`;
+          const daysLeft = parseInt(
+            next[targetIdx].status.match(/\d+/)?.[0] || "3",
+            10,
+          );
+          next[targetIdx].status =
+            `Out (${Math.max(1, daysLeft - 1)}d remaining)`;
         }
         return next;
       });
 
       // 10. Increment/update upcoming diary
-      setUpcomingDiary(prev => {
+      setUpcomingDiary((prev) => {
         const next = [...prev];
         const target = Math.floor(Math.random() * next.length);
         if (next[target].time.includes(":")) {
@@ -210,11 +302,11 @@ const DashboardSection = () => {
             nextMin = 0;
             nextHour += 1;
           }
-          next[target].time = `${nextHour.toString().padStart(2, '0')}:${nextMin.toString().padStart(2, '0')}`;
+          next[target].time =
+            `${nextHour.toString().padStart(2, "0")}:${nextMin.toString().padStart(2, "0")}`;
         }
         return next;
       });
-
     }, 4500);
 
     return () => clearInterval(simulationInterval);
@@ -546,7 +638,9 @@ const DashboardSection = () => {
                             <motion.path
                               d={`M0 120 C 50 ${chartYVals.c1}, 100 ${chartYVals.c2}, 150 ${chartYVals.c3} C 200 ${chartYVals.c4}, 250 ${chartYVals.c5}, 300 ${chartYVals.c6} C 350 ${chartYVals.c7}, 400 ${chartYVals.c8}, 400 ${chartYVals.c8} L 400 150 L 0 150 Z`}
                               fill="url(#dashboard-chart-grad-1)"
-                              animate={{ d: `M0 120 C 50 ${chartYVals.c1}, 100 ${chartYVals.c2}, 150 ${chartYVals.c3} C 200 ${chartYVals.c4}, 250 ${chartYVals.c5}, 300 ${chartYVals.c6} C 350 ${chartYVals.c7}, 400 ${chartYVals.c8}, 400 ${chartYVals.c8} L 400 150 L 0 150 Z` }}
+                              animate={{
+                                d: `M0 120 C 50 ${chartYVals.c1}, 100 ${chartYVals.c2}, 150 ${chartYVals.c3} C 200 ${chartYVals.c4}, 250 ${chartYVals.c5}, 300 ${chartYVals.c6} C 350 ${chartYVals.c7}, 400 ${chartYVals.c8}, 400 ${chartYVals.c8} L 400 150 L 0 150 Z`,
+                              }}
                               transition={{ duration: 1.5, ease: "easeInOut" }}
                             />
 
@@ -565,7 +659,9 @@ const DashboardSection = () => {
                               fill="none"
                               stroke="#3b82f6"
                               strokeWidth="3"
-                              animate={{ d: `M0 120 C 50 ${chartYVals.c1}, 100 ${chartYVals.c2}, 150 ${chartYVals.c3} C 200 ${chartYVals.c4}, 250 ${chartYVals.c5}, 300 ${chartYVals.c6} C 350 ${chartYVals.c7}, 400 ${chartYVals.c8}, 400 ${chartYVals.c8}` }}
+                              animate={{
+                                d: `M0 120 C 50 ${chartYVals.c1}, 100 ${chartYVals.c2}, 150 ${chartYVals.c3} C 200 ${chartYVals.c4}, 250 ${chartYVals.c5}, 300 ${chartYVals.c6} C 350 ${chartYVals.c7}, 400 ${chartYVals.c8}, 400 ${chartYVals.c8}`,
+                              }}
                               transition={{ duration: 1.5, ease: "easeInOut" }}
                             />
                           </svg>
@@ -650,7 +746,12 @@ const DashboardSection = () => {
                             {bayUtilization}%
                           </span>
                           <span className="text-[9px] md:text-[10px] font-bold text-gray-400 bg-white/10 border border-white/5 px-1.5 py-0.5 rounded-md">
-                            {bayUtilization === 60 ? "3/5" : bayUtilization === 80 ? "4/5" : "5/5"} Bays Active
+                            {bayUtilization === 60
+                              ? "3/5"
+                              : bayUtilization === 80
+                                ? "4/5"
+                                : "5/5"}{" "}
+                            Bays Active
                           </span>
                         </div>
                       </div>
@@ -670,14 +771,24 @@ const DashboardSection = () => {
                         </div>
 
                         <div className="flex-1 flex items-end justify-between space-x-4 pt-8 h-[120px] pb-1 border-b border-white/5">
-                          {["Engine", "Brakes", "Electrical", "Tyre", "Exhaust", "Gearbox"].map((label, i) => (
+                          {[
+                            "Engine",
+                            "Brakes",
+                            "Electrical",
+                            "Tyre",
+                            "Exhaust",
+                            "Gearbox",
+                          ].map((label, i) => (
                             <div
                               key={i}
                               className="flex-1 flex flex-col justify-end h-full items-center"
                             >
                               <motion.div
                                 initial={{ scaleY: 0 }}
-                                animate={{ scaleY: 1, height: `${barChartHeights[i]}%` }}
+                                animate={{
+                                  scaleY: 1,
+                                  height: `${barChartHeights[i]}%`,
+                                }}
                                 transition={{ duration: 0.6, delay: i * 0.05 }}
                                 style={{
                                   originY: 1,
@@ -780,10 +891,20 @@ const DashboardSection = () => {
                         </span>
                         <div className="flex items-baseline justify-between mt-2">
                           <span className="text-base md:text-2xl font-black text-blue-400">
-                            {fleetPerformance[0] > 80 ? "12 / 15" : fleetPerformance[0] > 60 ? "11 / 15" : "10 / 15"}
+                            {fleetPerformance[0] > 80
+                              ? "12 / 15"
+                              : fleetPerformance[0] > 60
+                                ? "11 / 15"
+                                : "10 / 15"}
                           </span>
                           <span className="text-[9px] md:text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded-md">
-                            {Math.round((fleetPerformance[0] + fleetPerformance[1] + fleetPerformance[2]) / 3)}% Util.
+                            {Math.round(
+                              (fleetPerformance[0] +
+                                fleetPerformance[1] +
+                                fleetPerformance[2]) /
+                                3,
+                            )}
+                            % Util.
                           </span>
                         </div>
                       </div>
@@ -834,12 +955,16 @@ const DashboardSection = () => {
                             <div key={idx} className="space-y-1">
                               <div className="flex justify-between text-[10px] text-gray-300 font-semibold">
                                 <span>{car.name}</span>
-                                <span>{fleetPerformance[idx]}% Utilization</span>
+                                <span>
+                                  {fleetPerformance[idx]}% Utilization
+                                </span>
                               </div>
                               <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/5">
                                 <motion.div
                                   initial={{ width: 0 }}
-                                  animate={{ width: `${fleetPerformance[idx]}%` }}
+                                  animate={{
+                                    width: `${fleetPerformance[idx]}%`,
+                                  }}
                                   transition={{ duration: 0.8 }}
                                   className={`h-full ${car.color}`}
                                 />
@@ -914,7 +1039,8 @@ const DashboardSection = () => {
                             {Math.floor(todayMotBookings * 1.3)} Bookings
                           </span>
                           <span className="text-[9px] md:text-[10px] font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded-md">
-                            Capacity {Math.min(100, Math.floor(todayMotBookings * 5))}%
+                            Capacity{" "}
+                            {Math.min(100, Math.floor(todayMotBookings * 5))}%
                           </span>
                         </div>
                       </div>

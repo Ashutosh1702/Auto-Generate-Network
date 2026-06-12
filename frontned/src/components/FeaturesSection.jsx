@@ -18,6 +18,7 @@ import {
   FiPieChart,
   FiTrendingUp,
   FiActivity,
+  FiChevronDown,
 } from "react-icons/fi";
 
 // Interactive 3D tilt and flip card component
@@ -118,7 +119,9 @@ const FeatureCard = ({ feature }) => {
 };
 
 const FeaturesSection = () => {
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -127,6 +130,7 @@ const FeaturesSection = () => {
     e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
     e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
   };
+
   const features = [
     {
       icon: <FiTool />,
@@ -261,11 +265,34 @@ const FeaturesSection = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {features.map((feature, idx) => (
-            <motion.div key={idx} variants={itemVariants}>
+            <motion.div
+              key={idx}
+              variants={itemVariants}
+              className={
+                idx >= 4 && !showAllFeatures ? "hidden sm:block" : "block"
+              }
+            >
               <FeatureCard feature={feature} />
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Mobile See More / See Less Button */}
+        <div className="flex justify-center mt-12 sm:hidden">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowAllFeatures(!showAllFeatures)}
+            className="bg-white/5 border border-white/10 hover:border-indigo-500/50 hover:bg-indigo-600/10 px-8 py-3 rounded-2xl text-xs font-bold tracking-widest uppercase transition-all duration-300 text-indigo-300 hover:text-white flex items-center gap-2 shadow-[0_0_15px_rgba(79,70,229,0.1)] cursor-pointer"
+          >
+            <span>{showAllFeatures ? "See Less" : "See More"}</span>
+            <FiChevronDown
+              className={`w-4 h-4 transition-transform duration-300 ${
+                showAllFeatures ? "rotate-180" : ""
+              }`}
+            />
+          </motion.button>
+        </div>
       </div>
     </section>
   );

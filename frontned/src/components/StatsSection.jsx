@@ -37,7 +37,11 @@ const AnimatedCounter = ({ end, duration = 1.5, inView, isFloat = false }) => {
     prevEndRef.current = end;
   }, [end, inView, duration]);
 
-  return <span>{isFloat ? count.toFixed(1) : Math.round(count).toLocaleString()}</span>;
+  return (
+    <span>
+      {isFloat ? count.toFixed(1) : Math.round(count).toLocaleString()}
+    </span>
+  );
 };
 
 const StatsSection = () => {
@@ -67,7 +71,7 @@ const StatsSection = () => {
     // Satisfaction wiggles slightly
     const satisfactionInterval = setInterval(() => {
       setSatisfaction((prev) => {
-        const delta = (Math.random() * 0.2 - 0.1);
+        const delta = Math.random() * 0.2 - 0.1;
         const next = prev + delta;
         return parseFloat(Math.min(Math.max(next, 98.1), 99.2).toFixed(1));
       });
@@ -83,7 +87,12 @@ const StatsSection = () => {
   const stats = [
     { value: garages, suffix: "+", label: "Garages Across UK", isFloat: false },
     { value: jobs, suffix: "+", label: "Jobs Completed", isFloat: false },
-    { value: satisfaction, suffix: "%", label: "Satisfaction Rate", isFloat: true },
+    {
+      value: satisfaction,
+      suffix: "%",
+      label: "Satisfaction Rate",
+      isFloat: true,
+    },
     { value: 15, suffix: "+", label: "Years Experience", isFloat: false },
   ];
 
@@ -103,7 +112,11 @@ const StatsSection = () => {
               className="flex flex-col space-y-3 p-6 rounded-2xl bg-[#111827] border border-white/5 hover:border-indigo-500/30 transition-colors group"
             >
               <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-400 to-purple-500 group-hover:scale-110 transition-transform">
-                <AnimatedCounter end={stat.value} inView={inView} isFloat={stat.isFloat} />
+                <AnimatedCounter
+                  end={stat.value}
+                  inView={inView}
+                  isFloat={stat.isFloat}
+                />
                 {stat.suffix}
               </div>
               <div className="text-sm md:text-base text-gray-400 font-medium">
