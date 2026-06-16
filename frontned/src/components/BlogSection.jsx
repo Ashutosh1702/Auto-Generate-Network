@@ -242,7 +242,7 @@ const BlogCard = ({ post, onReadMore }) => {
 const BlogSection = ({ limit }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState(null);
-  const postsPerPage = 10;
+  const postsPerPage = 9;
 
   useEffect(() => {
     if (!limit) {
@@ -617,9 +617,11 @@ const BlogSection = ({ limit }) => {
           )}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {currentPosts.map((post, idx) => (
-            <BlogCard key={idx} post={post} onReadMore={() => setSelectedPost(post)} />
+            <div key={idx} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-[380px] flex">
+              <BlogCard post={post} onReadMore={() => setSelectedPost(post)} />
+            </div>
           ))}
         </div>
 

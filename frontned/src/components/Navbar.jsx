@@ -334,7 +334,7 @@ const Navbar = () => {
                       onMouseLeave={() => setDropdownOpen(false)}
                     >
                       <button
-                        className={`flex items-center gap-1.5 text-xs xl:text-[13px] 2xl:text-[14.5px] font-semibold transition-all duration-300 whitespace-nowrap py-2 px-1.5 lg:px-2 xl:px-2.5 2xl:px-3.5 rounded-lg relative cursor-pointer ${
+                        className={`flex items-center gap-1.5 text-xs xl:text-[13px] 2xl:text-[14.5px] font-semibold transition-all duration-300 whitespace-nowrap py-2 px-1.5 lg:px-2 xl:px-2.5 2xl:px-3.5 rounded-full relative cursor-pointer ${
                           isActive
                             ? "text-[#2196f3] font-bold"
                             : "text-gray-300 hover:text-white"
@@ -343,7 +343,7 @@ const Navbar = () => {
                         {hoveredLink === link.name && (
                           <motion.span
                             layoutId="navHoverPill"
-                            className="absolute inset-0 bg-white/5 rounded-lg -z-10"
+                            className="absolute inset-0 bg-white/5 rounded-full -z-10"
                             transition={{
                               type: "spring",
                               stiffness: 380,
@@ -413,7 +413,7 @@ const Navbar = () => {
                 }
 
                 let linkClass =
-                  "relative text-xs xl:text-[13px] 2xl:text-[14.5px] font-semibold transition-all duration-300 whitespace-nowrap py-2 px-1.5 lg:px-2 xl:px-2.5 2xl:px-3.5 rounded-lg flex items-center ";
+                  "relative text-xs xl:text-[13px] 2xl:text-[14.5px] font-semibold transition-all duration-300 whitespace-nowrap py-2 px-1.5 lg:px-2 xl:px-2.5 2xl:px-3.5 rounded-full flex items-center ";
 
                 if (link.type === "pricing") {
                   linkClass +=
@@ -437,7 +437,7 @@ const Navbar = () => {
                     {hoveredLink === link.name && !link.type && (
                       <motion.span
                         layoutId="navHoverPill"
-                        className="absolute inset-0 bg-white/5 rounded-lg -z-10"
+                        className="absolute inset-0 bg-white/5 rounded-full -z-10"
                         transition={{
                           type: "spring",
                           stiffness: 380,

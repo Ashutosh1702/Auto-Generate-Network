@@ -154,7 +154,7 @@ const Sitemap = () => {
         <section className="py-16 pb-28 px-6 md:px-12 max-w-6xl mx-auto space-y-8">
           
           {/* Accordion 1: Information */}
-          <div className="bg-[#0c1222] border border-white/10 rounded-2xl overflow-hidden shadow-2xl transition-all">
+          <div className="bg-[#0c1222] border border-white/10 rounded-3xl overflow-hidden shadow-2xl transition-all">
             <div
               id="accordion-toggle-info"
               role="button"
@@ -166,7 +166,7 @@ const Sitemap = () => {
                   setInfoExpanded(!infoExpanded);
                 }
               }}
-              className="w-full flex items-center justify-between p-6 md:p-7 text-left hover:bg-white/5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl"
+              className="w-full flex items-center justify-between p-6 md:p-7 text-left hover:bg-white/5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-none"
             >
               <div className="flex items-center gap-3">
                 <span className="text-lg md:text-xl font-bold tracking-tight text-white select-none">
@@ -197,7 +197,7 @@ const Sitemap = () => {
           </div>
 
           {/* Accordion 2: Blogs */}
-          <div className="bg-[#0c1222] border border-white/10 rounded-2xl overflow-hidden shadow-2xl transition-all">
+          <div className="bg-[#0c1222] border border-white/10 rounded-3xl overflow-hidden shadow-2xl transition-all">
             <div
               id="accordion-toggle-blogs"
               role="button"
@@ -209,7 +209,7 @@ const Sitemap = () => {
                   setBlogsExpanded(!blogsExpanded);
                 }
               }}
-              className="w-full flex items-center justify-between p-6 md:p-7 text-left hover:bg-white/5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl"
+              className="w-full flex items-center justify-between p-6 md:p-7 text-left hover:bg-white/5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-none"
             >
               <div className="flex items-center gap-3">
                 <span className="text-lg md:text-xl font-bold tracking-tight text-white select-none">

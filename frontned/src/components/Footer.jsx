@@ -58,6 +58,8 @@ const Footer = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [leadStep, setLeadStep] = useState(0); // 0: normal, 1: name, 2: garage, 3: email, 4: phone
+  const [leadData, setLeadData] = useState({ name: "", garage: "", email: "", phone: "" });
 
   const getFormattedTime = () => {
     return new Date()
@@ -73,13 +75,13 @@ const Footer = () => {
     {
       id: 1,
       sender: "bot",
-      text: "Hi again, Guest.",
+      text: "Hello. I am the Auto Garage Network virtual assistant.",
       time: getFormattedTime(),
     },
     {
       id: 2,
       sender: "bot",
-      text: "What can I help you with?",
+      text: "How can I help you improve your workshop operations today?",
       time: getFormattedTime(),
     },
     {
@@ -109,10 +111,14 @@ const Footer = () => {
   }, [messages, isTyping]);
 
   const menuOptions = [
-    { text: "Book a Free Demo", value: "demo" },
-    { text: "Pricing & Packages", value: "pricing" },
-    { text: "System Features", value: "features" },
-    { text: "Contact Sales & Support", value: "contact" },
+    { text: "Book a Free Demo 🚀", value: "demo" },
+    { text: "Website Solutions 🌐", value: "website" },
+    { text: "MOT Diary 📅", value: "mot" },
+    { text: "SEO Services 📈", value: "seo" },
+    { text: "Mobile Apps 📱", value: "app" },
+    { text: "Pricing & Plans 💰", value: "pricing" },
+    { text: "DVLA & Autodata 🔧", value: "integration" },
+    { text: "Setup & Onboarding ⚡", value: "setup" },
   ];
 
   const handleUserMessage = (text, optionValue = null) => {
@@ -128,46 +134,169 @@ const Footer = () => {
     setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
     setIsTyping(true);
-
-    // Hide tooltip when interaction begins
     setShowTooltip(false);
 
     // Simulate bot response typing latency
     setTimeout(() => {
       let botText1 = "";
       let botText2 = "";
+      let nextStep = leadStep;
+      const updatedLeadData = { ...leadData };
       const query = (optionValue || text).toLowerCase();
 
-      if (query.includes("demo")) {
-        botText1 =
-          "I'd love to help you schedule a free interactive demo of Auto Garage Network! 🚀";
-        botText2 =
-          "Please call our Sales team at **07947906789** (Mon-Fri, 9:00 AM - 5:30 PM) or email us at **hello@agn-software.co.uk**. We will set up a screen-share walkthrough customized for your workshop!";
-      } else if (
-        query.includes("price") ||
-        query.includes("pricing") ||
-        query.includes("cost")
-      ) {
-        botText1 =
-          "Auto Garage Network offers transparent pricing with zero contract lock-ins. 💳";
-        botText2 =
-          "Our standard package starts at just **£49/month**, which includes the full garage management suite, MOT booking diary, invoice creation, and automated SMS reminders.";
-      } else if (query.includes("feature")) {
-        botText1 =
-          "AGN is an all-in-one system designed specifically for modern garages and workshops. 🛠️";
-        botText2 =
-          "Key features include:\n• **MOT Diary & Automated Reminders**\n• **Customer Invoicing & Portals**\n• **Job Cards & Digital Checklists**\n• **Parts Stock & Supplier Tracking**\n• **Integrated SEO-Optimized Websites**";
-      } else if (query.includes("contact") || query.includes("support")) {
-        botText1 =
-          "You can reach us through multiple channels. We are always happy to help! 📞";
-        botText2 =
-          "• **Sales Hotline**: 07947906789\n• **Customer Service**: 0172655556\n• **Email**: hello@agn-software.co.uk\n• **Office Hours**: Monday to Friday, 9:00 AM - 5:30 PM";
+      // Lead capture flow state machine
+      if (leadStep === 1) {
+        updatedLeadData.name = text;
+        setLeadData(updatedLeadData);
+        botText1 = `Thank you, ${text}. What is the name of your garage?`;
+        nextStep = 2;
+      } else if (leadStep === 2) {
+        updatedLeadData.garage = text;
+        setLeadData(updatedLeadData);
+        botText1 = `Got it. Could you please provide your email address so we can send the demo details?`;
+        nextStep = 3;
+      } else if (leadStep === 3) {
+        updatedLeadData.email = text;
+        setLeadData(updatedLeadData);
+        botText1 = `Perfect. And finally, what is a good phone number to reach you on?`;
+        nextStep = 4;
+      } else if (leadStep === 4) {
+        updatedLeadData.phone = text;
+        setLeadData(updatedLeadData);
+        botText1 = `Brilliant! Thank you, ${leadData.name}. I have successfully collected your details for ${leadData.garage}.`;
+        botText2 = `I highly encourage you to book a free demo now. Our team will contact you shortly at ${leadData.email} or on ${text} to schedule it. You can also call us on **07947 906789** to talk to sales!`;
+        nextStep = 0;
+        // Reset lead data for future requests
+        setLeadData({ name: "", garage: "", email: "", phone: "" });
       } else {
-        botText1 =
-          "Thank you for reaching out! A representative will get back to you shortly.";
-        botText2 =
-          "You can also contact us directly at **07947906789** or email **hello@agn-software.co.uk**.";
+        // Normal user queries matching key terms
+        if (
+          query.includes("pricing") ||
+          query.includes("price") ||
+          query.includes("cost") ||
+          query.includes("cheap") ||
+          query.includes("package") ||
+          query.includes("plan") ||
+          query.includes("fee")
+        ) {
+          botText1 = "We offer simple, transparent pricing with no hidden fees or lock-in contracts:\n\n• **Elite Workshop** (£135/mo): Up to 3 users, invoices/quotes, MOT/service reminders, CRM.\n• **Elite ProMax** (£235/mo): Up to 10 users, Autodata & TecRMI, Xero/QuickBooks sync, GSF parts link.\n• **Elite ProMax Plus** (£375/mo): Unlimited users, multi-site management, custom API, 24/7 support.";
+          botText2 = "We also offer a **Free Trial & Free Version of MOT Diary** with unlimited trial users (no credit card needed). Would you like to book a free demo to see these features in action?";
+        } else if (
+          query.includes("demo") ||
+          query.includes("buy") ||
+          query.includes("sign up") ||
+          query.includes("register") ||
+          query.includes("trial") ||
+          query.includes("quote") ||
+          query.includes("purchase") ||
+          query.includes("start")
+        ) {
+          botText1 = "I would be delighted to help you set up a free interactive demo of Auto Garage Network! 🚀";
+          botText2 = "May I start by taking your name, please?";
+          nextStep = 1;
+        } else if (
+          query.includes("setup") ||
+          query.includes("timeline") ||
+          query.includes("how long") ||
+          query.includes("install") ||
+          query.includes("onboarding") ||
+          query.includes("migrate") ||
+          query.includes("implementation")
+        ) {
+          botText1 = "Setting up your custom website and MOT diary is incredibly fast. We fully manage the onboarding and get everything live within **24 to 48 hours**.";
+          botText2 = "Our team helps you with domain setup, custom layout configuration, importing your existing customer & parts inventory data, plus full staff training. Would you like to book a demo?";
+        } else if (
+          query.includes("founder") ||
+          query.includes("owner") ||
+          query.includes("history") ||
+          query.includes("about") ||
+          query.includes("who created") ||
+          query.includes("bassi") ||
+          query.includes("story") ||
+          query.includes("team") ||
+          query.includes("jatinder")
+        ) {
+          botText1 = "Auto Garage Network was founded by **Mr. Jatinder Singh Bassi** and has been in business for **6 years** (established in 2016). We are based in Melton Mowbray, Leicestershire.";
+          botText2 = "With a team of 200+ members, we support 425+ clients worldwide and power over 550K+ active users. We specialise in being lifetime e-partners for UK independent garages.";
+        } else if (
+          query.includes("integration") ||
+          query.includes("dvla") ||
+          query.includes("autodata") ||
+          query.includes("tecrmi") ||
+          query.includes("solera") ||
+          query.includes("xero") ||
+          query.includes("quickbooks") ||
+          query.includes("sage") ||
+          query.includes("parts") ||
+          query.includes("gsf") ||
+          query.includes("partslink24")
+        ) {
+          botText1 = "Yes! Our platform integrates seamlessly with standard UK workshop tools:\n\n• **DVLA Database**: Real-time vehicle info, engine size, MOT status, and tyre specs by typing a registration number.\n• **Solera Autodata & TecRMI**: OE repair data, interactive wiring diagrams, and technical specifications for 30,000+ models.\n• **Accounting Sync**: Live links to Xero, QuickBooks, and Sage.\n• **Parts Link**: Automated ordering via GSF and Partslink24.";
+          botText2 = "Would you like to book a demo to see these integrations in action?";
+        } else if (
+          query.includes("app") ||
+          query.includes("mobile") ||
+          query.includes("phone app") ||
+          query.includes("ios") ||
+          query.includes("android")
+        ) {
+          botText1 = "We build **custom-branded mobile apps** for iOS and Android under *your own garage name*! Your customers can book MOTs, check vehicle histories, and receive real-time notifications directly.";
+          botText2 = "We have launched over 65+ custom apps. Would you like to see how a custom mobile app could look for your workshop?";
+        } else if (
+          query.includes("mot") ||
+          query.includes("diary") ||
+          query.includes("booking") ||
+          query.includes("calendar") ||
+          query.includes("reminder") ||
+          query.includes("sms") ||
+          query.includes("notification")
+        ) {
+          botText1 = "Our smart, cloud-based **MOT Diary** links directly with the DVLA. It automatically syncs MOT expiry dates, VIN, and engine specifics.";
+          botText2 = "It features automated SMS/Email reminders to reduce no-shows, drag-and-drop ramp scheduling, and auto-generated campaigns. Would you like to book a demo?";
+        } else if (
+          query.includes("seo") ||
+          query.includes("marketing") ||
+          query.includes("rank") ||
+          query.includes("google") ||
+          query.includes("search") ||
+          query.includes("traffic")
+        ) {
+          botText1 = "Our Search Engine Optimisation (SEO) services focus on ranking your workshop at the top of local Google searches for MOTs, tyre sales, and repairs.";
+          botText2 = "This targets active local customers and drives them straight to your booking system. Would you like to hear more details?";
+        } else if (
+          query.includes("website") ||
+          query.includes("solution") ||
+          query.includes("design") ||
+          query.includes("e-commerce")
+        ) {
+          botText1 = "We build custom, SEO-optimised e-commerce website solutions designed specifically for UK garages.";
+          botText2 = "Features include vehicle registration search lookups, MOT booking gateways, and wholesale tyre distributor stock integration. Would you like to book a demo?";
+        } else if (
+          query.includes("contact") ||
+          query.includes("phone") ||
+          query.includes("email") ||
+          query.includes("address") ||
+          query.includes("support") ||
+          query.includes("number") ||
+          query.includes("call")
+        ) {
+          botText1 = "You can contact our teams directly:\n\n• **Sales Inquiry**: 07947 906789 | info@autogaragenetwork.com\n• **Customer Support**: 01702 655556 | jatindersingh@autogaragenetwork.com";
+          botText2 = "Our address is: The Chestnuts, 46 Middle Lane, Nether Broughton, LE14 3HD. Let us know if you would like us to call you!";
+        } else if (
+          query.includes("software") ||
+          query.includes("system") ||
+          query.includes("features")
+        ) {
+          botText1 = "The Auto Garage Network software is an all-in-one suite covering smart job cards, customer CRM, invoicing/billing, stock control, and real-time revenue reports.";
+          botText2 = "It is designed to save you hours of admin time. Would you like to schedule a free demo?";
+        } else {
+          // Cannot answer, redirect to sales
+          botText1 = "I am afraid I do not have the information to answer that specific question.";
+          botText2 = "I would be happy to connect you with our sales team. You can reach us directly on **07947 906789** or email us at **info@autogaragenetwork.com**.";
+        }
       }
+
+      setLeadStep(nextStep);
 
       setMessages((prev) => {
         const nextMsgs = [
@@ -189,14 +318,16 @@ const Footer = () => {
           });
         }
 
-        // Add menu card again so user can continue interacting
-        nextMsgs.push({
-          id: Date.now() + 3,
-          sender: "bot",
-          text: "",
-          isMenu: true,
-          time: getFormattedTime(),
-        });
+        // Add menu cards again if not collecting step-by-step lead info
+        if (nextStep === 0) {
+          nextMsgs.push({
+            id: Date.now() + 3,
+            sender: "bot",
+            text: "",
+            isMenu: true,
+            time: getFormattedTime(),
+          });
+        }
 
         return nextMsgs;
       });
