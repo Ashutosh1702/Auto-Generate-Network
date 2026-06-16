@@ -364,7 +364,7 @@ const DashboardSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-3xl border border-white/10 bg-[#090d1f]/60 backdrop-blur-xl p-3 md:p-6 shadow-[0_30px_100px_rgba(0,0,0,0.8),0_0_80px_rgba(79,70,229,0.15)] mx-auto max-w-5xl overflow-hidden flex flex-col h-auto lg:h-[620px] lg:aspect-[16/10]"
+          className="dashboard-mockup relative rounded-3xl border border-white/10 bg-[#090d1f]/60 backdrop-blur-xl p-3 md:p-6 shadow-[0_30px_100px_rgba(0,0,0,0.8),0_0_80px_rgba(79,70,229,0.15)] mx-auto max-w-5xl overflow-hidden flex flex-col h-auto lg:h-[620px] lg:aspect-[16/10]"
         >
           {/* Dashboard Window Header (mock status bar) */}
           <div className="flex items-center justify-between px-4 pb-4 border-b border-white/5 w-full">

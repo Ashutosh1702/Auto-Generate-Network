@@ -4,7 +4,7 @@ import { FiArrowRight } from 'react-icons/fi'
 
 const CTASection = () => {
   return (
-    <section className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
+    <section id="contact-us" className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-indigo-500/20 rounded-full blur-[120px] pointer-events-none"></div>
       
       <div className="max-w-4xl mx-auto relative z-10">

@@ -413,7 +413,7 @@ const MobileAppSection = () => {
               viewport={{ once: true }}
               transition={{ type: "spring", duration: 1.5 }}
               whileHover={{ rotateY: 0, scale: 1.04 }}
-              className="relative w-72 h-[550px] border-[10px] border-[#0c1222] rounded-[2.8rem] bg-[#050816] shadow-[0_20px_50px_rgba(0,0,0,0.7)] z-10 flex flex-col overflow-hidden border-white/10"
+              className="phone-mockup relative w-72 h-[550px] border-[10px] border-[#0c1222] rounded-[2.8rem] bg-[#050816] shadow-[0_20px_50px_rgba(0,0,0,0.7)] z-10 flex flex-col overflow-hidden border-white/10"
             >
               {/* Phone Speaker Notch */}
               <div className="absolute top-0 inset-x-0 h-6 bg-[#0c1222] rounded-b-2xl w-1/2 mx-auto z-40 flex justify-center items-center">

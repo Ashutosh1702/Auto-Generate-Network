@@ -78,12 +78,12 @@ const MOTDiary = () => {
       {/* API Lookup Header */}
       <div className="flex justify-between items-center border-b border-white/5 pb-3 shrink-0">
         <div className="flex items-center space-x-2">
-          <FiRefreshCw className="w-4 h-4 text-purple-400 animate-spin" />
+          <FiRefreshCw className="w-4 h-4 text-blue-400 animate-spin" />
           <h4 className="text-xs font-bold text-white uppercase tracking-wider">
             DVSA Live API Gateway
           </h4>
         </div>
-        <span className="text-[7.5px] bg-purple-500/10 border border-purple-500/30 text-purple-400 px-1.5 py-0.5 rounded font-black shrink-0">
+        <span className="text-[7.5px] bg-blue-500/10 border border-blue-500/30 text-blue-400 px-1.5 py-0.5 rounded font-black shrink-0">
           CONNECTED
         </span>
       </div>
@@ -211,7 +211,7 @@ const MOTDiary = () => {
           {
             bay: 4,
             type: "MOT",
-            color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+            color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
         ],
       },
@@ -251,7 +251,7 @@ const MOTDiary = () => {
           {
             bay: 4,
             type: "MOT",
-            color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+            color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
         ],
       },
@@ -322,16 +322,16 @@ const MOTDiary = () => {
                           y: [0, 0, "116%", "116%", 0],
                           borderColor: [
                             "rgba(239, 68, 68, 0.3)",
-                            "rgba(139, 92, 246, 0.8)",
-                            "rgba(168, 85, 247, 0.8)",
-                            "rgba(168, 85, 247, 0.8)",
+                            "rgba(59, 130, 246, 0.8)",
+                            "rgba(96, 165, 250, 0.8)",
+                            "rgba(96, 165, 250, 0.8)",
                             "rgba(239, 68, 68, 0.3)",
                           ],
                           boxShadow: [
                             "0 1px 2px rgba(0,0,0,0.1)",
-                            "0 6px 15px rgba(139,92,246,0.3)",
-                            "0 6px 15px rgba(139,92,246,0.35)",
-                            "0 6px 15px rgba(139,92,246,0.35)",
+                            "0 6px 15px rgba(59,130,246,0.3)",
+                            "0 6px 15px rgba(59,130,246,0.35)",
+                            "0 6px 15px rgba(59,130,246,0.35)",
                             "0 1px 2px rgba(0,0,0,0.1)",
                           ],
                         }}
@@ -357,8 +357,8 @@ const MOTDiary = () => {
                 if (b.isDragTarget) {
                   return (
                     <div key={i} className="relative h-full">
-                      <div className="absolute inset-0 border border-dashed border-purple-500/40 bg-purple-500/5 rounded-md flex items-center justify-center">
-                        <span className="text-[6.5px] font-black text-purple-400/50 uppercase select-none">
+                      <div className="absolute inset-0 border border-dashed border-blue-500/40 bg-blue-500/5 rounded-md flex items-center justify-center">
+                        <span className="text-[6.5px] font-black text-blue-400/50 uppercase select-none">
                           Target
                         </span>
                       </div>
@@ -372,7 +372,7 @@ const MOTDiary = () => {
                           repeat: Infinity,
                           times: [0, 0.55, 0.6, 0.85, 1],
                         }}
-                        className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white font-extrabold text-[6.5px] px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30"
+                        className="absolute -top-6 left-1/2 -translate-x-1/2 bg-blue-600 text-white font-extrabold text-[6.5px] px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30"
                       >
                         Rescheduled!
                       </motion.div>
@@ -400,7 +400,7 @@ const MOTDiary = () => {
                         className={`text-[5.5px] font-black tracking-wide uppercase mt-0.5 transition-colors ${
                           smsConfirmed
                             ? "text-green-400"
-                            : "text-purple-400 animate-pulse"
+                            : "text-blue-400 animate-pulse"
                         }`}
                       >
                         {smsConfirmed ? "✓ Confirmed" : "⏰ SMS Pending"}
@@ -460,9 +460,9 @@ const MOTDiary = () => {
                   animate={{ opacity: 1, x: 0 }}
                   className="flex justify-end"
                 >
-                  <div className="bg-purple-600 p-2 rounded-lg text-[8px] font-black text-white relative">
+                  <div className="bg-blue-600 p-2 rounded-lg text-[8px] font-black text-white relative">
                     "YES"
-                    <div className="absolute -right-1 top-2.5 w-2 h-2 bg-purple-600 rotate-45 rounded-sm"></div>
+                    <div className="absolute -right-1 top-2.5 w-2 h-2 bg-blue-600 rotate-45 rounded-sm"></div>
                   </div>
                 </motion.div>
               )}
@@ -484,7 +484,7 @@ const MOTDiary = () => {
             : "MOT Reminder: AB12 CDE",
           color: smsConfirmed
             ? "bg-green-500/20 text-green-400"
-            : "bg-purple-500/20 text-purple-400",
+            : "bg-blue-500/20 text-blue-400",
         };
       case 1:
         return {
@@ -501,7 +501,7 @@ const MOTDiary = () => {
           icon: <FiCalendar className="w-4 h-4" />,
           title: "Drag & Drop Rescheduler",
           desc: "Diagnostics shifted to Bay 3",
-          color: "bg-pink-500/20 text-pink-400",
+          color: "bg-blue-500/20 text-blue-400",
         };
       case 3:
       default:
@@ -527,18 +527,18 @@ const MOTDiary = () => {
             viewport={{ once: true }}
             className="relative w-full flex justify-center items-center"
           >
-            <div className="absolute inset-0 bg-purple-600/15 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="absolute inset-0 bg-blue-600/15 blur-[120px] rounded-full pointer-events-none"></div>
 
             {/* MOT Diary Dashboard Mockup Box */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative rounded-2xl border border-white/10 bg-[#050816] p-4 shadow-[0_0_40px_rgba(139,92,246,0.12)] z-10 w-full max-w-[500px]"
+              className="relative rounded-2xl border border-white/10 bg-[#050816] p-4 shadow-[0_0_40px_rgba(30,115,190,0.12)] z-10 w-full max-w-[500px]"
             >
               {/* Header */}
               <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4 shrink-0">
                 <div className="flex items-center space-x-3 select-none">
-                  <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400">
+                  <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400">
                     <FiCalendar className="w-5 h-5" />
                   </div>
                   <div>
@@ -551,7 +551,7 @@ const MOTDiary = () => {
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <div className="px-3 py-1 bg-purple-600 text-white text-[9px] font-black rounded-lg cursor-pointer shadow-sm shadow-purple-500/20 hover:bg-purple-500 transition-colors">
+                  <div className="px-3 py-1 bg-blue-600 text-white text-[9px] font-black rounded-lg cursor-pointer shadow-sm shadow-blue-500/20 hover:bg-blue-500 transition-colors">
                     + New Booking
                   </div>
                 </div>
@@ -617,7 +617,7 @@ const MOTDiary = () => {
             >
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Smart{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
                   MOT Diary
                 </span>{" "}
                 Management
@@ -641,7 +641,7 @@ const MOTDiary = () => {
                     whileHover={{ scale: 1.02 }}
                     className={`flex gap-4 p-4 rounded-2xl border cursor-pointer transition-all duration-300 relative overflow-hidden ${
                       isActive
-                        ? "bg-[#111827]/80 border-purple-500/50 shadow-[0_0_20px_rgba(139,92,246,0.1)]"
+                        ? "bg-[#111827]/80 border-blue-500/50 shadow-[0_0_20px_rgba(30,115,190,0.1)]"
                         : "bg-[#111827]/20 border-white/5 hover:bg-[#111827]/40 hover:border-white/10"
                     }`}
                   >
@@ -651,14 +651,14 @@ const MOTDiary = () => {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 6.5, ease: "linear" }}
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500 origin-left"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 origin-left"
                       />
                     )}
 
                     <div
                       className={`flex-shrink-0 w-12 h-12 rounded-xl border flex items-center justify-center transition-all ${
                         isActive
-                          ? "bg-purple-500/20 border-purple-500/40 text-purple-400 shadow-[0_0_10px_rgba(139,92,246,0.2)]"
+                          ? "bg-blue-500/20 border-blue-500/40 text-blue-400 shadow-[0_0_10px_rgba(30,115,190,0.2)]"
                           : "bg-[#111827] border-white/10 text-gray-500"
                       }`}
                     >
@@ -666,7 +666,7 @@ const MOTDiary = () => {
                     </div>
                     <div>
                       <h3
-                        className={`text-xl font-bold transition-all mb-1 ${isActive ? "text-purple-400" : "text-white"}`}
+                        className={`text-xl font-bold transition-all mb-1 ${isActive ? "text-blue-400" : "text-white"}`}
                       >
                         {item.title}
                       </h3>
@@ -685,7 +685,7 @@ const MOTDiary = () => {
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:inline-block px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all cursor-pointer"
+              className="hidden md:inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(30,115,190,0.3)] transition-all cursor-pointer"
             >
               Explore MOT Features
             </motion.button>

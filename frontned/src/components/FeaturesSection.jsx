@@ -229,6 +229,7 @@ const FeaturesSection = () => {
 
   return (
     <section
+      id="features"
       className="feature-section py-24 px-6 md:px-12 bg-[#050816] relative"
       onMouseMove={handleMouseMove}
     >

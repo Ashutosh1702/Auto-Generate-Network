@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FiStar, FiPlay } from 'react-icons/fi'
+import { FiStar } from 'react-icons/fi'
 
 const TestimonialsSection = () => {
   const reviews = [
@@ -52,31 +52,7 @@ const TestimonialsSection = () => {
           </motion.p>
         </div>
 
-        {/* Video Testimonial Spotlight */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16"
-        >
-          <div className="relative rounded-3xl overflow-hidden bg-[#111827] border border-white/10 group cursor-pointer shadow-2xl">
-            <div className="aspect-video bg-gradient-to-br from-indigo-900/50 to-slate-900 relative flex items-center justify-center">
-              {/* Fake Video Thumbnail Graphic */}
-              <div className="absolute inset-0 opacity-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDEwaDQwdjIwSDB6IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii4wNSIvPjwvc3ZnPg==')] bg-repeat"></div>
-              
-              <motion.div 
-                whileHover={{ scale: 1.1 }}
-                className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center z-10 group-hover:bg-indigo-600 transition-colors"
-              >
-                <FiPlay className="w-8 h-8 text-white ml-1" />
-              </motion.div>
-            </div>
-            <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-[#050816] to-transparent">
-              <h3 className="text-xl font-bold text-white">How AGN helped us double our revenue in 12 months</h3>
-              <p className="text-gray-400 text-sm">James Wilson, Wilson's Garage & MOT Centre</p>
-            </div>
-          </div>
-        </motion.div>
+
 
         {/* Text Review Cards */}
         <div className="grid md:grid-cols-3 gap-6">

@@ -588,7 +588,7 @@ const HeroSection = () => {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute -left-4 xs:-left-8 sm:-left-12 lg:-left-16 bottom-[-10px] sm:bottom-[-20px] md:bottom-[-40px] z-30 w-[140px] xs:w-[160px] sm:w-[175px] md:w-[185px] rounded-[28px] border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(79,70,229,0.2)]"
+                className="absolute -left-4 xs:-left-8 sm:-left-12 lg:-left-16 bottom-2 sm:bottom-4 md:bottom-6 z-30 w-[140px] xs:w-[160px] sm:w-[175px] md:w-[185px] rounded-[28px] border border-white/10 bg-[#070c18] p-3 shadow-2xl drop-shadow-[0_0_20px_rgba(79,70,229,0.2)]"
                 style={{ willChange: "transform" }}
               >
                 {/* Status Bar */}

@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 import {
   FiMail,
   FiPhone,
@@ -15,7 +23,11 @@ import {
 
 // Happy Smiley Face Chat Widget Icon matching the user's reference screenshot
 const ChatBubbleIcon = ({ className = "w-10 h-10" }) => (
-  <svg viewBox="0 0 100 100" className={className} xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 100 100"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     {/* Speech bubble shape with tail at bottom-left */}
     <path
       d="M50 15 C28 15 15 28 15 50 C15 62 21 72 30 78 L25 90 L40 84 C43 85 47 85 50 85 C72 85 85 72 85 50 C85 28 72 15 50 15 Z"
@@ -48,7 +60,13 @@ const Footer = () => {
   const [isTyping, setIsTyping] = useState(false);
 
   const getFormattedTime = () => {
-    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+    return new Date()
+      .toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .toLowerCase();
   };
 
   const [messages, setMessages] = useState([
@@ -56,21 +74,21 @@ const Footer = () => {
       id: 1,
       sender: "bot",
       text: "Hi again, Guest.",
-      time: getFormattedTime()
+      time: getFormattedTime(),
     },
     {
       id: 2,
       sender: "bot",
       text: "What can I help you with?",
-      time: getFormattedTime()
+      time: getFormattedTime(),
     },
     {
       id: 3,
       sender: "bot",
       text: "",
       isMenu: true,
-      time: getFormattedTime()
-    }
+      time: getFormattedTime(),
+    },
   ]);
 
   const messagesEndRef = useRef(null);
@@ -94,18 +112,18 @@ const Footer = () => {
     { text: "Book a Free Demo", value: "demo" },
     { text: "Pricing & Packages", value: "pricing" },
     { text: "System Features", value: "features" },
-    { text: "Contact Sales & Support", value: "contact" }
+    { text: "Contact Sales & Support", value: "contact" },
   ];
 
   const handleUserMessage = (text, optionValue = null) => {
     if (!text.trim()) return;
 
     // Add user message to list
-    const userMsg = { 
-      id: Date.now(), 
-      sender: "user", 
-      text, 
-      time: getFormattedTime() 
+    const userMsg = {
+      id: Date.now(),
+      sender: "user",
+      text,
+      time: getFormattedTime(),
     };
     setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
@@ -121,20 +139,34 @@ const Footer = () => {
       const query = (optionValue || text).toLowerCase();
 
       if (query.includes("demo")) {
-        botText1 = "I'd love to help you schedule a free interactive demo of Auto Garage Network! 🚀";
-        botText2 = "Please call our Sales team at **07947906789** (Mon-Fri, 9:00 AM - 5:30 PM) or email us at **hello@agn-software.co.uk**. We will set up a screen-share walkthrough customized for your workshop!";
-      } else if (query.includes("price") || query.includes("pricing") || query.includes("cost")) {
-        botText1 = "Auto Garage Network offers transparent pricing with zero contract lock-ins. 💳";
-        botText2 = "Our standard package starts at just **£49/month**, which includes the full garage management suite, MOT booking diary, invoice creation, and automated SMS reminders.";
+        botText1 =
+          "I'd love to help you schedule a free interactive demo of Auto Garage Network! 🚀";
+        botText2 =
+          "Please call our Sales team at **07947906789** (Mon-Fri, 9:00 AM - 5:30 PM) or email us at **hello@agn-software.co.uk**. We will set up a screen-share walkthrough customized for your workshop!";
+      } else if (
+        query.includes("price") ||
+        query.includes("pricing") ||
+        query.includes("cost")
+      ) {
+        botText1 =
+          "Auto Garage Network offers transparent pricing with zero contract lock-ins. 💳";
+        botText2 =
+          "Our standard package starts at just **£49/month**, which includes the full garage management suite, MOT booking diary, invoice creation, and automated SMS reminders.";
       } else if (query.includes("feature")) {
-        botText1 = "AGN is an all-in-one system designed specifically for modern garages and workshops. 🛠️";
-        botText2 = "Key features include:\n• **MOT Diary & Automated Reminders**\n• **Customer Invoicing & Portals**\n• **Job Cards & Digital Checklists**\n• **Parts Stock & Supplier Tracking**\n• **Integrated SEO-Optimized Websites**";
+        botText1 =
+          "AGN is an all-in-one system designed specifically for modern garages and workshops. 🛠️";
+        botText2 =
+          "Key features include:\n• **MOT Diary & Automated Reminders**\n• **Customer Invoicing & Portals**\n• **Job Cards & Digital Checklists**\n• **Parts Stock & Supplier Tracking**\n• **Integrated SEO-Optimized Websites**";
       } else if (query.includes("contact") || query.includes("support")) {
-        botText1 = "You can reach us through multiple channels. We are always happy to help! 📞";
-        botText2 = "• **Sales Hotline**: 07947906789\n• **Customer Service**: 0172655556\n• **Email**: hello@agn-software.co.uk\n• **Office Hours**: Monday to Friday, 9:00 AM - 5:30 PM";
+        botText1 =
+          "You can reach us through multiple channels. We are always happy to help! 📞";
+        botText2 =
+          "• **Sales Hotline**: 07947906789\n• **Customer Service**: 0172655556\n• **Email**: hello@agn-software.co.uk\n• **Office Hours**: Monday to Friday, 9:00 AM - 5:30 PM";
       } else {
-        botText1 = "Thank you for reaching out! A representative will get back to you shortly.";
-        botText2 = "You can also contact us directly at **07947906789** or email **hello@agn-software.co.uk**.";
+        botText1 =
+          "Thank you for reaching out! A representative will get back to you shortly.";
+        botText2 =
+          "You can also contact us directly at **07947906789** or email **hello@agn-software.co.uk**.";
       }
 
       setMessages((prev) => {
@@ -144,16 +176,16 @@ const Footer = () => {
             id: Date.now() + 1,
             sender: "bot",
             text: botText1,
-            time: getFormattedTime()
-          }
+            time: getFormattedTime(),
+          },
         ];
-        
+
         if (botText2) {
           nextMsgs.push({
             id: Date.now() + 2,
             sender: "bot",
             text: botText2,
-            time: getFormattedTime()
+            time: getFormattedTime(),
           });
         }
 
@@ -163,7 +195,7 @@ const Footer = () => {
           sender: "bot",
           text: "",
           isMenu: true,
-          time: getFormattedTime()
+          time: getFormattedTime(),
         });
 
         return nextMsgs;
@@ -186,7 +218,7 @@ const Footer = () => {
       items.push(
         <strong key={match.index} className="font-bold text-slate-900">
           {match[1]}
-        </strong>
+        </strong>,
       );
       lastIndex = splitRegex.lastIndex;
     }
@@ -199,189 +231,311 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#050816] border-t border-white/10 pt-20 pb-10 px-6 md:px-12 relative">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
-          <div className="col-span-2 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-white">
-                A
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">
-                AGN
+    <>
+      <footer className="footer-no-invert bg-[#000000] pt-0 pb-0 relative text-white font-sans">
+        {/* 1. Blue Top Bar */}
+        <div className="bg-[#1e73be] w-full py-4 border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col sm:flex-row justify-between items-center gap-4">
+            {/* Follow Us & Social Icons */}
+            <div className="flex items-center space-x-4">
+              <span className="font-bold text-sm text-white select-none">
+                Follow Us
               </span>
+              <div className="flex items-center space-x-2.5">
+                <a
+                  href="https://www.facebook.com/autogaragenetworkltd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1877F2] flex items-center justify-center text-white transition-all hover:scale-105"
+                >
+                  <FaFacebookF size={13} />
+                </a>
+                <a
+                  href="https://www.instagram.com/autogaragenetworkltd.uk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#E1306C] flex items-center justify-center text-white transition-all hover:scale-105"
+                >
+                  <FaInstagram size={13} />
+                </a>
+                <a
+                  href="https://x.com/autogaragent"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1DA1F2] flex items-center justify-center text-white transition-all hover:scale-105"
+                >
+                  <FaTwitter size={13} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/auto-garage-network-ltd/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#0A66C2] flex items-center justify-center text-white transition-all hover:scale-105"
+                >
+                  <FaLinkedinIn size={13} />
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UCT8JroOu-4_KT74be6tGUoQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FF0000] flex items-center justify-center text-white transition-all hover:scale-105"
+                >
+                  <FaYoutube size={13} />
+                </a>
+              </div>
             </div>
-            <p className="text-gray-400 text-sm mb-6 max-w-sm">
-              The premium, all-in-one garage management software helping
-              independent workshops, MOT centres, and tyre specialists scale
-              their operations and maximize revenue.
-            </p>
-            <div className="space-y-3">
-              <a
-                href="mailto:hello@agn-software.co.uk"
-                className="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors"
-              >
-                <FiMail className="w-4 h-4" />
-                <span className="text-sm">hello@agn-software.co.uk</span>
-              </a>
-              <a
-                href="tel:08001234567"
-                className="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors"
-              >
-                <FiPhone className="w-4 h-4" />
-                <span className="text-sm">0800 123 4567</span>
-              </a>
-              <div className="flex items-start space-x-3 text-gray-400">
-                <FiMapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span className="text-sm">
-                  123 Innovation Way
-                  <br />
-                  Tech Park, London
-                  <br />
-                  EC1V 2NX
+
+            {/* Contact Email on right */}
+            <a
+              href="mailto:info@autogaragenetwork.com"
+              className="flex items-center space-x-2 text-white hover:text-cyan-200 transition-colors text-sm font-semibold"
+            >
+              <FiMail className="w-4 h-4 shrink-0" />
+              <span>info@autogaragenetwork.com</span>
+            </a>
+          </div>
+        </div>
+
+        {/* 2. Main Footer columns grid */}
+        <div className="max-w-[1500px] mx-auto px-8 lg:px-16 pt-16 pb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
+            {/* Column 1: Auto Garage Network blurb */}
+            <div className="space-y-7">
+              <Link to="/" className="inline-block cursor-pointer">
+                <img
+                  src="https://www.autogaragenetwork.com/catalog/view/theme/avnv1/assets/img/logo-color.png"
+                  alt="Auto Garage Network Logo"
+                  className="h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  style={{
+                    filter: "invert(1) hue-rotate(180deg) brightness(1.5) contrast(1.2)"
+                  }}
+                />
+              </Link>
+              <p className="text-gray-400 text-xs leading-relaxed font-semibold">
+                Take full control of your garage operations with our system.
+                Manage your customers, optimise pricing, oversee employee tasks,
+                track inventory, and access real-time revenue reports–all
+                seamlessly and hassle-free!
+              </p>
+            </div>
+
+            {/* Column 2: Company */}
+            <div className="space-y-4">
+              <h4 className="text-white font-extrabold text-base select-none">
+                Company
+              </h4>
+              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                <li>
+                  <Link to="/" className="hover:text-white transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about-us"
+                    className="hover:text-white transition-colors"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact-us"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Career
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    to="/sitemap"
+                    className="hover:text-white transition-colors"
+                  >
+                    Sitemap
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/pricing"
+                    className="hover:text-white transition-colors"
+                  >
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/latest-work"
+                    className="hover:text-white transition-colors"
+                  >
+                    Latest Work
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/privacy-policy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to="/cookie-policy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Cookie Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/terms-of-service"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms & Conditions
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Industries */}
+            <div className="space-y-4">
+              <h4 className="text-white font-extrabold text-base select-none">
+                Industries
+              </h4>
+              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Car Workshop
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Car Traders
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    MOT Centres
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Automotive
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Products */}
+            <div className="space-y-4">
+              <h4 className="text-white font-extrabold text-base select-none">
+                Products
+              </h4>
+              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                <li>
+                  <Link
+                    to="/mot-diary"
+                    className="hover:text-white transition-colors"
+                  >
+                    MOT Diary
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/seo"
+                    className="hover:text-white transition-colors"
+                  >
+                    SEO
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Website Register (WRF)
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Website Register with Contract
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Products & Services Price
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 5: Contact Information */}
+            <div className="space-y-6 text-xs text-gray-400 font-semibold leading-relaxed">
+              <div className="space-y-4">
+                <h4 className="text-white font-extrabold text-base select-none">
+                  Contact Information
+                </h4>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
+                    Address:
+                  </span>
+                  <p className="text-gray-300">
+                    The Chestnuts, 46 Middle Lane,
+                    <br />
+                    Nether Broughton, LE14 3HD
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
+                  Sales Inquiry:
                 </span>
+                <a
+                  href="tel:07947906789"
+                  className="text-white hover:text-indigo-400 block font-bold"
+                >
+                  07947 906789
+                </a>
+                <a
+                  href="mailto:info@autogaragenetwork.com"
+                  className="text-gray-400 hover:text-white block mt-0.5"
+                >
+                  info@autogaragenetwork.com
+                </a>
+              </div>
+
+              <div>
+                <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
+                  Customer Support:
+                </span>
+                <a
+                  href="tel:01702655556"
+                  className="text-white hover:text-indigo-400 block font-bold"
+                >
+                  01702 655556
+                </a>
+                <a
+                  href="mailto:jatindersingh@autogaragenetwork.com"
+                  className="text-gray-400 hover:text-white block mt-0.5"
+                >
+                  jatindersingh@autogaragenetwork.com
+                </a>
               </div>
             </div>
           </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6">Products</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Garage Management System
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  MOT Diary
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Customer Portals
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Websites & SEO
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Mobile App
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6">Industries</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Independent Garages
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  MOT Centres
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Tyre Specialists
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Mobile Mechanics
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Franchises
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6">Resources</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Help Center
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  Case Studies
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  API Documentation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors">
-                  System Status
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-gray-500 text-xs">
-          <p>
-            &copy; {new Date().getFullYear()} Auto Garage Network. All rights
-            reserved.
+        {/* 3. Bottom Copyright Bar */}
+        <div className="copyright-text copy_txt select-none">
+          <p className="mb-lg-0 mb-md-0">
+            Copyright © 2016 - 2026 Auto Garage Network. All Right Reserved.
           </p>
-          <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Cookie Policy
-            </a>
-          </div>
-          <div className="flex space-x-4 mt-6 md:mt-0">
-            <a
-              href="#"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-            >
-              <FiTwitter className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-            >
-              <FiLinkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-            >
-              <FiFacebook className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-pink-400 transition-colors"
-            >
-              <FiInstagram className="w-5 h-5" />
-            </a>
-          </div>
         </div>
-      </div>
+      </footer>
 
       {/* Floating Chatbot Assistant Widget */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -395,10 +549,12 @@ const Footer = () => {
               className="bg-white text-slate-800 border border-gray-200 px-4 py-3 rounded-2xl rounded-br-none shadow-2xl mb-3 mr-1 text-xs max-w-[240px] flex items-center justify-between gap-3 select-none"
             >
               <div>
-                <span className="font-semibold block text-blue-600 mb-0.5">AGN Support Bot</span>
+                <span className="font-semibold block text-blue-600 mb-0.5">
+                  AGN Support Bot
+                </span>
                 <span>Hello! How may I help you today? 👋</span>
               </div>
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowTooltip(false);
@@ -428,7 +584,9 @@ const Footer = () => {
                     A
                   </div>
                   <div>
-                    <span className="text-sm font-bold text-slate-800 block">AGN Support</span>
+                    <span className="text-sm font-bold text-slate-800 block">
+                      AGN Support
+                    </span>
                     <span className="text-[10px] text-green-600 font-semibold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                       Online
@@ -444,16 +602,17 @@ const Footer = () => {
               </div>
 
               {/* Chat Messages */}
-              <div 
+              <div
                 className="flex-grow overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-300"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M0 38.5 C10 38.5 10 35.5 20 35.5 C30 35.5 30 38.5 40 38.5' fill='none' stroke='%231a73e8' stroke-opacity='0.03' stroke-width='1.2'/%3E%3C/svg%3E")`,
-                  backgroundColor: '#f4f6f9'
+                  backgroundColor: "#f4f6f9",
                 }}
               >
                 {/* Warning notice in the center */}
                 <div className="text-center text-[10px] text-gray-500 bg-white/50 py-2 px-3 rounded-xl mx-auto my-2 max-w-[95%] leading-normal border border-gray-200 shadow-sm select-none">
-                  Please excuse any mistakes as we work to better answer your questions. Do not give personal information in this chat.
+                  Please excuse any mistakes as we work to better answer your
+                  questions. Do not give personal information in this chat.
                 </div>
 
                 {messages.map((msg) => {
@@ -466,13 +625,19 @@ const Footer = () => {
                               <button
                                 key={idx}
                                 type="button"
-                                onClick={() => handleUserMessage(opt.text, opt.value)}
+                                onClick={() =>
+                                  handleUserMessage(opt.text, opt.value)
+                                }
                                 className={`w-full text-left px-4 py-3.5 text-xs font-semibold text-blue-600 hover:bg-gray-50 transition-colors flex items-center justify-between cursor-pointer ${
-                                  idx < menuOptions.length - 1 ? "border-b border-gray-150" : ""
+                                  idx < menuOptions.length - 1
+                                    ? "border-b border-gray-150"
+                                    : ""
                                 }`}
                               >
                                 <span>{opt.text}</span>
-                                <span className="text-gray-400 text-[10px]">➔</span>
+                                <span className="text-gray-400 text-[10px]">
+                                  ➔
+                                </span>
                               </button>
                             ))}
                           </div>
@@ -500,20 +665,31 @@ const Footer = () => {
                         >
                           {formatMessageText(msg.text)}
                         </div>
-                        <span className={`text-[9px] text-gray-400 mt-1 select-none w-full ${isUser ? "text-right pr-1" : "text-left pl-1"}`}>
+                        <span
+                          className={`text-[9px] text-gray-400 mt-1 select-none w-full ${isUser ? "text-right pr-1" : "text-left pl-1"}`}
+                        >
                           {msg.time}
                         </span>
                       </div>
                     </div>
                   );
                 })}
-                
+
                 {isTyping && (
                   <div className="flex justify-start">
                     <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-3.5 py-3 text-xs flex items-center gap-1 text-gray-400 shadow-sm">
-                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span
+                        className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "0ms" }}
+                      />
+                      <span
+                        className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      />
+                      <span
+                        className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      />
                     </div>
                   </div>
                 )}
@@ -560,8 +736,8 @@ const Footer = () => {
             !isOpen ? { repeat: Infinity, duration: 4, ease: "easeInOut" } : {}
           }
           className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl relative select-none cursor-pointer transition-all duration-300 ${
-            isOpen 
-              ? "bg-white text-slate-800 border border-gray-200 hover:bg-gray-50" 
+            isOpen
+              ? "bg-white text-slate-800 border border-gray-200 hover:bg-gray-50"
               : "bg-white text-slate-800 border border-gray-100 shadow-xl hover:shadow-2xl"
           }`}
         >
@@ -579,7 +755,7 @@ const Footer = () => {
           )}
         </motion.button>
       </div>
-    </footer>
+    </>
   );
 };
 

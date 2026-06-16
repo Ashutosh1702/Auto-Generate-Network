@@ -614,7 +614,11 @@ const WebsiteSolutions = () => {
   );
 
   return (
-    <section className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
+    <section
+      id="products"
+      className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden"
+    >
+      <div id="latest-work" className="absolute top-0 left-0" />
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left Column: Descriptions and interactive cards */}

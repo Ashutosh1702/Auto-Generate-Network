@@ -49,7 +49,7 @@ const PricingSection = () => {
   ]
 
   return (
-    <section className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
+    <section id="pricing" className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 

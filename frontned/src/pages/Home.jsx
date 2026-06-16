@@ -12,7 +12,6 @@ import MobileAppSection from "../components/MobileAppSection.jsx";
 import PricingSection from "../components/PricingSection.jsx";
 import TestimonialsSection from "../components/TestimonialsSection.jsx";
 import BlogSection from "../components/BlogSection.jsx";
-import CTASection from "../components/CTASection.jsx";
 import Footer from "../components/Footer.jsx";
 
 const Home = () => {
@@ -31,8 +30,7 @@ const Home = () => {
         <MobileAppSection />
         <PricingSection />
         <TestimonialsSection />
-        <BlogSection />
-        <CTASection />
+        <BlogSection limit={3} />
       </main>
       <Footer />
     </div>

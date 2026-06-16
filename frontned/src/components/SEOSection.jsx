@@ -286,7 +286,7 @@ const SEOSection = () => {
   );
 
   return (
-    <section className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
+    <section id="seo" className="py-24 px-6 md:px-12 bg-[#050816] relative overflow-hidden">
       {/* Background radial glow recolored from emerald to blue */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
 
