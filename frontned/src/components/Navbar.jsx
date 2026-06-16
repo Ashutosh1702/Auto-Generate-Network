@@ -318,10 +318,19 @@ const Navbar = () => {
               className="flex-shrink-0 flex items-center cursor-pointer"
             >
               <img
-                src="/logo-color.png"
-                alt="AG Network Logo"
-                className="logo-img h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                src="/AutoGarageSystem.png"
+                alt=""
+                aria-hidden="true"
+                className="h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />
+              <div className="flex flex-col leading-none select-none ml-2">
+                <span className="text-[#288FEB] font-extrabold tracking-wide text-lg md:text-xl">
+                  AUTO GARAGE
+                </span>
+                <span className="logo-network-text font-extrabold tracking-[0.34em] text-xs md:text-sm">
+                  NETWORK
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}

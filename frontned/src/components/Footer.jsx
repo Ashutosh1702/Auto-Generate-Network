@@ -447,15 +447,21 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-y-8 md:gap-10">
             {/* Column 1: Auto Garage Network blurb */}
             <div className="space-y-5 text-center md:text-left flex flex-col items-center md:items-start pb-6 md:pb-0 border-b border-white/5 md:border-0">
-              <Link to="/" className="inline-block cursor-pointer">
+              <Link to="/" className="inline-flex items-center gap-2 cursor-pointer">
                 <img
-                  src="/logo-color.png"
-                  alt="Auto Garage Network Logo"
+                  src="/AutoGarageSystem.png"
+                  alt=""
+                  aria-hidden="true"
                   className="h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  style={{
-                    filter: "invert(1) hue-rotate(180deg) brightness(1.5) contrast(1.2)"
-                  }}
                 />
+                <div className="flex flex-col leading-none select-none">
+                  <span className="text-[#288FEB] font-extrabold tracking-wide text-lg md:text-xl">
+                    AUTO GARAGE
+                  </span>
+                  <span className="logo-network-text font-extrabold tracking-[0.34em] text-xs md:text-sm">
+                    NETWORK
+                  </span>
+                </div>
               </Link>
               <p className="text-gray-400 text-xs leading-relaxed font-semibold">
                 Take full control of your garage operations with our system.
