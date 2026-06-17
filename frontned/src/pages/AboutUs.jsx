@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import aboutImg from "../assets/about-img-add.jpg";
 import videoPoster from "../assets/video-img-01.png";
-import founderVideo from "../assets/Agn_01.mp4";
+const founderVideo = "/Agn_01.mp4";
 import featureImg3 from "../assets/feature-img3.jpg";
 import {
   FiUsers,

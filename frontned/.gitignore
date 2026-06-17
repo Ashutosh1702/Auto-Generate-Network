@@ -25,3 +25,4 @@ dist-ssr
 
 # Large media files
 src/assets/*.mp4
+public/*.mp4
