@@ -75,11 +75,17 @@
 }
 .light .bg-\[\#0d1226\]\/50 {
   background-color: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.05) !important;
+  box-shadow:
+    0 10px 30px -10px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(15, 23, 42, 0.05) !important;
   border-color: rgba(15, 23, 42, 0.06) !important;
 }
 .light .bg-gradient-to-br.from-indigo-950\/90.to-purple-950\/90 {
-  background-image: linear-gradient(to bottom right, #e0e7ff, #f3e8ff) !important;
+  background-image: linear-gradient(
+    to bottom right,
+    #e0e7ff,
+    #f3e8ff
+  ) !important;
 }
 .light .from-indigo-950\/90 .text-white {
   color: #0f172a !important;
@@ -152,7 +158,11 @@
   background-image: linear-gradient(to bottom, #f8fafc, #ffffff) !important;
 }
 .light .bg-gradient-to-br.from-\[\#111827\].to-\[\#0c1222\] {
-  background-image: linear-gradient(to bottom right, #ffffff, #f1f5f9) !important;
+  background-image: linear-gradient(
+    to bottom right,
+    #ffffff,
+    #f1f5f9
+  ) !important;
   border-color: rgba(15, 23, 42, 0.1) !important;
 }
 .light .from-\[\#111827\].to-\[\#0c1222\] .text-white {
@@ -318,7 +328,6 @@
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
-
 
 /* SVG grid lines adjustments */
 .light svg line,
@@ -509,19 +518,19 @@
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 .light .footer-no-invert .hover\:bg-\[\#1877F2\]:hover {
-  background-color: #1877F2 !important;
+  background-color: #1877f2 !important;
 }
 .light .footer-no-invert .hover\:bg-\[\#E1306C\]:hover {
-  background-color: #E1306C !important;
+  background-color: #e1306c !important;
 }
 .light .footer-no-invert .hover\:bg-\[\#1DA1F2\]:hover {
-  background-color: #1DA1F2 !important;
+  background-color: #1da1f2 !important;
 }
 .light .footer-no-invert .hover\:bg-\[\#0A66C2\]:hover {
-  background-color: #0A66C2 !important;
+  background-color: #0a66c2 !important;
 }
 .light .footer-no-invert .hover\:bg-\[\#FF0000\]:hover {
-  background-color: #FF0000 !important;
+  background-color: #ff0000 !important;
 }
 
 /* ========================================================================== */
@@ -650,7 +659,9 @@ main.flex-grow:not(.home-main) {
 
 .light .bg-\[\#0c1222\]\/60 {
   background-color: rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.05) !important;
+  box-shadow:
+    0 10px 30px -10px rgba(15, 23, 42, 0.05),
+    0 0 0 1px rgba(15, 23, 42, 0.05) !important;
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
@@ -715,5 +726,3 @@ main.flex-grow:not(.home-main) {
 .light .gms-feature-card .text-gray-500 {
   color: #475569 !important;
 }
-
-

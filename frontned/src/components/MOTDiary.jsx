@@ -64,11 +64,11 @@ const MOTDiary = () => {
     {
       icon: <FiCalendar className="w-5 h-5" />,
       title: "Drag-and-Drop Scheduling",
-      desc: "Reallocate bays, reschedule slots, and optimize your diary grid in real-time.",
+      desc: "Reallocate days, reschedule slots, and optimize your diary grid in real-time.",
     },
     {
       icon: <FiClock className="w-5 h-5" />,
-      title: "Live Bay Availability",
+      title: "Live Day Availability",
       desc: "Monitor diagnostic checks and ramp load percentages with real-time feedback indicators.",
     },
   ];
@@ -198,18 +198,18 @@ const MOTDiary = () => {
         time: "09:00",
         bookings: [
           {
-            bay: 1,
+            day: 1,
             type: "Service",
             color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
-          { bay: 2, empty: true },
+          { day: 2, empty: true },
           {
-            bay: 3,
+            day: 3,
             type: "Tyres",
             color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
           },
           {
-            bay: 4,
+            day: 4,
             type: "MOT",
             color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
@@ -219,37 +219,37 @@ const MOTDiary = () => {
         time: "10:00",
         bookings: [
           {
-            bay: 1,
+            day: 1,
             type: "Service",
             color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
           {
-            bay: 2,
+            day: 2,
             type: "Diagnostics",
             color: "bg-red-500/20 text-red-400 border-red-500/30",
             isDragSource: true,
           },
-          { bay: 3, empty: true },
-          { bay: 4, empty: true },
+          { day: 3, empty: true },
+          { day: 4, empty: true },
         ],
       },
       {
         time: "11:00",
         bookings: [
-          { bay: 1, empty: true },
+          { day: 1, empty: true },
           {
-            bay: 2,
+            day: 2,
             type: "Diagnostics",
             color: "bg-red-500/20 text-red-400 border-red-500/30",
           },
           {
-            bay: 3,
+            day: 3,
             type: "Brakes",
             color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
             isDragTarget: true,
           },
           {
-            bay: 4,
+            day: 4,
             type: "MOT",
             color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
           },
@@ -262,10 +262,10 @@ const MOTDiary = () => {
         {/* Time header */}
         <div className="grid grid-cols-5 gap-2 mb-3 text-center text-[8.5px] text-gray-400 font-bold uppercase tracking-wider border-b border-white/5 pb-2 shrink-0">
           <div>Time</div>
-          <div>Bay 1</div>
-          <div>Bay 2</div>
-          <div>Bay 3</div>
-          <div>Bay 4 (MOT)</div>
+          <div>Day 1</div>
+          <div>Day 2</div>
+          <div>Day 3</div>
+          <div>Day 4 (MOT)</div>
         </div>
 
         {rows.map((row, idx) => (
@@ -500,14 +500,14 @@ const MOTDiary = () => {
         return {
           icon: <FiCalendar className="w-4 h-4" />,
           title: "Drag & Drop Rescheduler",
-          desc: "Diagnostics shifted to Bay 3",
+          desc: "Diagnostics shifted to Day 3",
           color: "bg-blue-500/20 text-blue-400",
         };
       case 3:
       default:
         return {
           icon: <FiClock className="w-4 h-4" />,
-          title: "Bay Occupancy Meter",
+          title: "Day Occupancy Meter",
           desc: "Active Load: 3/4 Ramps (75%)",
           color: "bg-blue-500/20 text-blue-400",
         };

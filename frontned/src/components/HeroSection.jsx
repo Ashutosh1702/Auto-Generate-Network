@@ -57,7 +57,7 @@ const HeroSection = () => {
   // Live state values for Hero Dashboard Mockup
   const [scheduledJobs, setScheduledJobs] = useState(37);
   const [todayRevenue, setTodayRevenue] = useState(1240.5);
-  const [bayOccupancy, setBayOccupancy] = useState(85);
+  const [dayOccupancy, setDayOccupancy] = useState(85);
   const [performanceVal, setPerformanceVal] = useState(18.4);
 
   // Active Queue State
@@ -97,8 +97,8 @@ const HeroSection = () => {
   useEffect(() => {
     // 1. General metrics fluctuation
     const metricsInterval = setInterval(() => {
-      // Bay occupancy wiggles between 75 and 95
-      setBayOccupancy((prev) => {
+      // Day occupancy wiggles between 75 and 95
+      setDayOccupancy((prev) => {
         const delta = Math.random() > 0.5 ? 5 : -5;
         const next = prev + delta;
         return Math.min(Math.max(next, 70), 100);
@@ -482,10 +482,10 @@ const HeroSection = () => {
                       </div>
                       <div className="bg-slate-900/80 border border-white/5 rounded-lg p-2 flex flex-col justify-center">
                         <span className="text-[6.5px] text-gray-500 font-bold uppercase tracking-wider">
-                          Bay Occupancy
+                          Day Occupancy
                         </span>
                         <span className="text-[10px] md:text-[11px] font-black text-cyan-400 mt-0.5">
-                          {bayOccupancy}%
+                          {dayOccupancy}%
                         </span>
                       </div>
                     </div>

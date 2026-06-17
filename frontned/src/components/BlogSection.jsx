@@ -43,8 +43,8 @@ const generateBlogContent = (post) => {
   let p3 = "";
   
   if (cat.includes("workflow")) {
-    p1 = "Effective workflow management is the foundation of any successful garage. In the fast-paced automotive industry, scheduling bottlenecks, misallocated bay slots, and delayed parts procurement can quickly cascade into lost revenue and unsatisfied customers.";
-    p2 = "A modern, cloud-based workshop management system solves these pain points by integrating all scheduling operations into a single interactive diary dashboard. Service managers can dynamically reallocate jobs, assign specific technicians based on certifications, and monitor bay load limits in real-time. This eliminates downtime and ensures that every lift operates at peak efficiency.";
+    p1 = "Effective workflow management is the foundation of any successful garage. In the fast-paced automotive industry, scheduling bottlenecks, misallocated day slots, and delayed parts procurement can quickly cascade into lost revenue and unsatisfied customers.";
+    p2 = "A modern, cloud-based workshop management system solves these pain points by integrating all scheduling operations into a single interactive diary dashboard. Service managers can dynamically reallocate jobs, assign specific technicians based on certifications, and monitor day load limits in real-time. This eliminates downtime and ensures that every lift operates at peak efficiency.";
     p3 = "Furthermore, automated parts inventory tracking links direct job bookings with local wholesale API databases. The moment a booking is confirmed, necessary filters, brakes, or diagnostic parts can be reserved or ordered. This dramatically minimizes vehicle-off-road (VOR) times and keeps the service floor running smoothly without administrative drag.";
   } else if (cat.includes("news") || cat.includes("industry")) {
     p1 = "The UK automotive and tyre services industry is experiencing significant consolidation and digital transformation. As independent and multi-site garage operations seek to streamline their technical operations, corporate mergers and acquisitions are driving the development of more integrated software ecosystems.";
@@ -60,7 +60,7 @@ const generateBlogContent = (post) => {
     p3 = "Additionally, digital invoice links and transparent diagnostic checklists allow owners to review recommendations online with photos of the parts that require replacement. This open-book approach removes friction, increases estimate approval rates, and creates a highly professional dealership-grade customer experience.";
   } else {
     p1 = "Maintaining a competitive edge in today's fast-paced automotive services market requires a blend of technical excellence and state-of-the-art management tools. Workshops that transition away from legacy spreadsheets and manual logs achieve greater visibility and control over their operations.";
-    p2 = "Using advanced features like automated VRM lookup, direct wholesale parts integrations, and interactive bay scheduling allows managers to streamline the entire job lifecycle. Technicians work with clear, digital instruction cards, and parts managers can match stock levels to upcoming jobs automatically.";
+    p2 = "Using advanced features like automated VRM lookup, direct wholesale parts integrations, and interactive day scheduling allows managers to streamline the entire job lifecycle. Technicians work with clear, digital instruction cards, and parts managers can match stock levels to upcoming jobs automatically.";
     p3 = "Ultimately, implementing integrated software solutions leads to higher technician utilization rates, reduced administrative waste, and improved cash flow. The resulting data insights empower business owners to make informed decisions and drive long-term profitability.";
   }
   
@@ -427,7 +427,7 @@ const BlogSection = ({ limit }) => {
       date: "08 February, 2023",
       readTime: "5 min read",
       excerpt:
-        "Utilizing technology to enhance efficiency with the help of Garage Management Software allows independent shops to coordinate technician bay schedules and increase monthly booking slots.",
+        "Utilizing technology to enhance efficiency with the help of Garage Management Software allows independent shops to coordinate technician day schedules and increase monthly booking slots.",
       color: "bg-teal-500/10 text-teal-400",
       image: streamlineOpsImg,
     },
@@ -457,7 +457,7 @@ const BlogSection = ({ limit }) => {
       date: "15 December, 2022",
       readTime: "5 min read",
       excerpt:
-        "Workshop booking diaries have evolved. Smart calendars coordinate mechanical technicians, allocate bay tasks, and issue automatic updates to minimize booking bottlenecks.",
+        "Workshop booking diaries have evolved. Smart calendars coordinate mechanical technicians, allocate day tasks, and issue automatic updates to minimize booking bottlenecks.",
       color: "bg-blue-500/10 text-blue-400",
       image: featureImg, // Replaced with unique extra asset
     },

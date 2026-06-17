@@ -38,7 +38,7 @@ const DashboardSection = () => {
   const tourSequence = [
     {
       nextTab: 1,
-      flyText: "Transferring diagnostic feeds to Maintenance bay...",
+      flyText: "Transferring diagnostic feeds to Maintenance day...",
       iconColor: "bg-red-400",
     },
     {
@@ -64,7 +64,7 @@ const DashboardSection = () => {
   const [serviceAlerts, setServiceAlerts] = useState(38);
   const [activeTickets, setActiveTickets] = useState(14);
   const [partsExpense, setPartsExpense] = useState(3840);
-  const [bayUtilization, setBayUtilization] = useState(80);
+  const [dayUtilization, setDayUtilization] = useState(80);
   const [todayMotBookings, setTodayMotBookings] = useState(18);
   const [smsDispatched, setSmsDispatched] = useState(45);
 
@@ -228,8 +228,8 @@ const DashboardSection = () => {
       });
       setSmsDispatched((prev) => prev + (Math.random() > 0.7 ? 1 : 0));
 
-      // 4. Bay Utilization toggle
-      setBayUtilization((prev) => {
+      // 4. Day Utilization toggle
+      setDayUtilization((prev) => {
         const choices = [60, 80, 100];
         return choices[Math.floor(Math.random() * choices.length)];
       });
@@ -353,7 +353,7 @@ const DashboardSection = () => {
             className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto"
           >
             Watch the dynamic data flow across modules, automatically updating
-            diagnostic alerts, costs, fleet utilization rates, and bay rota
+            diagnostic alerts, costs, fleet utilization rates, and day rota
             schedules in real time.
           </motion.p>
         </div>
@@ -739,19 +739,19 @@ const DashboardSection = () => {
                       </div>
                       <div className="bg-[#0a0f1d]/60 border border-white/5 hover:border-red-500/20 p-4 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300">
                         <span className="text-[8px] md:text-[9px] font-black text-gray-500 uppercase tracking-widest">
-                          WORKSHOP BAY UTILIZATION
+                          WORKSHOP DAY UTILIZATION
                         </span>
                         <div className="flex items-baseline justify-between mt-2">
                           <span className="text-base md:text-2xl font-black text-green-400">
-                            {bayUtilization}%
+                            {dayUtilization}%
                           </span>
                           <span className="text-[9px] md:text-[10px] font-bold text-gray-400 bg-white/10 border border-white/5 px-1.5 py-0.5 rounded-md">
-                            {bayUtilization === 60
+                            {dayUtilization === 60
                               ? "3/5"
-                              : bayUtilization === 80
+                              : dayUtilization === 80
                                 ? "4/5"
                                 : "5/5"}{" "}
-                            Bays Active
+                            Days Active
                           </span>
                         </div>
                       </div>
@@ -1068,7 +1068,7 @@ const DashboardSection = () => {
                             WORKSHOP TIME SLOTS
                           </h4>
                           <span className="text-[9px] md:text-xs text-gray-500">
-                            Live bay allocation feed
+                            Live day allocation feed
                           </span>
                         </div>
 

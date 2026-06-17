@@ -174,7 +174,7 @@ const WebsiteSolutions = () => {
               {
                 title: "MOT Testing",
                 price: "£45.00",
-                desc: "DVSA certified bays",
+                desc: "DVSA certified days",
                 icon: "🚗",
               },
               {

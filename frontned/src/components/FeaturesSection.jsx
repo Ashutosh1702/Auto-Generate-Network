@@ -150,7 +150,7 @@ const FeaturesSection = () => {
     {
       icon: <FiCalendar />,
       title: "Calendar",
-      desc: "Drag-and-drop workshop diary with live bay availability.",
+      desc: "Drag-and-drop workshop diary with live day availability.",
     },
     {
       icon: <FiUsers />,
