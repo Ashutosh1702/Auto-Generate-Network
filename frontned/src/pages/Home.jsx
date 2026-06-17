@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow home-main">
         <HeroSection />
         <PartnerLogos />
         <StatsSection />

@@ -74,7 +74,7 @@ const AutotechData = () => {
         {/* ══════════════════════════════════════════
             HERO SECTION
         ══════════════════════════════════════════ */}
-        <section className="relative py-20 lg:py-28 px-6 md:px-12 overflow-hidden">
+        <section className="relative pt-6 pb-20 lg:pt-8 lg:pb-28 px-6 md:px-12 overflow-hidden">
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
           
           <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -84,10 +84,13 @@ const AutotechData = () => {
                 Autotech Data Integration
               </span>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                An Online OE Information Tool Offering Exclusive, Precise Technical Information To Lend Your Garage The Technical Prowess
+                An Online OE Information Tool Offering Exclusive, Precise Technical Information to{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+                  Equip Your Garage with Technical Prowess
+                </span>
               </h1>
               <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl">
-                Whether it is vehicle maintenance, diagnostics or repair, our omnipresent tool brings it all at your finger tips! Our manuals are the bible to garages and auto-centres serving modern vehicles in the UK.
+                Whether it is vehicle maintenance, diagnostics or repair, our omnipresent tool brings it all to your fingertips! Our manuals are the bible for garages and auto-centres serving modern vehicles in the UK.
               </p>
               <div className="pt-2">
                 <Link
@@ -293,10 +296,10 @@ const AutotechData = () => {
             <div className="grid md:grid-cols-2 gap-8 text-gray-400 text-sm md:text-base leading-relaxed">
               <div className="space-y-4">
                 <p>
-                  At Autotechdata, we bring a world class, state of the art OE Information Tool. Which enables you to manage your garage in a more efficient way while and while staying on the go.
+                  At Autotechdata, we bring a world-class, state-of-the-art OE Information Tool that enables you to manage your garage in a more efficient way while staying on the go.
                 </p>
                 <p>
-                  With our iconic OE information tool you can manage each and every aspect of your business. The OE information that lends your garage the Technical Process by providing distinct, accurate technical information.
+                  With our iconic OE information tool, you can manage every aspect of your business. This OE information equips your garage with technical prowess by providing distinct, accurate technical specifications.
                 </p>
               </div>
               <div className="space-y-4">
@@ -368,7 +371,7 @@ const AutotechData = () => {
                 Factory Correct Information
               </h2>
               <p className="text-gray-400 text-base leading-relaxed">
-                It is easy for factory correct OE information to meet the eyes, as you can witness in the slide show above. If the evident precision in the stated technical information, illustrations, and drawings successfully stirs your interest, Click the button below and allow us to elaborate further on this amazing tool and its features!
+                It is easy for factory correct OE information to meet the eyes, as you can witness in the slide show above. If the evident precision in the stated technical information, illustrations, and drawings successfully stirs your interest, click the button below and allow us to elaborate further on this amazing tool and its features!
               </p>
               <div className="pt-4">
                 <Link

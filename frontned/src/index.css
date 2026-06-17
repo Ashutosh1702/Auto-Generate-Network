@@ -633,14 +633,14 @@
   border-color: rgba(59, 130, 246, 0.2) !important;
 }
 
-/* Fix header overlap by increasing top padding on main layout content container */
-main.flex-grow {
-  padding-top: 9rem !important; /* equivalent to pt-36 (144px) */
+/* Fix header overlap by increasing top padding on main layout content container (excluding homepage) */
+main.flex-grow:not(.home-main) {
+  padding-top: 7rem; /* 112px on mobile to clear navbar exactly */
 }
 
 @media (min-width: 1024px) {
-  main.flex-grow {
-    padding-top: 10.5rem !important; /* equivalent to pt-42 (168px) for extra breathing room on desktop */
+  main.flex-grow:not(.home-main) {
+    padding-top: 8.5rem; /* 136px on desktop to clear navbar exactly */
   }
 }
 

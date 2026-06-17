@@ -260,7 +260,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-12 max-w-7xl mx-auto overflow-visible min-h-screen flex items-center">
+    <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 px-6 md:px-12 max-w-7xl mx-auto overflow-visible min-h-[80vh] flex items-center">
       <style>{`.three-d{perspective:1200px;transform-style:preserve-3d;transition:transform .4s ease;}
 .three-d:hover{transform:rotateX(2deg) rotateY(-2deg) scale(1.01);}`}</style>
 
