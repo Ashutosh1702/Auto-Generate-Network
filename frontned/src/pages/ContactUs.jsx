@@ -23,7 +23,7 @@ const ContactUs = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.phone.length < 10) {
       alert("Please enter a valid phone number (at least 10 digits).");
@@ -31,27 +31,46 @@ const ContactUs = () => {
     }
     setSubmitted(true);
 
-    // Capture and save data to localStorage
     try {
-      const existingLeads = localStorage.getItem("agn_leads");
-      const leads = existingLeads ? JSON.parse(existingLeads) : [];
-      const newLead = {
-        id: Date.now(),
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        interest: formData.interest,
-        message: formData.message,
-        timestamp: new Date().toISOString(),
-      };
-      leads.push(newLead);
-      localStorage.setItem("agn_leads", JSON.stringify(leads));
-    } catch (error) {
-      console.error("Failed to save lead to localStorage:", error);
-    }
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.interest,
+          message: formData.message,
+        }),
+      });
 
-    setTimeout(() => {
-      setSubmitted(false);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong while submitting request.");
+      }
+
+      // Capture and save data to localStorage as fallback
+      try {
+        const existingLeads = localStorage.getItem("agn_leads");
+        const leads = existingLeads ? JSON.parse(existingLeads) : [];
+        const newLead = {
+          id: data.data?._id || Date.now(),
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.interest,
+          message: formData.message,
+          timestamp: new Date().toISOString(),
+        };
+        leads.push(newLead);
+        localStorage.setItem("agn_leads", JSON.stringify(leads));
+      } catch (error) {
+        console.error("Failed to save lead to localStorage:", error);
+      }
+
       setSubmittedData({
         name: formData.name,
         interest: formData.interest,
@@ -66,7 +85,12 @@ const ContactUs = () => {
         interest: "Garage Management System",
         message: "",
       });
-    }, 1000);
+    } catch (error) {
+      console.error("Form submission failed:", error);
+      alert(`Submission failed: ${error.message}`);
+    } finally {
+      setSubmitted(false);
+    }
   };
 
   return (

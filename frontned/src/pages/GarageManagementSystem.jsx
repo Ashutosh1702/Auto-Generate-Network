@@ -209,7 +209,7 @@ const GarageManagementSystem = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.name.trim() ||
@@ -219,13 +219,34 @@ const GarageManagementSystem = () => {
       !formData.interestedIn.trim() ||
       !formData.address.trim()
     ) {
+      alert("Please fill in all required fields.");
       return;
     }
 
     setIsSubmitting(true);
-    // Simulate API submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          garageName: formData.garageName,
+          email: formData.email,
+          phone: formData.phone,
+          interestedIn: formData.interestedIn,
+          address: formData.address,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong while submitting booking.");
+      }
+
       setFormSubmitted(true);
       // Reset form
       setFormData({
@@ -237,7 +258,12 @@ const GarageManagementSystem = () => {
         address: "",
         message: "",
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Booking submission error:", error);
+      alert(`Submission failed: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // 36 Key GMS Features data matching the real site index

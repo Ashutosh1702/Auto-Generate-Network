@@ -91,10 +91,10 @@ const BlogModal = ({ post, onClose }) => {
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="relative w-full max-w-3xl bg-[#0c1222] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+        className="relative w-full max-w-2xl bg-[#0c1222] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative aspect-[21/9] overflow-hidden">
+        <div className="relative h-40 md:h-48 overflow-hidden">
           <img
             src={post.image}
             alt={post.title}
@@ -109,34 +109,34 @@ const BlogModal = ({ post, onClose }) => {
           </button>
         </div>
 
-        <div className="p-6 md:p-8 space-y-6 overflow-y-auto max-h-[60vh] text-left">
+        <div className="p-5 md:p-6 space-y-4.5 overflow-y-auto max-h-[45vh] text-left">
           <div className="flex flex-wrap items-center gap-3">
             <span
-              className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider ${post.color} border border-current/10`}
+              className={`px-3 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${post.color} border border-current/10`}
             >
               {post.category}
             </span>
-            <span className="text-xs text-gray-500 font-semibold">
+            <span className="text-[11px] text-gray-500 font-semibold">
               {post.date} &bull; {post.readTime}
             </span>
           </div>
 
-          <h2 className="text-xl md:text-3xl font-extrabold text-white leading-tight">
+          <h2 className="text-lg md:text-2xl font-extrabold text-white leading-tight">
             {post.title}
           </h2>
 
-          <p className="text-gray-400 font-medium italic border-l-4 border-indigo-500 pl-4">
+          <p className="text-gray-400 text-xs md:text-sm font-medium italic border-l-4 border-indigo-500 pl-4">
             {post.excerpt}
           </p>
 
-          <div className="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+          <div className="space-y-3.5 text-gray-300 text-xs md:text-sm leading-relaxed">
             <p>{p1}</p>
             <p>{p2}</p>
             <p>{p3}</p>
           </div>
         </div>
 
-        <div className="p-6 bg-[#0a0f24]/20 border-t border-white/5 flex items-center justify-end gap-3 rounded-b-3xl">
+        <div className="p-5 bg-[#0a0f24]/20 border-t border-white/5 flex items-center justify-end gap-3 rounded-b-3xl">
           <button
             onClick={onClose}
             className="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:text-white transition-colors cursor-pointer"
