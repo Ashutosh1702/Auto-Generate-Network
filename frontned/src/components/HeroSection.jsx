@@ -92,6 +92,7 @@ const HeroSection = () => {
   // Booking Flow simulation states
   const [selectedSlotIdx, setSelectedSlotIdx] = useState(0);
   const [selectedDateIdx, setSelectedDateIdx] = useState(14); // August 21
+  const [bookingBtnState, setBookingBtnState] = useState("normal"); // "normal", "loading", "success"
   // VRM Lookup states & functions
   const [vrmInput, setVrmInput] = useState("");
   const [isVrmLoading, setIsVrmLoading] = useState(false);
