@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
-  AnimatePresence,
   useMotionValue,
   useAnimation,
 } from "framer-motion";
@@ -93,76 +92,7 @@ const HeroSection = () => {
   const [selectedSlotIdx, setSelectedSlotIdx] = useState(0);
   const [selectedDateIdx, setSelectedDateIdx] = useState(14); // August 21
   const [bookingBtnState, setBookingBtnState] = useState("normal"); // "normal", "loading", "success"
-  // VRM Lookup states & functions
-  const [vrmInput, setVrmInput] = useState("");
-  const [isVrmLoading, setIsVrmLoading] = useState(false);
-  const [vrmResult, setVrmResult] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-
-  const handleVrmLookup = () => {
-    if (!vrmInput.trim()) {
-      alert("Please enter a registration plate.");
-      return;
-    }
-    setIsVrmLoading(true);
-    setVrmResult(null);
-
-    setTimeout(() => {
-      setIsVrmLoading(false);
-      const cleanPlate = vrmInput.trim().toUpperCase().replace(/\s/g, "");
-      
-      const mockDatabase = {
-        "LG24KXD": {
-          makeModel: "BMW 3-Series M Sport",
-          year: "2024",
-          engine: "1998cc Mild-Hybrid",
-          fuel: "Petrol / Electric",
-          motStatus: "MOT NOT REQUIRED",
-          expiry: "New Vehicle (MOT due May 2027)",
-          statusColor: "bg-blue-500/10 text-blue-400 border border-blue-500/20"
-        },
-        "VO68FJK": {
-          makeModel: "Tesla Model Y Performance",
-          year: "2022",
-          engine: "Electric (350 kW)",
-          fuel: "Electric",
-          motStatus: "MOT VALID",
-          expiry: "22 August 2026",
-          statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-        },
-        "HJ19LCP": {
-          makeModel: "Ford Transit Custom",
-          year: "2019",
-          engine: "1995cc EcoBlue",
-          fuel: "Diesel",
-          motStatus: "MOT VALID",
-          expiry: "14 November 2026",
-          statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-        },
-        "KY68WZM": {
-          makeModel: "Škoda Kodiaq vRS 4x4",
-          year: "2018",
-          engine: "1968cc BiTDI",
-          fuel: "Diesel",
-          motStatus: "MOT VALID",
-          expiry: "18 October 2026",
-          statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-        }
-      };
-
-      const result = mockDatabase[cleanPlate] || {
-        makeModel: "Audi A4 S-Line TDI",
-        year: "2020",
-        engine: "1968cc TDI",
-        fuel: "Diesel",
-        motStatus: "MOT VALID",
-        expiry: "12 September 2026",
-        statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-      };
-
-      setVrmResult(result);
-    }, 1200);
-  };
 
   useEffect(() => {
     const mobileCheck = window.innerWidth < 768;
@@ -431,80 +361,7 @@ const HeroSection = () => {
             </motion.button>
           </motion.div>
 
-          {/* UK VRM Live DVLA Lookup Demonstration Box */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="bg-[#0c1222]/90 border border-white/10 rounded-2xl p-5 shadow-xl space-y-4 max-w-md"
-          >
-            <div className="flex items-center justify-between select-none">
-              <span className="text-[10px] text-indigo-400 font-extrabold uppercase tracking-wider">DVLA Live Integration</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            </div>
-            <p className="text-xs text-gray-400 font-semibold select-none">
-              Enter a UK plate number (e.g. <span className="text-gray-300">LG24 KXD</span>, <span className="text-gray-300">VO68 FJK</span>) to test spec & MOT status lookups.
-            </p>
-            <div className="flex gap-2">
-              <div className="relative flex-grow flex items-center">
-                <div className="absolute left-2.5 w-3.5 h-6 bg-[#0055A5] rounded flex flex-col justify-between items-center py-0.5 text-[5px] text-white font-bold select-none leading-none">
-                  <span>GB</span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="LG24 KXD"
-                  value={vrmInput}
-                  onChange={(e) => setVrmInput(e.target.value.toUpperCase())}
-                  className="w-full bg-[#FFCB05] text-black border-2 border-[#E5B203] font-bold text-center placeholder-black/30 text-xs tracking-widest uppercase py-2.5 pl-8 pr-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400/50 animate-pulse"
-                  maxLength={8}
-                />
-              </div>
-              <button
-                onClick={handleVrmLookup}
-                disabled={isVrmLoading}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-md cursor-pointer transition-colors"
-              >
-                {isVrmLoading ? "Searching..." : "Lookup"}
-              </button>
-            </div>
 
-            {/* Results Display */}
-            <AnimatePresence mode="wait">
-              {vrmResult && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="bg-[#050816]/70 border border-white/5 rounded-xl p-3.5 space-y-2.5 text-xs font-semibold text-gray-400 overflow-hidden"
-                >
-                  <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                    <span className="text-white font-bold text-xs">{vrmResult.makeModel}</span>
-                    <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider ${vrmResult.statusColor}`}>
-                      {vrmResult.motStatus}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[10px]">
-                    <div>
-                      <span className="text-gray-500 block text-[9px] uppercase tracking-wider">Year of Mfg</span>
-                      <span className="text-gray-200">{vrmResult.year}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 block text-[9px] uppercase tracking-wider">Engine Capacity</span>
-                      <span className="text-gray-200">{vrmResult.engine}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 block text-[9px] uppercase tracking-wider">Fuel Type</span>
-                      <span className="text-gray-200">{vrmResult.fuel}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 block text-[9px] uppercase tracking-wider">MOT Expiry Date</span>
-                      <span className="text-gray-200">{vrmResult.expiry}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
 
 
           <motion.div

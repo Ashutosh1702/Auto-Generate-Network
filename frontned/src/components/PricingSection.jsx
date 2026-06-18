@@ -229,7 +229,7 @@ const PricingSection = () => {
               </div>
 
               {/* Live Savings Calculations Panel (Right) */}
-              <div className="lg:col-span-5 bg-[#050816]/75 border border-white/5 rounded-3xl p-6 flex flex-col justify-between gap-6 relative shadow-lg">
+              <div className="lg:col-span-5 bg-[#050816]/75 border border-white/5 rounded-3xl p-6 flex flex-col justify-between gap-6 relative shadow-lg roi-panel-preserve">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[40px] pointer-events-none" />
                 
                 <div className="space-y-4">
