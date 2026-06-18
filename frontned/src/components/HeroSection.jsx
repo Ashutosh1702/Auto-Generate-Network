@@ -137,6 +137,15 @@ const HeroSection = () => {
           motStatus: "MOT VALID",
           expiry: "14 November 2026",
           statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+        },
+        "KY68WZM": {
+          makeModel: "Škoda Kodiaq vRS 4x4",
+          year: "2018",
+          engine: "1968cc BiTDI",
+          fuel: "Diesel",
+          motStatus: "MOT VALID",
+          expiry: "18 October 2026",
+          statusColor: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
         }
       };
 

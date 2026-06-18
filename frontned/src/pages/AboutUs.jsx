@@ -91,13 +91,13 @@ const servicesList = [
 ];
 
 /* ─── Animation helpers ─── */
-const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
+const fadeUp = { hidden: { opacity: 0, y: 0 }, visible: { opacity: 1, y: 0 } };
 const fadeLeft = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, x: 0 },
   visible: { opacity: 1, x: 0 },
 };
 const fadeRight = {
-  hidden: { opacity: 0, x: 40 },
+  hidden: { opacity: 0, x: 0 },
   visible: { opacity: 1, x: 0 },
 };
 

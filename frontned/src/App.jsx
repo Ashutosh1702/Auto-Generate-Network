@@ -1,50 +1,44 @@
-import React, { lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import Home from "./pages/Home.jsx";
 import PageTransition from "./components/PageTransition.jsx";
-import { CgSpinner } from "react-icons/cg";
 
-// Lazy load other page components for performance
-const AboutUs = lazy(() => import("./pages/AboutUs.jsx"));
-const Pricing = lazy(() => import("./pages/Pricing.jsx"));
-const GarageManagementSystem = lazy(
-  () => import("./pages/GarageManagementSystem.jsx"),
-);
-const WebsiteForGarages = lazy(() => import("./pages/WebsiteForGarages.jsx"));
-const AutotechData = lazy(() => import("./pages/AutotechData.jsx"));
-const MOTDiary = lazy(() => import("./pages/MOTDiary.jsx"));
-const SEO = lazy(() => import("./pages/SEO.jsx"));
-const Features = lazy(() => import("./pages/Features.jsx"));
-const LatestWork = lazy(() => import("./pages/LatestWork.jsx"));
-const Blog = lazy(() => import("./pages/Blog.jsx"));
-const ContactUs = lazy(() => import("./pages/ContactUs.jsx"));
-const LogIn = lazy(() => import("./pages/LogIn.jsx"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService.jsx"));
-const CookiePolicy = lazy(() => import("./pages/CookiePolicy.jsx"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"));
-const Sitemap = lazy(() => import("./pages/Sitemap.jsx"));
+// ScrollToTop resets scroll position to (0,0) instantly on route changes
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
-const SuspenseFallback = () => (
-  <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050816] text-white">
-    <div className="flex flex-col items-center gap-4">
-      <CgSpinner className="animate-spin text-indigo-500" size={50} />
-      <span className="text-gray-400 text-sm tracking-wider font-semibold animate-pulse">
-        Loading...
-      </span>
-    </div>
-  </div>
-);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
+// Import page components directly for instant page transitions (no loading spinner)
+import AboutUs from "./pages/AboutUs.jsx";
+import Pricing from "./pages/Pricing.jsx";
+import GarageManagementSystem from "./pages/GarageManagementSystem.jsx";
+import WebsiteForGarages from "./pages/WebsiteForGarages.jsx";
+import AutotechData from "./pages/AutotechData.jsx";
+import MOTDiary from "./pages/MOTDiary.jsx";
+import SEO from "./pages/SEO.jsx";
+import Features from "./pages/Features.jsx";
+import LatestWork from "./pages/LatestWork.jsx";
+import Blog from "./pages/Blog.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
+import LogIn from "./pages/LogIn.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import TermsOfService from "./pages/TermsOfService.jsx";
+import CookiePolicy from "./pages/CookiePolicy.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import Sitemap from "./pages/Sitemap.jsx";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        <Suspense fallback={<SuspenseFallback />}>
-          <Routes location={location} key={location.pathname}>
+      <Routes location={location} key={location.pathname}>
             <Route
               path="/"
               element={
@@ -190,8 +184,6 @@ const AnimatedRoutes = () => {
               }
             />
           </Routes>
-        </Suspense>
-      </AnimatePresence>
     </>
   );
 };
@@ -199,6 +191,7 @@ const AnimatedRoutes = () => {
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AnimatedRoutes />
     </BrowserRouter>
   );
