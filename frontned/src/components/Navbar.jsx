@@ -142,6 +142,24 @@ const Navbar = () => {
     setActiveLink(location.pathname);
   }, [location.pathname]);
 
+  const handlePreload = (href) => {
+    const pages = {
+      "/about-us": () => import("../pages/AboutUs.jsx"),
+      "/pricing": () => import("../pages/Pricing.jsx"),
+      "/garage-management-system": () => import("../pages/GarageManagementSystem.jsx"),
+      "/website-for-garages": () => import("../pages/WebsiteForGarages.jsx"),
+      "/autotech-data": () => import("../pages/AutotechData.jsx"),
+      "/mot-diary": () => import("../pages/MOTDiary.jsx"),
+      "/seo": () => import("../pages/SEO.jsx"),
+      "/features": () => import("../pages/Features.jsx"),
+      "/latest-work": () => import("../pages/LatestWork.jsx"),
+      "/blog": () => import("../pages/Blog.jsx"),
+      "/contact-us": () => import("../pages/ContactUs.jsx"),
+    };
+    const load = pages[href];
+    if (load) load().catch(() => {});
+  };
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about-us" },
@@ -289,7 +307,7 @@ const Navbar = () => {
         className={`fixed top-0 sm:top-11 left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
             ? "bg-[#050816]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-2.5 lg:py-3.5"
-            : "bg-transparent py-4 lg:py-5"
+            : "bg-[#050816]/95 backdrop-blur-md sm:bg-transparent py-4 lg:py-5"
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-8">
@@ -371,6 +389,7 @@ const Navbar = () => {
                                   <Link
                                     key={subItem.name}
                                     to={subItem.href}
+                                    onMouseEnter={() => handlePreload(subItem.href)}
                                     className={`flex items-start gap-3.5 p-3 rounded-lg transition-all duration-300 ${
                                       isSubActive
                                         ? "bg-indigo-500/15 border-l-2 border-indigo-500"
@@ -427,7 +446,10 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     className={linkClass}
-                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseEnter={() => {
+                      setHoveredLink(link.name);
+                      handlePreload(link.href);
+                    }}
                   >
                     {hoveredLink === link.name && !link.type && (
                       <motion.span
@@ -461,7 +483,11 @@ const Navbar = () => {
             <div className="lg:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-300 hover:text-white p-1 rounded-md bg-white/5 border border-white/5 cursor-pointer"
+                className={`p-1.5 rounded-md border cursor-pointer transition-colors duration-300 ${
+                  theme === "light"
+                    ? "text-slate-800 hover:text-slate-900 bg-slate-100 border-slate-200"
+                    : "text-gray-300 hover:text-white bg-white/5 border-white/5"
+                }`}
               >
                 {mobileMenuOpen ? (
                   <FiX className="w-6 h-6" />
@@ -481,12 +507,20 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden bg-[#070b16]/98 backdrop-blur-xl border-b border-white/10 overflow-hidden shadow-2xl"
+              className={`lg:hidden border-b overflow-hidden shadow-2xl transition-colors duration-300 ${
+                theme === "light"
+                  ? "bg-slate-50 border-slate-200"
+                  : "bg-[#070b16]/98 backdrop-blur-xl border-white/10"
+              }`}
             >
               <div className="px-6 py-6 space-y-4">
                 {/* Theme Toggle inside drawer to save space in the main mobile header */}
-                <div className="flex justify-between items-center pb-4 border-b border-white/10 no-invert">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Switch Theme</span>
+                <div className={`flex justify-between items-center pb-4 border-b no-invert ${
+                  theme === "light" ? "border-slate-200" : "border-white/10"
+                }`}>
+                  <span className={`text-xs font-bold uppercase tracking-wider ${
+                    theme === "light" ? "text-slate-500" : "text-gray-400"
+                  }`}>Switch Theme</span>
                   <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
                 </div>
                 {navLinks.map((link) => {
@@ -502,7 +536,9 @@ const Navbar = () => {
                           onClick={() =>
                             setMobileDropdownOpen(!mobileDropdownOpen)
                           }
-                          className="w-full flex items-center justify-between text-base font-semibold py-2 text-[#2196f3] cursor-pointer"
+                          className={`w-full flex items-center justify-between text-base font-semibold py-2 cursor-pointer ${
+                            theme === "light" ? "text-blue-600" : "text-[#2196f3]"
+                          }`}
                         >
                           <span>{link.name}</span>
                           <FiChevronDown
@@ -517,7 +553,9 @@ const Navbar = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="pl-4 space-y-2 overflow-hidden mt-1 border-l border-white/10"
+                              className={`pl-4 space-y-2 overflow-hidden mt-1 border-l ${
+                                theme === "light" ? "border-slate-200" : "border-white/10"
+                              }`}
                             >
                               {link.dropdown.map((subItem) => {
                                 const isSubActive = activeLink === subItem.href;
@@ -525,10 +563,11 @@ const Navbar = () => {
                                   <Link
                                     key={subItem.name}
                                     to={subItem.href}
-                                    className={`block text-sm py-2 ${
+                                    onMouseEnter={() => handlePreload(subItem.href)}
+                                    className={`block text-sm py-2 transition-colors duration-200 ${
                                       isSubActive
-                                        ? "text-[#2196f3] font-bold"
-                                        : "text-gray-400 hover:text-white"
+                                        ? (theme === "light" ? "text-blue-600 font-bold" : "text-[#2196f3] font-bold")
+                                        : (theme === "light" ? "text-slate-600 hover:text-slate-900" : "text-gray-400 hover:text-white")
                                     }`}
                                     onClick={() => {
                                       setMobileMenuOpen(false);
@@ -550,17 +589,25 @@ const Navbar = () => {
                     "block text-base font-semibold py-2 pl-3 rounded-lg transition-all ";
                   if (link.type === "pricing") {
                     linkClass +=
-                      "text-emerald-400 border-l-4 border-[#10b981] bg-emerald-500/5 mt-1 pr-3";
+                      theme === "light"
+                        ? "text-emerald-600 border-l-4 border-emerald-500 bg-emerald-50 mt-1 pr-3"
+                        : "text-emerald-400 border-l-4 border-[#10b981] bg-emerald-500/5 mt-1 pr-3";
                   } else if (
                     link.type === "seo" ||
                     link.type === "latest-work"
                   ) {
                     linkClass +=
-                      "text-rose-400 border-l-4 border-[#f43f5e] bg-rose-500/5 mt-1 pr-3";
+                      theme === "light"
+                        ? "text-rose-600 border-l-4 border-rose-500 bg-rose-50 mt-1 pr-3"
+                        : "text-rose-400 border-l-4 border-[#f43f5e] bg-rose-500/5 mt-1 pr-3";
                   } else {
                     linkClass += isActive
-                      ? "text-indigo-400 border-l-4 border-indigo-500 bg-indigo-500/5 font-bold"
-                      : "text-gray-300 border-l-4 border-transparent hover:text-white hover:bg-white/5";
+                      ? (theme === "light"
+                          ? "text-indigo-600 border-l-4 border-indigo-500 bg-indigo-50 font-bold"
+                          : "text-indigo-400 border-l-4 border-indigo-500 bg-indigo-500/5 font-bold")
+                      : (theme === "light"
+                          ? "text-slate-700 border-l-4 border-transparent hover:text-slate-950 hover:bg-slate-100"
+                          : "text-gray-300 border-l-4 border-transparent hover:text-white hover:bg-white/5");
                   }
 
                   return (
@@ -568,6 +615,7 @@ const Navbar = () => {
                       key={link.name}
                       to={link.href}
                       className={linkClass}
+                      onMouseEnter={() => handlePreload(link.href)}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.name}
@@ -576,18 +624,28 @@ const Navbar = () => {
                 })}
 
                 {/* Mobile Drawer Contacts & Socials */}
-                <div className="pt-6 border-t border-white/10 space-y-5">
+                <div className={`pt-6 border-t space-y-5 ${
+                  theme === "light" ? "border-slate-200" : "border-white/10"
+                }`}>
                   <div className="space-y-3">
-                    <p className="text-[10px] uppercase tracking-wider text-gray-500 font-extrabold">
+                    <p className={`text-[10px] uppercase tracking-wider font-extrabold ${
+                      theme === "light" ? "text-slate-400" : "text-gray-500"
+                    }`}>
                       Contact Info
                     </p>
                     <div className="grid grid-cols-1 gap-2.5">
                       <a
                         href="tel:07947906789"
-                        className="flex items-center text-sm text-gray-300 hover:text-white transition-colors duration-300"
+                        className={`flex items-center text-sm transition-colors duration-300 ${
+                          theme === "light" ? "text-slate-700 hover:text-slate-950" : "text-gray-300 hover:text-white"
+                        }`}
                       >
-                        <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center mr-2.5 shrink-0 border border-white/5">
-                          <FiPhone className="text-indigo-400 w-3.5 h-3.5" />
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center mr-2.5 shrink-0 border ${
+                          theme === "light"
+                            ? "bg-slate-100 border-slate-200 text-indigo-600"
+                            : "bg-white/5 border-white/5 text-indigo-400"
+                        }`}>
+                          <FiPhone className="w-3.5 h-3.5" />
                         </div>
                         <span className="font-semibold text-xs tracking-wide">
                           Sales: 07947906789
@@ -595,10 +653,16 @@ const Navbar = () => {
                       </a>
                       <a
                         href="tel:0172655556"
-                        className="flex items-center text-sm text-gray-300 hover:text-white transition-colors duration-300"
+                        className={`flex items-center text-sm transition-colors duration-300 ${
+                          theme === "light" ? "text-slate-700 hover:text-slate-950" : "text-gray-300 hover:text-white"
+                        }`}
                       >
-                        <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center mr-2.5 shrink-0 border border-white/5">
-                          <FiPhone className="text-indigo-400 w-3.5 h-3.5" />
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center mr-2.5 shrink-0 border ${
+                          theme === "light"
+                            ? "bg-slate-100 border-slate-200 text-indigo-600"
+                            : "bg-white/5 border-white/5 text-indigo-400"
+                        }`}>
+                          <FiPhone className="w-3.5 h-3.5" />
                         </div>
                         <span className="font-semibold text-xs tracking-wide">
                           Services: 0172655556
@@ -608,7 +672,9 @@ const Navbar = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <p className="text-[10px] uppercase tracking-wider text-gray-500 font-extrabold">
+                    <p className={`text-[10px] uppercase tracking-wider font-extrabold ${
+                      theme === "light" ? "text-slate-400" : "text-gray-500"
+                    }`}>
                       Follow Us
                     </p>
                     <div className="flex items-center space-x-3.5">
@@ -616,7 +682,9 @@ const Navbar = () => {
                         href="https://www.facebook.com/autogaragenetworkltd"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2]/10 transition-all duration-300 border border-white/5 shadow-md hover:scale-105"
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-[#1877F2] transition-all duration-300 border shadow-md hover:scale-105 ${
+                          theme === "light" ? "bg-slate-100 border-slate-200 hover:bg-[#1877F2]/10" : "bg-white/5 border-white/5 hover:bg-[#1877F2]/10"
+                        }`}
                       >
                         <FaFacebookF size={14} />
                       </a>
@@ -624,7 +692,9 @@ const Navbar = () => {
                         href="https://www.instagram.com/autogaragenetworkltd.uk"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#E1306C] hover:bg-[#E1306C]/10 transition-all duration-300 border border-white/5 shadow-md hover:scale-105"
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-[#E1306C] transition-all duration-300 border shadow-md hover:scale-105 ${
+                          theme === "light" ? "bg-slate-100 border-slate-200 hover:bg-[#E1306C]/10" : "bg-white/5 border-white/5 hover:bg-[#E1306C]/10"
+                        }`}
                       >
                         <FaInstagram size={14} />
                       </a>
@@ -632,7 +702,9 @@ const Navbar = () => {
                         href="https://x.com/autogaragent"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#1DA1F2] hover:bg-[#1DA1F2]/10 transition-all duration-300 border border-white/5 shadow-md hover:scale-105"
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-[#1877F2] transition-all duration-300 border shadow-md hover:scale-105 ${
+                          theme === "light" ? "bg-slate-100 border-slate-200 hover:bg-[#1DA1F2]/10" : "bg-white/5 border-white/5 hover:bg-[#1DA1F2]/10"
+                        }`}
                       >
                         <FaTwitter size={14} />
                       </a>
@@ -640,7 +712,9 @@ const Navbar = () => {
                         href="https://www.linkedin.com/company/auto-garage-network-ltd/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all duration-300 border border-white/5 shadow-md hover:scale-105"
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-[#0A66C2] transition-all duration-300 border shadow-md hover:scale-105 ${
+                          theme === "light" ? "bg-slate-100 border-slate-200 hover:bg-[#0A66C2]/10" : "bg-white/5 border-white/5 hover:bg-[#0A66C2]/10"
+                        }`}
                       >
                         <FaLinkedinIn size={14} />
                       </a>
@@ -648,7 +722,9 @@ const Navbar = () => {
                         href="https://www.youtube.com/channel/UCT8JroOu-4_KT74be6tGUoQ"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-all duration-300 border border-white/5 shadow-md hover:scale-105"
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-[#FF0000] transition-all duration-300 border shadow-md hover:scale-105 ${
+                          theme === "light" ? "bg-slate-100 border-slate-200 hover:bg-[#FF0000]/10" : "bg-white/5 border-white/5 hover:bg-[#FF0000]/10"
+                        }`}
                       >
                         <FaYoutube size={14} />
                       </a>

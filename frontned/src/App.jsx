@@ -33,33 +33,8 @@ const CookiePolicy = lazy(() => import("./pages/CookiePolicy.jsx"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"));
 const Sitemap = lazy(() => import("./pages/Sitemap.jsx"));
 
-// Background preloader helper
-const preloadPages = () => {
-  const pages = [
-    () => import("./pages/AboutUs.jsx"),
-    () => import("./pages/Pricing.jsx"),
-    () => import("./pages/GarageManagementSystem.jsx"),
-    () => import("./pages/WebsiteForGarages.jsx"),
-    () => import("./pages/AutotechData.jsx"),
-    () => import("./pages/MOTDiary.jsx"),
-    () => import("./pages/SEO.jsx"),
-    () => import("./pages/Features.jsx"),
-    () => import("./pages/LatestWork.jsx"),
-    () => import("./pages/Blog.jsx"),
-    () => import("./pages/ContactUs.jsx"),
-    () => import("./pages/LogIn.jsx"),
-  ];
-  pages.forEach((load) => load().catch(() => {}));
-};
-
 const AnimatedRoutes = () => {
   const location = useLocation();
-
-  useEffect(() => {
-    // Preload all pages in the background 1.5 seconds after mounting to make transitions instant
-    const timer = setTimeout(preloadPages, 1500);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <Suspense fallback={null}>

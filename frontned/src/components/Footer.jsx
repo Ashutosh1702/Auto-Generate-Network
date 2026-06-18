@@ -61,6 +61,21 @@ const Footer = () => {
   const [leadStep, setLeadStep] = useState(0); // 0: normal, 1: name, 2: garage, 3: email, 4: phone
   const [leadData, setLeadData] = useState({ name: "", garage: "", email: "", phone: "" });
 
+  // Mobile Accordion state
+  const [openSections, setOpenSections] = useState({
+    company: false,
+    industries: false,
+    products: false,
+    contact: false,
+  });
+
+  const toggleSection = (section) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
   const getFormattedTime = () => {
     return new Date()
       .toLocaleTimeString([], {
@@ -429,9 +444,9 @@ const Footer = () => {
 
         {/* 2. Main Footer columns grid */}
         <div className="max-w-[1500px] mx-auto px-8 lg:px-16 pt-16 pb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-y-8 md:gap-10">
             {/* Column 1: Auto Garage Network blurb */}
-            <div className="space-y-7">
+            <div className="space-y-5 text-center md:text-left flex flex-col items-center md:items-start pb-6 md:pb-0 border-b border-white/5 md:border-0">
               <Link to="/" className="inline-block cursor-pointer">
                 <img
                   src="https://www.autogaragenetwork.com/catalog/view/theme/avnv1/assets/img/logo-color.png"
@@ -451,210 +466,260 @@ const Footer = () => {
             </div>
 
             {/* Column 2: Company */}
-            <div className="space-y-4">
-              <h4 className="text-white font-extrabold text-base select-none">
-                Company
-              </h4>
-              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
-                <li>
-                  <Link to="/" className="hover:text-white transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about-us"
-                    className="hover:text-white transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact-us"
-                    className="hover:text-white transition-colors"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Career
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    to="/sitemap"
-                    className="hover:text-white transition-colors"
-                  >
-                    Sitemap
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/pricing"
-                    className="hover:text-white transition-colors"
-                  >
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/latest-work"
-                    className="hover:text-white transition-colors"
-                  >
-                    Latest Work
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/privacy-policy"
-                    className="hover:text-white transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
+            <div className="space-y-4 border-b border-white/5 md:border-0 pb-4 md:pb-0">
+              <button
+                onClick={() => toggleSection("company")}
+                className="w-full md:cursor-default flex justify-between items-center text-left md:block focus:outline-none"
+              >
+                <h4 className="text-white font-extrabold text-base select-none">
+                  Company
+                </h4>
+                <span className="md:hidden text-gray-400 font-bold text-lg leading-none pr-1">
+                  {openSections.company ? "−" : "+"}
+                </span>
+              </button>
 
-                <li>
-                  <Link
-                    to="/cookie-policy"
-                    className="hover:text-white transition-colors"
-                  >
-                    Cookie Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/terms-of-service"
-                    className="hover:text-white transition-colors"
-                  >
-                    Terms & Conditions
-                  </Link>
-                </li>
-              </ul>
+              <div className={`${openSections.company ? "block" : "hidden"} md:block mt-3 md:mt-0`}>
+                <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                  <li>
+                    <Link to="/" className="hover:text-white transition-colors">
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/about-us"
+                      className="hover:text-white transition-colors"
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contact-us"
+                      className="hover:text-white transition-colors"
+                    >
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Career
+                    </a>
+                  </li>
+                  <li>
+                    <Link
+                      to="/sitemap"
+                      className="hover:text-white transition-colors"
+                    >
+                      Sitemap
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/pricing"
+                      className="hover:text-white transition-colors"
+                    >
+                      Pricing
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/latest-work"
+                      className="hover:text-white transition-colors"
+                    >
+                      Latest Work
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/privacy-policy"
+                      className="hover:text-white transition-colors"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/cookie-policy"
+                      className="hover:text-white transition-colors"
+                    >
+                      Cookie Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/terms-of-service"
+                      className="hover:text-white transition-colors"
+                    >
+                      Terms & Conditions
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Column 3: Industries */}
-            <div className="space-y-4">
-              <h4 className="text-white font-extrabold text-base select-none">
-                Industries
-              </h4>
-              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Car Workshop
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Car Traders
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    MOT Centres
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Automotive
-                  </a>
-                </li>
-              </ul>
+            <div className="space-y-4 border-b border-white/5 md:border-0 pb-4 md:pb-0">
+              <button
+                onClick={() => toggleSection("industries")}
+                className="w-full md:cursor-default flex justify-between items-center text-left md:block focus:outline-none"
+              >
+                <h4 className="text-white font-extrabold text-base select-none">
+                  Industries
+                </h4>
+                <span className="md:hidden text-gray-400 font-bold text-lg leading-none pr-1">
+                  {openSections.industries ? "−" : "+"}
+                </span>
+              </button>
+
+              <div className={`${openSections.industries ? "block" : "hidden"} md:block mt-3 md:mt-0`}>
+                <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Car Workshop
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Car Traders
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      MOT Centres
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Automotive
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Column 4: Products */}
-            <div className="space-y-4">
-              <h4 className="text-white font-extrabold text-base select-none">
-                Products
-              </h4>
-              <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
-                <li>
-                  <Link
-                    to="/mot-diary"
-                    className="hover:text-white transition-colors"
-                  >
-                    MOT Diary
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/seo"
-                    className="hover:text-white transition-colors"
-                  >
-                    SEO
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Website Register (WRF)
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Website Register with Contract
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Products & Services Price
-                  </a>
-                </li>
-              </ul>
+            <div className="space-y-4 border-b border-white/5 md:border-0 pb-4 md:pb-0">
+              <button
+                onClick={() => toggleSection("products")}
+                className="w-full md:cursor-default flex justify-between items-center text-left md:block focus:outline-none"
+              >
+                <h4 className="text-white font-extrabold text-base select-none">
+                  Products
+                </h4>
+                <span className="md:hidden text-gray-400 font-bold text-lg leading-none pr-1">
+                  {openSections.products ? "−" : "+"}
+                </span>
+              </button>
+
+              <div className={`${openSections.products ? "block" : "hidden"} md:block mt-3 md:mt-0`}>
+                <ul className="space-y-2.5 text-xs text-gray-400 font-semibold">
+                  <li>
+                    <Link
+                      to="/mot-diary"
+                      className="hover:text-white transition-colors"
+                    >
+                      MOT Diary
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/seo"
+                      className="hover:text-white transition-colors"
+                    >
+                      SEO
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Website Register (WRF)
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Website Register with Contract
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition-colors">
+                      Products & Services Price
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Column 5: Contact Information */}
-            <div className="space-y-6 text-xs text-gray-400 font-semibold leading-relaxed">
-              <div className="space-y-4">
+            <div className="space-y-4 border-b border-white/5 md:border-0 pb-4 md:pb-0">
+              <button
+                onClick={() => toggleSection("contact")}
+                className="w-full md:cursor-default flex justify-between items-center text-left md:block focus:outline-none"
+              >
                 <h4 className="text-white font-extrabold text-base select-none">
                   Contact Information
                 </h4>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
-                    Address:
-                  </span>
-                  <p className="text-gray-300">
-                    The Chestnuts, 46 Middle Lane,
-                    <br />
-                    Nether Broughton, LE14 3HD
-                  </p>
+                <span className="md:hidden text-gray-400 font-bold text-lg leading-none pr-1">
+                  {openSections.contact ? "−" : "+"}
+                </span>
+              </button>
+
+              <div className={`${openSections.contact ? "block" : "hidden"} md:block space-y-5 mt-4 md:mt-0 text-xs text-gray-400 font-semibold leading-relaxed`}>
+                <div className="flex items-start gap-3">
+                  <FiMapPin className="text-indigo-400 w-4 h-4 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">
+                      Address:
+                    </span>
+                    <p className="text-gray-300">
+                      The Chestnuts, 46 Middle Lane,
+                      <br />
+                      Nether Broughton, LE14 3HD
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
-                  Sales Inquiry:
-                </span>
-                <a
-                  href="tel:07947906789"
-                  className="text-white hover:text-indigo-400 block font-bold"
-                >
-                  07947 906789
-                </a>
-                <a
-                  href="mailto:info@autogaragenetwork.com"
-                  className="text-gray-400 hover:text-white block mt-0.5"
-                >
-                  info@autogaragenetwork.com
-                </a>
-              </div>
+                <div className="flex items-start gap-3">
+                  <FiPhone className="text-indigo-400 w-4 h-4 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">
+                      Sales Inquiry:
+                    </span>
+                    <a
+                      href="tel:07947906789"
+                      className="text-white hover:text-indigo-400 block font-bold"
+                    >
+                      07947 906789
+                    </a>
+                    <a
+                      href="mailto:info@autogaragenetwork.com"
+                      className="text-gray-400 hover:text-white block mt-0.5 break-all"
+                    >
+                      info@autogaragenetwork.com
+                    </a>
+                  </div>
+                </div>
 
-              <div>
-                <span className="text-[10px] uppercase font-bold text-gray-500 block mb-1">
-                  Customer Support:
-                </span>
-                <a
-                  href="tel:01702655556"
-                  className="text-white hover:text-indigo-400 block font-bold"
-                >
-                  01702 655556
-                </a>
-                <a
-                  href="mailto:jatindersingh@autogaragenetwork.com"
-                  className="text-gray-400 hover:text-white block mt-0.5"
-                >
-                  jatindersingh@autogaragenetwork.com
-                </a>
+                <div className="flex items-start gap-3">
+                  <FiPhone className="text-indigo-400 w-4 h-4 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">
+                      Customer Support:
+                    </span>
+                    <a
+                      href="tel:01702655556"
+                      className="text-white hover:text-indigo-400 block font-bold"
+                    >
+                      01702 655556
+                    </a>
+                    <a
+                      href="mailto:jatindersingh@autogaragenetwork.com"
+                      className="text-gray-400 hover:text-white block mt-0.5 break-all"
+                    >
+                      jatindersingh@autogaragenetwork.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

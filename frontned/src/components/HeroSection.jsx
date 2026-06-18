@@ -97,6 +97,7 @@ const HeroSection = () => {
   const [vrmInput, setVrmInput] = useState("");
   const [isVrmLoading, setIsVrmLoading] = useState(false);
   const [vrmResult, setVrmResult] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleVrmLookup = () => {
     if (!vrmInput.trim()) {
@@ -164,6 +165,10 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
+    const mobileCheck = window.innerWidth < 768;
+    setIsMobile(mobileCheck);
+    if (mobileCheck) return;
+
     // 1. General metrics fluctuation
     const metricsInterval = setInterval(() => {
       // Day occupancy wiggles between 75 and 95
@@ -730,7 +735,7 @@ const HeroSection = () => {
               {/* Floating Mobile Booking Panel (Front-Left) */}
               <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: [-5, 5, -5] }}
+                animate={isMobile ? { y: 0 } : { y: [-5, 5, -5] }}
                 transition={{
                   duration: 6,
                   repeat: Infinity,
@@ -836,7 +841,7 @@ const HeroSection = () => {
               {/* Floating Analytics Card (Front-Right) */}
               <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: [5, -5, 5] }}
+                animate={isMobile ? { y: 0 } : { y: [5, -5, 5] }}
                 transition={{
                   duration: 5,
                   repeat: Infinity,

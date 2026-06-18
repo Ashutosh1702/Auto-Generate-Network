@@ -357,7 +357,8 @@ html, body {
 }
 
 /* SVG grid lines adjustments */
-.light svg line,
+.light svg line[stroke="rgba(255,255,255,0.03)"],
+.light svg line[stroke="rgba(255,255,255,0.05)"],
 .light svg path[stroke="rgba(255,255,255,0.03)"],
 .light svg path[stroke="rgba(255,255,255,0.05)"] {
   stroke: rgba(15, 23, 42, 0.06) !important;
@@ -752,4 +753,74 @@ main.flex-grow:not(.home-main) {
 .light .gms-feature-card .text-gray-400,
 .light .gms-feature-card .text-gray-500 {
   color: #475569 !important;
+}
+
+/* ========================================================================== */
+/* Mobile Scroll Performance & Lag Optimizations                             */
+/* ========================================================================== */
+
+@media (max-w: 767px) {
+  /* Disable expensive backdrop filters on mobile devices to prevent GPU rendering lag */
+  .backdrop-blur,
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Map semi-transparent backgrounds to solid colors to keep text readable without blur */
+  .bg-\[\#050816\]\/90,
+  .bg-\[\#050816\]\/95,
+  .bg-\[\#050816\]\/70,
+  .bg-\[\#050816\]\/30 {
+    background-color: #050816 !important;
+  }
+  
+  .light .bg-\[\#050816\]\/90,
+  .light .bg-\[\#050816\]\/95,
+  .light .bg-\[\#050816\]\/70,
+  .light .bg-\[\#050816\]\/30 {
+    background-color: #f8fafc !important;
+  }
+
+  .bg-\[\#0c1222\]\/85,
+  .bg-\[\#0c1222\]\/90,
+  .bg-\[\#0c1222\]\/95 {
+    background-color: #0c1222 !important;
+  }
+
+  .light .bg-\[\#0c1222\]\/85,
+  .light .bg-\[\#0c1222\]\/90,
+  .light .bg-\[\#0c1222\]\/95 {
+    background-color: #ffffff !important;
+  }
+
+  .bg-\[\#070b16\]\/98 {
+    background-color: #070b16 !important;
+  }
+
+  .light .bg-\[\#070b16\]\/98 {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Disable 3D tilt effects on mobile to prevent paint storm reflows */
+  .three-d {
+    perspective: none !important;
+    transform-style: flat !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .three-d:hover {
+    transform: none !important;
+  }
+
+  /* Smooth touch scrolling with simplified layers */
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: auto !important; /* Better touch kinetic response on iOS/Android */
+  }
 }

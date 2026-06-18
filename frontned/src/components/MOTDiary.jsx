@@ -609,7 +609,7 @@ const MOTDiary = () => {
           </motion.div>
 
           {/* Right Column: Descriptions & Clickable Feature Tabs */}
-          <div className="space-y-8 text-left z-10">
+          <div className="space-y-8 text-left z-10 w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -627,6 +627,37 @@ const MOTDiary = () => {
                 Reduce no-shows, fill gaps, and keep your ramps fully booked.
               </p>
             </motion.div>
+
+            {/* Mobile Feature Description Card */}
+            <div className="block md:hidden bg-[#111827]/60 border border-white/5 p-5 rounded-2xl space-y-3.5 shadow-xl select-none">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 border border-blue-500/30 shadow-md">
+                  {features[activeFeature].icon}
+                </div>
+                <h3 className="text-base font-bold text-blue-400 leading-tight">
+                  {features[activeFeature].title}
+                </h3>
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed min-h-[40px]">
+                {features[activeFeature].desc}
+              </p>
+              {/* Dot selectors */}
+              <div className="flex items-center space-x-2.5 pt-2 justify-center">
+                {features.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setActiveFeature(idx);
+                      setIsAutoPlaying(false);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      idx === activeFeature ? "bg-blue-500 w-5" : "bg-gray-600 w-2 hover:bg-gray-500"
+                    }`}
+                    aria-label={`Go to feature ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
 
             <div className="hidden md:block space-y-4">
               {features.map((item, idx) => {
@@ -685,7 +716,7 @@ const MOTDiary = () => {
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(30,115,190,0.3)] transition-all cursor-pointer"
+              className="w-full md:w-auto text-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(30,115,190,0.3)] transition-all cursor-pointer block md:inline-block"
             >
               Explore MOT Features
             </motion.button>
