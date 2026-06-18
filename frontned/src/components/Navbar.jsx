@@ -78,6 +78,9 @@ const ThemeToggle = ({ theme, toggleTheme }) => {
             stiffness: 400,
             damping: 25,
           }}
+          initial={{
+            x: isLight ? 0 : 28,
+          }}
           animate={{
             x: isLight ? 0 : 28, // 56px (w-14) - 20px (w-5) - 8px (padding) = 28px
           }}
@@ -188,9 +191,7 @@ const Navbar = () => {
   return (
     <>
       {/* Top Bar with social icons and contacts */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 bg-[#050816]/90 backdrop-blur-md border-b border-white/5"
-      >
+      <header className="hidden sm:block fixed top-0 left-0 right-0 z-50 bg-[#050816]/90 backdrop-blur-md border-b border-white/5">
         <div className="max-w-[1536px] mx-auto px-4 md:px-8 flex items-center justify-between h-10 sm:h-12 text-gray-400 text-xs">
           {/* Social Icons */}
           <div className="flex items-center space-x-3 sm:space-x-4">
@@ -285,7 +286,7 @@ const Navbar = () => {
 
       {/* Main Navigation Bar */}
       <header
-        className={`fixed top-11 left-0 right-0 z-40 transition-all duration-500 ${
+        className={`fixed top-0 sm:top-11 left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
             ? "bg-[#050816]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-2.5 lg:py-3.5"
             : "bg-transparent py-4 lg:py-5"
@@ -456,8 +457,6 @@ const Navbar = () => {
               })}
             </nav>
 
-
-
             {/* Mobile / Tablet Menu Button */}
             <div className="lg:hidden flex items-center">
               <button
@@ -485,6 +484,11 @@ const Navbar = () => {
               className="lg:hidden bg-[#070b16]/98 backdrop-blur-xl border-b border-white/10 overflow-hidden shadow-2xl"
             >
               <div className="px-6 py-6 space-y-4">
+                {/* Theme Toggle inside drawer to save space in the main mobile header */}
+                <div className="flex justify-between items-center pb-4 border-b border-white/10 no-invert">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Switch Theme</span>
+                  <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                </div>
                 {navLinks.map((link) => {
                   const isActive =
                     activeLink === link.href ||
@@ -570,8 +574,6 @@ const Navbar = () => {
                     </Link>
                   );
                 })}
-
-
 
                 {/* Mobile Drawer Contacts & Socials */}
                 <div className="pt-6 border-t border-white/10 space-y-5">
