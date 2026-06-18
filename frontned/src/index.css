@@ -399,17 +399,13 @@ html, body, #root {
   color: #ffffff !important;
 }
 
-/* Since logo-color.png has black text, we apply invert filter in Dark Mode to make the text white and visible */
-.logo-img {
-  filter: invert(1) hue-rotate(180deg) brightness(1.5) contrast(1.2);
-  transition:
-    filter 0.3s ease,
-    transform 0.3s ease;
+/* Logo NETWORK text: white by default (dark mode), black in light mode */
+.logo-network-text {
+  color: #ffffff;
+  transition: color 0.3s ease;
 }
-
-/* In Light Mode, we display it as-is (with black text) so it is visible on the light background */
-.light .logo-img {
-  filter: none !important;
+.light .logo-network-text {
+  color: #000000 !important;
 }
 
 /* Custom Dropdown overrides for Light Mode */
