@@ -4,9 +4,13 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
+html, body, #root {
   background-color: #050816;
   color: #ffffff;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  position: relative;
 }
 
 /* Premium Custom Scrollbar */
