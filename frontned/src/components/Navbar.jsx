@@ -318,7 +318,7 @@ const Navbar = () => {
               className="flex-shrink-0 flex items-center cursor-pointer"
             >
               <img
-                src="https://www.autogaragenetwork.com/catalog/view/theme/avnv1/assets/img/logo-color.png"
+                src="/logo-color.png"
                 alt="AG Network Logo"
                 className="logo-img h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />

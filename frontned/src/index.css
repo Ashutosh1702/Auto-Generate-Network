@@ -809,7 +809,7 @@ main.flex-grow:not(.home-main) {
 /* Mobile Scroll Performance & Lag Optimizations                             */
 /* ========================================================================== */
 
-@media (max-w: 767px) {
+@media (max-width: 767px) {
   /* Disable expensive backdrop filters on mobile devices to prevent GPU rendering lag */
   .backdrop-blur,
   .backdrop-blur-sm,

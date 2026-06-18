@@ -449,7 +449,7 @@ const Footer = () => {
             <div className="space-y-5 text-center md:text-left flex flex-col items-center md:items-start pb-6 md:pb-0 border-b border-white/5 md:border-0">
               <Link to="/" className="inline-block cursor-pointer">
                 <img
-                  src="https://www.autogaragenetwork.com/catalog/view/theme/avnv1/assets/img/logo-color.png"
+                  src="/logo-color.png"
                   alt="Auto Garage Network Logo"
                   className="h-10 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
                   style={{
