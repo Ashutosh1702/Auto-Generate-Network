@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import aboutImg from "../assets/about-img-add.jpg";
@@ -109,6 +110,12 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="About Us | Mr. Jatinder Singh Bassi's Vision"
+        description="Learn about the story, mission, and team behind Auto Garage Network, founded by Mr. Jatinder Singh Bassi to build lifetime e-partnerships with UK garages."
+        keywords="About Auto Garage Network, Jatinder Singh Bassi, Melton Mowbray automotive software, garage e-partner"
+        canonicalPath="/about-us"
+      />
       <Navbar />
 
       <main className="flex-grow pt-24">

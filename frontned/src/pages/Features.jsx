@@ -1,4 +1,5 @@
 import React from "react";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import FeaturesSection from "../components/FeaturesSection.jsx";
 import Footer from "../components/Footer.jsx";
@@ -6,6 +7,12 @@ import Footer from "../components/Footer.jsx";
 const Features = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="All Features | Complete Automotive Suite"
+        description="Discover all the features of Auto Garage Network, including TecRMI schedules, GSF parts order, partslink24 integration, and QuickBooks accounting sync."
+        keywords="TecRMI integration, GSF parts link, partslink24, accounting sync, garage software features"
+        canonicalPath="/features"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Header decoration */}

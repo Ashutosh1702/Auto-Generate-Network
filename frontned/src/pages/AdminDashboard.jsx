@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiTrash2, FiDownload, FiSearch, FiKey, FiDatabase, FiLayers, FiMail, FiPhone } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const AdminDashboard = () => {
   const [passcode, setPasscode] = useState("");
@@ -114,6 +115,12 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Admin Portal Dashboard"
+        description="Internal administrative control dashboard for managing platform accounts, clients, subscriptions, and integrations."
+        keywords="admin console, internal manager"
+        canonicalPath="/admin"
+      />
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
         {/* Passcode Login Form */}

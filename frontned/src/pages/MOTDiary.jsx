@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import MOTDiarySection from "../components/MOTDiary.jsx";
 import Footer from "../components/Footer.jsx";
@@ -37,6 +38,12 @@ const MOTDiaryPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Smart MOT Diary & Ramp Scheduler"
+        description="Keep your ramps fully loaded with our cloud-based MOT Diary. Features automatic DVLA MOT expiry sync, drag-and-drop ramp scheduling, and SMS reminders."
+        keywords="MOT diary, ramp scheduler, garage calendar, MOT reminders SMS, booking diary"
+        canonicalPath="/mot-diary"
+      />
       <Navbar />
       
       <main className="flex-grow pt-24">

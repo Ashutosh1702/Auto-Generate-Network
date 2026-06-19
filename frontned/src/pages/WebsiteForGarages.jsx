@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiCheckCircle, FiMail, FiArrowRight, FiInfo } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import WebsiteSolutions from "../components/WebsiteSolutions.jsx";
 import Footer from "../components/Footer.jsx";
@@ -34,6 +35,12 @@ const WebsiteForGarages = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="E-Commerce Websites for UK Garages"
+        description="Get a custom-branded, SEO-optimized e-commerce website with vehicle registration search lookup, MOT booking gateway, and wholesale tyre distributor stock integration."
+        keywords="garage website builder, UK tyre website, MOT booking website, e-commerce for workshops"
+        canonicalPath="/website-for-garages"
+      />
       <Navbar />
       
       <main className="flex-grow pt-24">

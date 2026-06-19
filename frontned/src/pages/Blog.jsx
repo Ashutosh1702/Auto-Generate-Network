@@ -1,4 +1,5 @@
 import React from "react";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import BlogSection from "../components/BlogSection.jsx";
 import Footer from "../components/Footer.jsx";
@@ -6,6 +7,12 @@ import Footer from "../components/Footer.jsx";
 const Blog = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Blog & Automotive Industry Insights"
+        description="Read the latest news, expert guides, workshop management tips, and digital trends from Auto Garage Network to grow your garage business."
+        keywords="garage business blog, workshop management tips, automotive news UK, digital marketing"
+        canonicalPath="/blog"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Header decoration */}

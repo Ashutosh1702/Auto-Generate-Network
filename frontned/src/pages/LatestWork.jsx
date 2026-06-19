@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import PartnerLogos from "../components/PartnerLogos.jsx";
@@ -247,6 +248,12 @@ const LatestWork = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Our Work & Case Studies | Successful Garages"
+        description="See real success stories and custom e-commerce websites and mobile apps we've launched for independent workshops, MOT centres, and tyre brands across the UK."
+        keywords="garage website portfolio, case studies workshop apps, success stories"
+        canonicalPath="/latest-work"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Banner */}

@@ -22,6 +22,7 @@ import {
   FiFileText,
   FiBriefcase,
 } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import DashboardSection from "../components/DashboardSection.jsx";
 import Footer from "../components/Footer.jsx";
@@ -511,6 +512,12 @@ const GarageManagementSystem = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Garage Management System (GMS) | Digital Workspace"
+        description="Explore the all-in-one digital GMS for independent garages. Manage smart job cards, customer CRM, invoicing, stock control, and real-time revenue reports."
+        keywords="GMS, garage CRM, workshop job cards, parts stock control, invoicing software garages"
+        canonicalPath="/garage-management-system"
+      />
       <Navbar />
 
       <main className="flex-grow pt-24">

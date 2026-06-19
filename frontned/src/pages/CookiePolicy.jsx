@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion } from "framer-motion";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const CookiePolicy = () => {
   useEffect(() => {
@@ -10,6 +11,12 @@ const CookiePolicy = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Cookie Policy | Browser Settings"
+        description="Learn how we use cookies on the Auto Garage Network site to personalize your experience, analyze web traffic, and improve portal features."
+        keywords="cookie policy, tracking cookies"
+        canonicalPath="/cookie-policy"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Header Section */}

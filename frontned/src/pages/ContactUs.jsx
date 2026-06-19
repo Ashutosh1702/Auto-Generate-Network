@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion, AnimatePresence } from "framer-motion";
@@ -95,6 +96,12 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Contact Our Sales & Support Teams"
+        description="Have questions? Contact Auto Garage Network. Reach our sales at 07947 906789 or customer support at 01702 655556. Located in Nether Broughton."
+        keywords="contact garage network, support phone number, Melton Mowbray software office"
+        canonicalPath="/contact-us"
+      />
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
         {/* Banner */}

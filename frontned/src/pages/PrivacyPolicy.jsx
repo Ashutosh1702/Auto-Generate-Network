@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion } from "framer-motion";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -10,6 +11,12 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Privacy Policy | Data Protection"
+        description="Read our privacy policy to understand how Auto Garage Network collects, uses, protects, and stores your workshop and customer data."
+        keywords="privacy policy, data protection GDPR"
+        canonicalPath="/privacy-policy"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Header Section */}

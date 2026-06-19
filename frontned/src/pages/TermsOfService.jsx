@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion } from "framer-motion";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const TermsOfService = () => {
   useEffect(() => {
@@ -10,6 +11,12 @@ const TermsOfService = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Terms & Conditions of Service"
+        description="Review the terms and conditions for using Auto Garage Network software suite, website solutions, custom apps, and support contracts."
+        keywords="terms of service, software terms, user agreement"
+        canonicalPath="/terms-of-service"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Header Section */}

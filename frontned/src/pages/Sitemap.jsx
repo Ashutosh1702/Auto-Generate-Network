@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const Sitemap = () => {
   useEffect(() => {
@@ -126,6 +127,12 @@ const Sitemap = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Sitemap | Complete Directory"
+        description="Quickly find and navigate to any page, product, or information document on the Auto Garage Network portal with our complete HTML directory."
+        keywords="sitemap, page directory, website navigation"
+        canonicalPath="/sitemap"
+      />
       <Navbar />
       <main className="flex-grow pt-20">
         

@@ -1,4 +1,5 @@
 import React from "react";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import SEOSection from "../components/SEOSection.jsx";
 import Footer from "../components/Footer.jsx";
@@ -6,6 +7,12 @@ import Footer from "../components/Footer.jsx";
 const SEO = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Local SEO & Marketing Services for Garages"
+        description="Rank your independent workshop on Google. Drive local traffic, increase tyre sales, and get more MOT bookings with our tailored garage marketing SEO."
+        keywords="local SEO garages, workshop Google ranking, tyre sales SEO, MOT search marketing"
+        canonicalPath="/seo"
+      />
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Header decoration */}

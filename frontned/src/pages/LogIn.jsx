@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +21,12 @@ const LogIn = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center font-sans bg-[#050816] text-white px-6 relative overflow-hidden">
+      <SEOHeader
+        title="Log In to Your Portal Account"
+        description="Log in securely to your Auto Garage Network portal to manage bookings, view dashboard reports, and track your workshop schedule."
+        keywords="garage portal login, GMS sign in, workshop dashboard login"
+        canonicalPath="/login"
+      />
       {/* Subtle glowing elements */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />

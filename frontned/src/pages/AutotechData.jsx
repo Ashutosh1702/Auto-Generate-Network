@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSearch, FiCpu, FiDatabase, FiCheckCircle, FiInfo, FiArrowRight, FiCheck } from "react-icons/fi";
+import SEOHeader from "../components/SEOHeader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
@@ -68,6 +69,12 @@ const AutotechData = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
+      <SEOHeader
+        title="Autotech Data Integration | OE Repair Manuals"
+        description="Access official UK factory-correct OE vehicle information, diagnostic wiring diagrams, maintenance manuals, recall data, and specifications."
+        keywords="Autotech data, Autodata integration, Solera vehicle data, garage repair manuals, wiring diagrams"
+        canonicalPath="/autotech-data"
+      />
       <Navbar />
       
       <main className="flex-grow pt-24">
