@@ -1,101 +1,41 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
+import { MotionConfig } from "framer-motion";
 import Navbar from "../components/Navbar.jsx";
 import HeroSection from "../components/HeroSection.jsx";
-import LazySection from "../components/LazySection.jsx";
-
-// Lazy loaded below-the-fold sections
-const PartnerLogos = lazy(() => import("../components/PartnerLogos.jsx"));
-const StatsSection = lazy(() => import("../components/StatsSection.jsx"));
-const FeaturesSection = lazy(() => import("../components/FeaturesSection.jsx"));
-const DashboardSection = lazy(() => import("../components/DashboardSection.jsx"));
-const WebsiteSolutions = lazy(() => import("../components/WebsiteSolutions.jsx"));
-const MOTDiary = lazy(() => import("../components/MOTDiary.jsx"));
-const SEOSection = lazy(() => import("../components/SEOSection.jsx"));
-const MobileAppSection = lazy(() => import("../components/MobileAppSection.jsx"));
-const PricingSection = lazy(() => import("../components/PricingSection.jsx"));
-const TestimonialsSection = lazy(() => import("../components/TestimonialsSection.jsx"));
-const BlogSection = lazy(() => import("../components/BlogSection.jsx"));
-const Footer = lazy(() => import("../components/Footer.jsx"));
+import PartnerLogos from "../components/PartnerLogos.jsx";
+import StatsSection from "../components/StatsSection.jsx";
+import FeaturesSection from "../components/FeaturesSection.jsx";
+import DashboardSection from "../components/DashboardSection.jsx";
+import WebsiteSolutions from "../components/WebsiteSolutions.jsx";
+import MOTDiary from "../components/MOTDiary.jsx";
+import SEOSection from "../components/SEOSection.jsx";
+import MobileAppSection from "../components/MobileAppSection.jsx";
+import PricingSection from "../components/PricingSection.jsx";
+import TestimonialsSection from "../components/TestimonialsSection.jsx";
+import BlogSection from "../components/BlogSection.jsx";
+import Footer from "../components/Footer.jsx";
 
 const Home = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#050816] text-white">
       <Navbar />
-      <main className="flex-grow home-main">
-        <HeroSection />
-        
-        <LazySection height="120px">
-          <Suspense fallback={<div style={{ minHeight: "120px" }} />}>
-            <PartnerLogos />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="350px">
-          <Suspense fallback={<div style={{ minHeight: "350px" }} />}>
-            <StatsSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="600px">
-          <Suspense fallback={<div style={{ minHeight: "600px" }} />}>
-            <FeaturesSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="700px">
-          <Suspense fallback={<div style={{ minHeight: "700px" }} />}>
-            <DashboardSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="600px">
-          <Suspense fallback={<div style={{ minHeight: "600px" }} />}>
-            <WebsiteSolutions />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="600px">
-          <Suspense fallback={<div style={{ minHeight: "600px" }} />}>
-            <MOTDiary />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="600px">
-          <Suspense fallback={<div style={{ minHeight: "600px" }} />}>
-            <SEOSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="600px">
-          <Suspense fallback={<div style={{ minHeight: "600px" }} />}>
-            <MobileAppSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="700px">
-          <Suspense fallback={<div style={{ minHeight: "700px" }} />}>
-            <PricingSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="400px">
-          <Suspense fallback={<div style={{ minHeight: "400px" }} />}>
-            <TestimonialsSection />
-          </Suspense>
-        </LazySection>
-
-        <LazySection height="500px">
-          <Suspense fallback={<div style={{ minHeight: "500px" }} />}>
-            <BlogSection limit={3} />
-          </Suspense>
-        </LazySection>
-      </main>
-
-      <LazySection height="400px">
-        <Suspense fallback={<div style={{ minHeight: "400px" }} />}>
-          <Footer />
-        </Suspense>
-      </LazySection>
+      <MotionConfig reducedMotion="always">
+        <main className="flex-grow home-main">
+          <HeroSection />
+          <PartnerLogos />
+          <StatsSection />
+          <FeaturesSection />
+          <DashboardSection />
+          <WebsiteSolutions />
+          <MOTDiary />
+          <SEOSection />
+          <MobileAppSection />
+          <PricingSection />
+          <TestimonialsSection />
+          <BlogSection limit={3} />
+        </main>
+      </MotionConfig>
+      <Footer />
     </div>
   );
 };
